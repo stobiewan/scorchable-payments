@@ -41,8 +41,8 @@ contract ScorchablePayments is DaiTransferrer {
     uint64[] public ethPaymentIds;
     uint64[] public daiPaymentIds;
     uint64 public currentId = 1;
-    mapping(uint64 => Payment) public ethPayments;
-    mapping(uint64 => Payment) public daiPayments;
+    mapping(uint64 => EthPayment) public ethPayments;
+    mapping(uint64 => DaiPayment) public daiPayments;
     address private scorch = 0x300afbE08EE4619EC93524f9255CE59a013a5b63;
 
     function createEthPayment(
@@ -92,16 +92,16 @@ contract ScorchablePayments is DaiTransferrer {
     }
 
     function cancelEthPayment(uint64 paymentId) external {
-        require(msg.sender == ethPayments[offerId].payer);
-        require(ethPayments[offerId].payeeBondPaid == false);
-        msg.sender.transfer(ethPayments[offerId].ethInPayment);
+        require(msg.sender == ethPayments[paymentId].payer);
+        require(ethPayments[paymentId].payeeBondPaid == false);
+        msg.sender.transfer(ethPayments[paymentId].ethInPayment);
         _deleteEthPayment(paymentId);
     }
     
     function cancelDaiPayment(uint64 paymentId) external {
-        require(msg.sender == daiPayments[offerId].payer);
-        require(daiPayments[offerId].payeeBondPaid == false);
-        transferDai(address(this), msg.sender, daiPayments[offerId].daiInPayment);
+        require(msg.sender == daiPayments[paymentId].payer);
+        require(daiPayments[paymentId].payeeBondPaid == false);
+        transferDai(address(this), msg.sender, daiPayments[paymentId].daiInPayment);
         _deleteDaiPayment(paymentId);
     }
 
