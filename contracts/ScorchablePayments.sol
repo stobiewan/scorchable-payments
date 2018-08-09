@@ -6,8 +6,10 @@ import "./SafeMath.sol";
 import "./DaiInterface.sol";
 
 
-// TODO add bond to tokenPaid, allow release, scorch, RTS to take from there only too other party. Single function and if empty then delete.
+// TODO add tests
 // TODO tests must cover underflow throws, using safemath
+// TODO update migration
+// TODO frontend
 
 
 contract ScorchablePayments is DaiTransferrer {

@@ -21,7 +21,7 @@ contract DaiTransferrer is Ownable {
         daiContract = DaiInterface(_address);
     }
 
-    function getDaiBalance(address _address) public returns (uint) {
+    function getDaiBalance(address _address) public view returns (uint) {
         return daiContract.balanceOf(_address);
     }
 }
