@@ -6,6 +6,9 @@ import "./SafeMath.sol";
 import "./DaiInterface.sol";
 
 
+// TODO combine eth and dai methods
+// TODO add extend timeout
+// TODO add top up
 // TODO add tests
 // TODO tests must cover underflow throws, using safemath
 // TODO update migration
