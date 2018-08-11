@@ -6,9 +6,6 @@ import "./SafeMath.sol";
 import "./DaiInterface.sol";
 
 
-// TODO combine eth and dai methods
-// TODO add extend timeout
-// TODO add top up
 // TODO add tests
 // TODO tests must cover underflow throws, using safemath
 // TODO update migration
@@ -23,194 +20,153 @@ contract ScorchablePayments is DaiTransferrer {
     event PayeeBondPaid();
     event PaymentDeleted();
 
-    struct EthPayment {
+    struct Payment {
         address payer;
         address payee;
-        uint ethInPayment;
-        uint payeeEthBond;
+        uint amount;
+        uint payeeBondAmount;
         uint payerInactionTimeout;
         uint listIndex;
         bool payeeBondPaid;
+        bool isEthPayment;
     }
 
-    struct DaiPayment {
-        address payer;
-        address payee;
-        uint daiInPayment;
-        uint payeeDaiBond;
-        uint payerInactionTimeout;
-        uint listIndex;
-        bool payeeBondPaid;
-    }
-
-    uint64[] public ethPaymentIds;
-    uint64[] public daiPaymentIds;
+    uint64[] public paymentIds;
     uint64 public currentId = 1;
-    mapping(uint64 => EthPayment) public ethPayments;
-    mapping(uint64 => DaiPayment) public daiPayments;
+    mapping(uint64 => Payment) public payments;
     address private scorch = 0x300afbE08EE4619EC93524f9255CE59a013a5b63;
 
-    function createEthPayment(
+    modifier onlyPayer(uint64 paymentId) {
+        require(msg.sender == payments[paymentId].payer);
+        _;
+    }
+
+    modifier onlyPayee(uint64 paymentId) {
+        require(msg.sender == payments[paymentId].payee);
+        _;
+    }
+
+    function createPayment(
         address payee,
-        uint payeeEthBond,
-        uint payerInactionTimeout
+        uint amountToPay,
+        uint payeeBondAmount,
+        uint payerInactionTimeout,
+        bool isEthPayment
     )
     external
     payable
     {
-        require(msg.value > 0);
-        ethPayments[currentId] = EthPayment(
+        transferTokens(msg.sender, address(this), amountToPay, isEthPayment);
+        require(payerInactionTimeout < now + 26 weeks);
+        payments[currentId] = Payment(
             msg.sender,
             payee,
-            msg.value,
-            payeeEthBond,
+            amountToPay,
+            payeeBondAmount,
             payerInactionTimeout,
-            ethPaymentIds.push(currentId) - 1,
-            false
+            paymentIds.push(currentId) - 1,
+            false,
+            isEthPayment
         );
         currentId++;
         emit NewPayment();
     }
 
-    function createDaiPayment(
-        address payee,
-        uint daiToPay,
-        uint payeeDaiBond,
-        uint payerInactionTimeout
-    )
-    external
-    payable
-    {
-        require(daiToPay > 0);
-        transferDai(msg.sender, address(this), daiToPay);
-        daiPayments[currentId] = DaiPayment(
+    function cancelPayment(uint64 paymentId) external onlyPayer(paymentId) {
+        require(payments[paymentId].payeeBondPaid == false);
+        transferTokens(
+            address(this),
             msg.sender,
-            payee,
-            daiToPay,
-            payeeDaiBond,
-            payerInactionTimeout,
-            daiPaymentIds.push(currentId) - 1,
-            false
+            payments[paymentId].amount,
+            payments[paymentId].isEthPayment
         );
-        currentId++;
-        emit NewPayment();
+        _deletePayment(paymentId);
     }
 
-    function cancelEthPayment(uint64 paymentId) external {
-        require(msg.sender == ethPayments[paymentId].payer);
-        require(ethPayments[paymentId].payeeBondPaid == false);
-        msg.sender.transfer(ethPayments[paymentId].ethInPayment);
-        _deleteEthPayment(paymentId);
-    }
-    
-    function cancelDaiPayment(uint64 paymentId) external {
-        require(msg.sender == daiPayments[paymentId].payer);
-        require(daiPayments[paymentId].payeeBondPaid == false);
-        transferDai(address(this), msg.sender, daiPayments[paymentId].daiInPayment);
-        _deleteDaiPayment(paymentId);
-    }
-
-    function payEthBond(
+    function payBond(
         uint64 paymentId
     )
     external
     payable
     {
-        require(msg.value == ethPayments[paymentId].payeeEthBond);
-        ethPayments[paymentId].ethInPayment += msg.value;
-        ethPayments[paymentId].payeeBondPaid = true;
+        transferTokens(
+            msg.sender,
+            address(this),
+            payments[paymentId].payeeBondAmount,
+            payments[paymentId].isEthPayment
+        );
+        payments[paymentId].amount += payments[paymentId].payeeBondAmount;
+        payments[paymentId].payeeBondPaid = true;
         emit PayeeBondPaid();
     }
 
-    function payDaiBond(
-        uint64 paymentId
-    )
-    external
-    payable
-    {
-        transferDai(msg.sender, address(this), daiPayments[paymentId].payeeDaiBond);
-        daiPayments[paymentId].daiInPayment += daiPayments[paymentId].payeeDaiBond;
-        daiPayments[paymentId].payeeBondPaid = true;
-        emit PayeeBondPaid();
-    }
-
-    function returnEthToSender(uint64 paymentId, uint amount) external {
-        require(msg.sender == ethPayments[paymentId].payee);
-        require(amount <= ethPayments[paymentId].ethInPayment);
-        ethPayments[paymentId].payer.transfer(amount);
-        if (amount == ethPayments[paymentId].ethInPayment) {
-            _deleteEthPayment(paymentId);
+    function returnTokensToSender(uint64 paymentId, uint amount) external onlyPayee(paymentId) {
+        require(amount <= payments[paymentId].amount);
+        transferTokens(address(this), payments[paymentId].payer, amount, payments[paymentId].isEthPayment);
+        if (amount == payments[paymentId].amount) {
+            _deletePayment(paymentId);
         }
         else {
-            ethPayments[paymentId].ethInPayment -= amount;
+            payments[paymentId].amount -= amount;
         }
     }
 
-    function returnDaiToSender(uint64 paymentId, uint amount) external {
-        require(msg.sender == daiPayments[paymentId].payee);
-        require(amount <= daiPayments[paymentId].daiInPayment);
-        transferDai(address(this), daiPayments[paymentId].payer, amount);
-        if (amount == daiPayments[paymentId].daiInPayment) {
-            _deleteDaiPayment(paymentId);
+    function extendInactionTimeout(uint64 paymentId) public onlyPayer(paymentId) {
+        payments[paymentId].payerInactionTimeout = now + 5 weeks;
+    }
+
+    function topUp(uint64 paymentId, uint amount) external {
+        transferTokens(msg.sender, address(this), amount, payments[paymentId].isEthPayment);
+        payments[paymentId].amount += amount;
+    }
+
+    function releasePayment(uint64 paymentId, uint amount) external onlyPayer(paymentId) {
+        require(amount <= payments[paymentId].amount);
+        payments[paymentId].amount -= amount;
+        transferTokens(address(this), payments[paymentId].payee, amount, payments[paymentId].isEthPayment);
+        if (payments[paymentId].amount == 0) {
+            _deletePayment(paymentId);
+        }
+    }
+
+    function scorchPayment(uint64 paymentId, uint256 amountToScorch) external onlyPayer(paymentId) {
+        payments[paymentId].amount -= amountToScorch;
+        transferTokens(address(this), scorch, amountToScorch, payments[paymentId].isEthPayment);
+        if (payments[paymentId].amount == 0) {
+            _deletePayment(paymentId);
+        }
+    }
+
+    function claimTimedOutPayment(uint64 paymentId) external onlyPayee(paymentId) {
+        require(now > payments[paymentId].payerInactionTimeout);
+        transferTokens(
+            address(this),
+            payments[paymentId].payee,
+            payments[paymentId].amount,
+            payments[paymentId].isEthPayment
+        );
+    }
+
+    function transferTokens(address source, address dest, uint amount, bool isEthPayment) internal {
+        if (isEthPayment) {
+            if (dest == address(this)) {
+                require(msg.value == amount);
+            }
+            else {
+                dest.transfer(amount);
+            }
         }
         else {
-            daiPayments[paymentId].daiInPayment -= amount;
+            transferDai(source, dest, amount);
         }
     }
 
-    function releaseEthPayment(uint64 paymentId, uint amount) external {
-        require(msg.sender == ethPayments[paymentId].payer);
-        require(amount <= ethPayments[paymentId].ethInPayment);
-        ethPayments[paymentId].ethInPayment -= amount;
-        ethPayments[paymentId].payee.transfer(amount);
-        if (ethPayments[paymentId].ethInPayment == 0) {
-            _deleteEthPayment(paymentId);
-        }
-    }
-
-    function releaseDaiPayment(uint64 paymentId, uint amount) external {
-        require(msg.sender == daiPayments[paymentId].payer);
-        require(amount <= daiPayments[paymentId].daiInPayment);
-        daiPayments[paymentId].daiInPayment -= amount;
-        transferDai(address(this), daiPayments[paymentId].payee, amount);
-        if (daiPayments[paymentId].daiInPayment == 0) {
-            _deleteDaiPayment(paymentId);
-        }
-    }
-
-    function scorchEthPayment(uint64 paymentId, uint256 ethToScorch) external {
-        require(msg.sender == ethPayments[paymentId].payer);
-        ethPayments[paymentId].ethInPayment -= ethToScorch;
-        scorch.transfer(ethToScorch);
-        if (ethPayments[paymentId].ethInPayment == 0) {
-            _deleteEthPayment(paymentId);
-        }
-    }
-
-    function scorchDaiPayment(uint64 paymentId, uint256 daiToScorch) external {
-        require(msg.sender == daiPayments[paymentId].payer);
-        daiPayments[paymentId].daiInPayment -= daiToScorch;
-        transferDai(address(this), scorch, daiToScorch);
-        if (daiPayments[paymentId].daiInPayment == 0) {
-            _deleteDaiPayment(paymentId);
-        }
-    }
-
-    function _deleteEthPayment(uint64 paymentId) internal {
-        uint listIndex = ethPayments[paymentId].listIndex;
-        ethPaymentIds[listIndex] = ethPaymentIds[ethPaymentIds.length - 1];
-        ethPayments[ethPaymentIds[listIndex]].listIndex = listIndex;
-        delete ethPayments[paymentId];
-        ethPaymentIds.length --;
-        emit PaymentDeleted();
-    }
-    
-    function _deleteDaiPayment(uint64 paymentId) internal {
-        uint listIndex = daiPayments[paymentId].listIndex;
-        daiPaymentIds[listIndex] = daiPaymentIds[daiPaymentIds.length - 1];
-        daiPayments[daiPaymentIds[listIndex]].listIndex = listIndex;
-        delete daiPayments[paymentId];
-        daiPaymentIds.length --;
+    function _deletePayment(uint64 paymentId) internal {
+        uint listIndex = payments[paymentId].listIndex;
+        paymentIds[listIndex] = paymentIds[paymentIds.length - 1];
+        payments[paymentIds[listIndex]].listIndex = listIndex;
+        delete payments[paymentId];
+        paymentIds.length --;
         emit PaymentDeleted();
     }
 }
