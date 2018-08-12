@@ -1,15 +1,13 @@
-var SimpleStorage = artifacts.require("SimpleStorage");
-var TutorialToken = artifacts.require("TutorialToken");
-var ComplexStorage = artifacts.require("ComplexStorage");
+//var SimpleStorage = artifacts.require("SimpleStorage");
+//var TutorialToken = artifacts.require("TutorialToken");
+//var ComplexStorage = artifacts.require("ComplexStorage");
+//
+//module.exports = function(deployer) {
+//  deployer.deploy(SimpleStorage);
+//  deployer.deploy(TutorialToken);
+//  deployer.deploy(ComplexStorage);
+//};
 
-module.exports = function(deployer) {
-  deployer.deploy(SimpleStorage);
-  deployer.deploy(TutorialToken);
-  deployer.deploy(ComplexStorage);
-};
-
-
-/*
 var fakeDai = artifacts.require("./DSToken");
 var scorchablePayments = artifacts.require("./ScorchablePayments");
 const oneDai = Math.pow(10, 18);
@@ -40,4 +38,3 @@ module.exports = function (deployer, network, accounts) {
         deployer.deploy(scorchablePayments);
     }
 };
-*/
