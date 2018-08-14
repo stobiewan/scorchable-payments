@@ -65,7 +65,7 @@ contract ScorchablePayments is DaiTransferrer {
             payeeBondAmount,
             payerInactionTimeout,
             paymentIds.push(currentId) - 1,
-            false,
+            payeeBondAmount == 0,
             isEthPayment
         );
         currentId++;
@@ -111,6 +111,10 @@ contract ScorchablePayments is DaiTransferrer {
         }
     }
 
+    function getNumPayments() external view returns (uint length) {
+        return paymentIds.length;
+    }
+
     function extendInactionTimeout(uint64 paymentId) public onlyPayer(paymentId) {
         payments[paymentId].payerInactionTimeout = now + 5 weeks;
     }
@@ -139,6 +143,7 @@ contract ScorchablePayments is DaiTransferrer {
 
     function claimTimedOutPayment(uint64 paymentId) external onlyPayee(paymentId) {
         require(now > payments[paymentId].payerInactionTimeout);
+        require(payments[paymentId].payeeBondPaid);
         transferTokens(
             address(this),
             payments[paymentId].payee,
