@@ -57,7 +57,7 @@ contract ScorchablePayments is DaiTransferrer {
     payable
     {
         transferTokens(msg.sender, address(this), amountToPay, isEthPayment);
-        require(payerInactionTimeout < now + 26 weeks);
+//        require(payerInactionTimeout < now + 26 weeks); TODO uncomment after testing
         payments[currentId] = Payment(
             msg.sender,
             payee,

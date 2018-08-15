@@ -48,24 +48,35 @@ contract('Payments test', async (accounts) => {
         await scorchablePaymentsInstance.createPayment(accounts[1], 10 * oneDai,   2 * oneDai, past,   false, {from: accounts[0]});
         // Dai payment with bond which can be extended then not claimed by payee
         await scorchablePaymentsInstance.createPayment(accounts[2], 10 * oneDai,   2 * oneDai, past,   false, {from: accounts[1]});
-        // Dai payment which should with insufficient approved dai
-        await scorchablePaymentsInstance.createPayment(accounts[3], 90 * oneDai,   2 * oneDai, future, false, {from: accounts[2]});
         // Dai payment which will be cancelled
         await scorchablePaymentsInstance.createPayment(accounts[9], 5 * oneDai,   2 * oneDai, future, false, {from: accounts[3]});
         // eth payment with bond that can't be claimed to release
-        await scorchablePaymentsInstance.createPayment(accounts[5], 10 * weiInEth, 2 * weiInEth, future, true, {from: accounts[4]});
+        await scorchablePaymentsInstance.createPayment(accounts[5], 1 * weiInEth, 0.1 * weiInEth, future, true, {from: accounts[4], value: 1 * weiInEth});
         // eth payment with bond to be scorched
-        await scorchablePaymentsInstance.createPayment(accounts[0], 10 * weiInEth, 2 * weiInEth, future, true, {from: accounts[6]});
+        await scorchablePaymentsInstance.createPayment(accounts[0], 1 * weiInEth, 0.1 * weiInEth, future, true, {from: accounts[6], value: 1 * weiInEth});
         // eth payment to be claimed
-        await scorchablePaymentsInstance.createPayment(accounts[7], 10 * oneEth,   2 * oneEth, past, true,  {from: accounts[1], value: 10 * oneEth});
+        await scorchablePaymentsInstance.createPayment(accounts[7], 1 * weiInEth,   0.1 * weiInEth, past, true,  {from: accounts[1], value: 1 * weiInEth});
         // eth payment to be extended, not claimed
-        await scorchablePaymentsInstance.createPayment(accounts[7], 10 * oneEth,   2 * oneEth, past, true,  {from: accounts[8], value: 10 * oneEth});
+        await scorchablePaymentsInstance.createPayment(accounts[7], 1 * weiInEth,   0.1 * weiInEth, past, true,  {from: accounts[8], value: 1 * weiInEth});
+
+        var expectedError = false;
+        try {
+            // Dai payment which should fail with insufficient approved dai
+            await scorchablePaymentsInstance.createPayment(accounts[3], 90 * oneDai,   2 * oneDai, future, false, {from: accounts[2]});
+        }
+        catch (err) {
+            expectedError = true;
+        }
+        if (!expectedError) {
+            throw "user stole dai";
+        }
 
         assert.equal(await fakeDaiInstance.balanceOf.call(scorchablePaymentsInstance.address), 35 * oneDai);
         assert.equal(await fakeDaiInstance.balanceOf.call(accounts[0]), 780 * oneDai);
         assert.equal(await fakeDaiInstance.balanceOf.call(accounts[1]), 90 * oneDai);
         assert.equal(await fakeDaiInstance.balanceOf.call(accounts[2]), 100 * oneDai);
         assert.equal(await fakeDaiInstance.balanceOf.call(accounts[3]), 95 * oneDai);
+        var accountFourBalance = await web3.eth.getBalance(accounts[4]);
 
         var numPayments = await scorchablePaymentsInstance.getNumPayments.call();
         var newNumPayments = 0
@@ -76,17 +87,16 @@ contract('Payments test', async (accounts) => {
         }
         for (i = 0; i < numPayments; i++) {
             let payment = await scorchablePaymentsInstance.payments.call(existingIds[i]);
-            if (payment[payerIndex].toString() == accounts[9].toLowerCase()) {
+            if (payment[payeeIndex].toString() == accounts[9].toLowerCase()) {
                 await scorchablePaymentsInstance.cancelPayment(existingIds[i], {from: accounts[3]});
                 newNumPayments = await scorchablePaymentsInstance.getNumPayments.call();
             }
         }
         assert.equal(numPayments, 8);
         assert.equal(newNumPayments, 7);
-        numPayments = await scorchablePaymentsInstance.getNumPayments.call();
-        await scorchablePaymentsInstance.createPayment();
+        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[3]), 100 * oneDai);
         // eth payment to be deleted
-        await scorchablePaymentsInstance.createPayment(accounts[7], 10 * oneEth, 2 * oneEth, future, true, {from: accounts[3], value: 5 * oneEth});
+        await scorchablePaymentsInstance.createPayment(accounts[7], 1 * weiInEth, 0.2 * weiInEth, future, true, {from: accounts[3], value: 1 * weiInEth});
         numPayments = await scorchablePaymentsInstance.getNumPayments.call();
         assert.equal(numPayments, 8);
 
@@ -104,3 +114,4 @@ contract('Payments test', async (accounts) => {
         assert.equal(await fakeDaiInstance.balanceOf.call(scorchablePaymentsInstance.address), 30 * oneDai);
         // TODO check eth balance, assert close enough due to fees.
     });
+});
