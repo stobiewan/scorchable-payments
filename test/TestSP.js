@@ -83,7 +83,7 @@ contract('Payments test', async (accounts) => {
 
         var expectedError = false;
         try {
-            // Dai payment which should fail with insufficient approved dai (id 9)
+            // Dai payment which should fail with insufficient approved dai
             await scorchablePaymentsInstance.createPayment(accounts[3], 90 * oneDai,   2 * oneDai, future, false, {from: accounts[2]});
         }
         catch (err) {
@@ -120,7 +120,7 @@ contract('Payments test', async (accounts) => {
         assert.equal(numPayments, 8);
         assert.equal(newNumPayments, 7);
         assert.equal(await fakeDaiInstance.balanceOf.call(accounts[3]), 100 * oneDai);
-        // eth payment to be deleted
+        // eth payment to be deleted (id 9)
         await scorchablePaymentsInstance.createPayment(accounts[7], 1 * weiInEth, 0.2 * weiInEth, future, true, {from: accounts[3], value: 1 * weiInEth});
         numPayments = await scorchablePaymentsInstance.getNumPayments.call();
         assert.equal(numPayments, 8);
@@ -139,26 +139,44 @@ contract('Payments test', async (accounts) => {
         assert.equal(await fakeDaiInstance.balanceOf.call(scorchablePaymentsInstance.address), 30 * oneDai);
     });
 
-    it("cancels and claims", async () => {
-        var previousEthBalances = await getEthBalances();
-        await scorchablePaymentsInstance.claimTimedOutPayment(2, {from: accounts[1]});
-        await scorchablePaymentsInstance.claimTimedOutPayment(7, {from: accounts[7]});  // 7 should gain 1 eth
-        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[1]), 100 * oneDai);
-
+    it("invalid cancels and claims", async () => {
         var expectedError = false;
         try {
-            // Dai payment which should fail with insufficient approved dai (id 9)
+            // Attempt by payee to claim payment that hasn't timed out which should raise exception
             await scorchablePaymentsInstance.claimTimedOutPayment(5, {from: accounts[5]});
         }
         catch (err) {
             expectedError = true;
         }
         if (!expectedError) {
-            throw "user stole dai";
+            throw "claimed payment before timeout";
         }
 
+        expectedError = false;
+        try {
+            // Try to cancel payment from wrong account
+            await scorchablePaymentsInstance.cancelPayment(3, {from: accounts[2]});
+        }
+        catch (err) {
+            expectedError = true;
+        }
+        if (!expectedError) {
+            throw "payment cancelled from wrong account";
+        }
+    });
+
+    it("cancels and claims", async () => {
+        var previousEthBalances = await getEthBalances();
+        await scorchablePaymentsInstance.claimTimedOutPayment(2, {from: accounts[1]});  // dai payment with id 2
+        await scorchablePaymentsInstance.claimTimedOutPayment(7, {from: accounts[7]});  // 7 should gain 1 eth
+        await scorchablePaymentsInstance.cancelPayment(9, {from: accounts[3]});
+        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[1]), 100 * oneDai);
         var newEthBalances = await getEthBalances();
-        var expectedEthDeltas = [0, 0, 0, 0, 0, 0, 0, 1 * weiInEth, 0, 0];
+        var expectedEthDeltas = [0, 0, 0, 1 * weiInEth, 0, 0, 0, 1 * weiInEth, 0, 0];
         assertDifferences(previousEthBalances, newEthBalances, expectedEthDeltas);
+    });
+
+    it("extend timers and pay bonds", async () => {
+//        remaining IDs are: 1, 2, 3, 8, 5, 6, 7
     });
 });
