@@ -57,7 +57,7 @@ contract ScorchablePayments is DaiTransferrer {
     payable
     {
         transferTokens(msg.sender, address(this), amountToPay, isEthPayment);
-//        require(payerInactionTimeout < now + 26 weeks); TODO uncomment after testing
+        require(payerInactionTimeout < now + 27 weeks);
         payments[currentId] = Payment(
             msg.sender,
             payee,
@@ -143,7 +143,6 @@ contract ScorchablePayments is DaiTransferrer {
 
     function claimTimedOutPayment(uint64 paymentId) external onlyPayee(paymentId) {
         require(now > payments[paymentId].payerInactionTimeout);
-        require(payments[paymentId].payeeBondPaid);
         transferTokens(
             address(this),
             payments[paymentId].payee,
