@@ -177,6 +177,43 @@ contract('Payments test', async (accounts) => {
     });
 
     it("extend timers and pay bonds", async () => {
-//        remaining IDs are: 1, 2, 3, 8, 5, 6, 7
+        // remaining IDs are: 1, 2, 3, 8, 5, 6, 7
+        var previousEthBalances = await getEthBalances();
+        // extend timer on 8 which was claimable and assert it is no longer claimable
+        await scorchablePaymentsInstance.extendInactionTimeout(8, {from: accounts[8]});
+        var expectedError = false;
+        try {
+            // Attempt by payee to claim payment that hasn't timed out which should raise exception
+            await scorchablePaymentsInstance.claimTimedOutPayment(5, {from: accounts[5]});
+        }
+        catch (err) {
+            expectedError = true;
+        }
+        if (!expectedError) {
+            throw "claimed payment before timeout";
+        }
+
+        // add a top up of a dai and eth payment
+        await scorchablePaymentsInstance.topUp(1, 1 * oneDai, {from: accounts[0]});
+        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[0]), 779 * oneDai);
+        await scorchablePaymentsInstance.topUp(8, 0.5 * weiInEth, {from: accounts[8], value: 0.5 * weiInEth});
+
+        //pay bonds
+        await scorchablePaymentsInstance.payBond(1, {from: accounts[0]});
+        await scorchablePaymentsInstance.payBond(2, {from: accounts[1]});
+        await scorchablePaymentsInstance.payBond(3, {from: accounts[2]});
+
+        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[0]), 777 * oneDai);
+        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[1]), 98 * oneDai);
+        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[2]), 98 * oneDai);
+
+        await scorchablePaymentsInstance.payBond(8, {from: accounts[7], value: 0.1 * weiInEth});
+        await scorchablePaymentsInstance.payBond(5, {from: accounts[4], value: 0.1 * weiInEth});
+        await scorchablePaymentsInstance.payBond(6, {from: accounts[6], value: 0.1 * weiInEth});
+        await scorchablePaymentsInstance.payBond(7, {from: accounts[1], value: 0.1 * weiInEth});
+
+        var newEthBalances = await getEthBalances();
+        var expectedEthDeltas = [0, -0.1 * weiInEth, 0, 0, -0.1 * weiInEth, 0, -0.1 * weiInEth, -0.1 * weiInEth, -0.5 * weiInEth, 0];
+        assertDifferences(previousEthBalances, newEthBalances, expectedEthDeltas);
     });
 });

@@ -119,7 +119,7 @@ contract ScorchablePayments is DaiTransferrer {
         payments[paymentId].payerInactionTimeout = now + 5 weeks;
     }
 
-    function topUp(uint64 paymentId, uint amount) external {
+    function topUp(uint64 paymentId, uint amount) external payable {
         transferTokens(msg.sender, address(this), amount, payments[paymentId].isEthPayment);
         payments[paymentId].amount += amount;
     }
