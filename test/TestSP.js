@@ -23,7 +23,7 @@ contract('Payments test', async (accounts) => {
     var future = now + 1000;
     var numAccounts = 10;
 
-    function bigNumToDai(bigNum) {
+    function bigNumToDaiOrEth(bigNum) {
         return bigNum.toNumber() / oneDai;
     }
 
@@ -210,10 +210,71 @@ contract('Payments test', async (accounts) => {
         await scorchablePaymentsInstance.payBond(8, {from: accounts[7], value: 0.1 * weiInEth});
         await scorchablePaymentsInstance.payBond(5, {from: accounts[4], value: 0.1 * weiInEth});
         await scorchablePaymentsInstance.payBond(6, {from: accounts[6], value: 0.1 * weiInEth});
+
+        expectedError = false;
+        try {
+            // try to pay bond with insufficient payment
+            await scorchablePaymentsInstance.payBond(7, {from: accounts[1], value: 0.05 * weiInEth});
+        }
+        catch (err) {
+            expectedError = true;
+        }
+        if (!expectedError) {
+            throw "claimed payment before timeout";
+        }
+
         await scorchablePaymentsInstance.payBond(7, {from: accounts[1], value: 0.1 * weiInEth});
 
         var newEthBalances = await getEthBalances();
         var expectedEthDeltas = [0, -0.1 * weiInEth, 0, 0, -0.1 * weiInEth, 0, -0.1 * weiInEth, -0.1 * weiInEth, -0.5 * weiInEth, 0];
         assertDifferences(previousEthBalances, newEthBalances, expectedEthDeltas);
+    });
+
+    it("return to sender", async () => {
+        // remaining IDs are: 1, 2, 3, 8, 5, 6, 7
+        var expectedError = false;
+        try {
+            // RTS from wrong account
+            await scorchablePaymentsInstance.returnTokensToSender(8, {from: accounts[8]});
+        }
+        catch (err) {
+            expectedError = true;
+        }
+        if (!expectedError) {
+            throw "claimed payment before timeout";
+        }
+        await scorchablePaymentsInstance.returnTokensToSender(8, 0.1 * weiInEth, {from: accounts[7]});
+        let payment = await scorchablePaymentsInstance.payments.call(8);
+        assert(bigNumToDaiOrEth(payment[amountIndex]) == 1.5); // 1.0 start + 0.1 bond + 0.5 top up - 0.1 returned.
+
+        expectedError = false;
+        try {
+            // Try to return too much
+            await scorchablePaymentsInstance.returnTokensToSender(8, 1.6 * weiInEth, {from: accounts[7]});
+        }
+        catch (err) {
+            expectedError = true;
+        }
+        if (!expectedError) {
+            throw "claimed payment before timeout";
+        }
+        //return everything and ensure payment gets deleted
+        await scorchablePaymentsInstance.returnTokensToSender(8, 1.5 * weiInEth, {from: accounts[7]});
+        let nullPayment = await scorchablePaymentsInstance.payments.call(8);
+        assert(nullPayment[payeeIndex] == 0);
+        //return some dai
+        await scorchablePaymentsInstance.returnTokensToSender(2, 0.1 * oneDai, {from: accounts[1]});
+        let daiPayment = await scorchablePaymentsInstance.payments.call(2);
+        assert(bigNumToDaiOrEth(daiPayment[amountIndex]) == 11.9);
+        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[0]), 777.1 * oneDai);
+    });
+
+    it("releases", async () => {
+        // remaining IDs are: 1, 2, 3, 5, 6, 7
+
+    });
+
+    it("scorches", async () => {
+        
     });
 });
