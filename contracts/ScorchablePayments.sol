@@ -34,7 +34,7 @@ contract ScorchablePayments is DaiTransferrer {
     uint64[] public paymentIds;
     uint64 public currentId = 1;
     mapping(uint64 => Payment) public payments;
-    address private scorch = 0x300afbE08EE4619EC93524f9255CE59a013a5b63;
+    address public scorch = 0x300afbE08EE4619EC93524f9255CE59a013a5b63;
 
     modifier onlyPayer(uint64 paymentId) {
         require(msg.sender == payments[paymentId].payer);
@@ -149,6 +149,7 @@ contract ScorchablePayments is DaiTransferrer {
             payments[paymentId].amount,
             payments[paymentId].isEthPayment
         );
+        _deletePayment(paymentId);
     }
 
     function transferTokens(address source, address dest, uint amount, bool isEthPayment) internal {

@@ -177,7 +177,7 @@ contract('Payments test', async (accounts) => {
     });
 
     it("extend timers and pay bonds", async () => {
-        // remaining IDs are: 1, 2, 3, 8, 5, 6, 7
+        // remaining IDs are: 1, 3, 8, 5, 6
         var previousEthBalances = await getEthBalances();
         // extend timer on 8 which was claimable and assert it is no longer claimable
         await scorchablePaymentsInstance.extendInactionTimeout(8, {from: accounts[8]});
@@ -200,21 +200,19 @@ contract('Payments test', async (accounts) => {
 
         //pay bonds
         await scorchablePaymentsInstance.payBond(1, {from: accounts[0]});
-        await scorchablePaymentsInstance.payBond(2, {from: accounts[1]});
         await scorchablePaymentsInstance.payBond(3, {from: accounts[2]});
 
         assert.equal(await fakeDaiInstance.balanceOf.call(accounts[0]), 777 * oneDai);
-        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[1]), 98 * oneDai);
+        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[1]), 100 * oneDai);
         assert.equal(await fakeDaiInstance.balanceOf.call(accounts[2]), 98 * oneDai);
 
-        await scorchablePaymentsInstance.payBond(8, {from: accounts[7], value: 0.1 * weiInEth});
         await scorchablePaymentsInstance.payBond(5, {from: accounts[4], value: 0.1 * weiInEth});
         await scorchablePaymentsInstance.payBond(6, {from: accounts[6], value: 0.1 * weiInEth});
 
         expectedError = false;
         try {
             // try to pay bond with insufficient payment
-            await scorchablePaymentsInstance.payBond(7, {from: accounts[1], value: 0.05 * weiInEth});
+            await scorchablePaymentsInstance.payBond(8, {from: accounts[7], value: 0.05 * weiInEth});
         }
         catch (err) {
             expectedError = true;
@@ -223,15 +221,15 @@ contract('Payments test', async (accounts) => {
             throw "claimed payment before timeout";
         }
 
-        await scorchablePaymentsInstance.payBond(7, {from: accounts[1], value: 0.1 * weiInEth});
+        await scorchablePaymentsInstance.payBond(8, {from: accounts[7], value: 0.1 * weiInEth});
 
         var newEthBalances = await getEthBalances();
-        var expectedEthDeltas = [0, -0.1 * weiInEth, 0, 0, -0.1 * weiInEth, 0, -0.1 * weiInEth, -0.1 * weiInEth, -0.5 * weiInEth, 0];
+        var expectedEthDeltas = [0, 0, 0, 0, -0.1 * weiInEth, 0, -0.1 * weiInEth, -0.1 * weiInEth, -0.5 * weiInEth, 0];
         assertDifferences(previousEthBalances, newEthBalances, expectedEthDeltas);
     });
 
     it("return to sender", async () => {
-        // remaining IDs are: 1, 2, 3, 8, 5, 6, 7
+        // remaining IDs are: 1, 3, 8, 5, 6
         var expectedError = false;
         try {
             // RTS from wrong account
@@ -263,14 +261,14 @@ contract('Payments test', async (accounts) => {
         let nullPayment = await scorchablePaymentsInstance.payments.call(8);
         assert(nullPayment[payeeIndex] == 0);
         //return some dai
-        await scorchablePaymentsInstance.returnTokensToSender(2, 0.1 * oneDai, {from: accounts[1]});
-        let daiPayment = await scorchablePaymentsInstance.payments.call(2);
-        assert(bigNumToDaiOrEth(daiPayment[amountIndex]) == 11.9);
+        await scorchablePaymentsInstance.returnTokensToSender(1, 0.1 * oneDai, {from: accounts[0]});
+        let daiPayment = await scorchablePaymentsInstance.payments.call(1);
+        assert(bigNumToDaiOrEth(daiPayment[amountIndex]) == 12.9);
         assert.equal(await fakeDaiInstance.balanceOf.call(accounts[0]), 777.1 * oneDai);
     });
 
     it("releases", async () => {
-        // remaining IDs are: 1, 2, 3, 5, 6, 7
+        // remaining IDs are: 1, 3, 5, 6
         var previousEthBalances = await getEthBalances();
         var expectedError = false;
         try {
@@ -299,18 +297,95 @@ contract('Payments test', async (accounts) => {
         //partial release eth
         await scorchablePaymentsInstance.releasePayment(5, 0.05 * weiInEth, {from: accounts[4]});
         let payment = await scorchablePaymentsInstance.payments.call(5);
-        assert(bigNumToDaiOrEth(payment[amountIndex]) == 1.05); // 1.0 start + 0.1 bond + 0.05 returned.
-        //complete release eth
-        await scorchablePaymentsInstance.releasePayment(8, {from: accounts[8]});
-        //partial release dai
-        await scorchablePaymentsInstance.releasePayment(8, {from: accounts[8]});
+        assert(bigNumToDaiOrEth(payment[amountIndex]) == 1.05); // 1.0 start + 0.1 bond - 0.05 released.
 
         var newEthBalances = await getEthBalances();
-        var expectedEthDeltas = [0, -0.1 * weiInEth, 0, 0, -0.1 * weiInEth, 0, -0.1 * weiInEth, -0.1 * weiInEth, -0.5 * weiInEth, 0];
+        var expectedEthDeltas = [0, 0, 0, 0, 0, 0.05 * weiInEth, 0, 0, 0, 0];
         assertDifferences(previousEthBalances, newEthBalances, expectedEthDeltas);
+
+        //complete release eth and make sure payment is gone
+        await scorchablePaymentsInstance.releasePayment(5, 1.05 * weiInEth, {from: accounts[4]});
+        let nullPayment = await scorchablePaymentsInstance.payments.call(5);
+        assert(nullPayment[payeeIndex] == 0);
+
+        //partial release dai
+        await scorchablePaymentsInstance.releasePayment(3, 3 * oneDai, {from: accounts[1]});
+        assert.equal(await fakeDaiInstance.balanceOf.call(accounts[2]), 101 * oneDai);
+        let daiPayment = await scorchablePaymentsInstance.payments.call(3);
+        assert(daiPayment[amountIndex] == 9 * oneDai);
+
+        var newEthBalances = await getEthBalances();
+        var expectedEthDeltas = [0, 0, 0, 0, 0, 1.1 * weiInEth, 0, 0, 0, 0];
+        assertDifferences(previousEthBalances, newEthBalances, expectedEthDeltas);
+
+        var numPayments = await scorchablePaymentsInstance.getNumPayments.call();
+        assert.equal(numPayments, 3);
     });
 
     it("scorches", async () => {
-        
+        // remaining IDs are: 1, 3, 6
+        var previousEthBalances = await getEthBalances();
+        var glass = await scorchablePaymentsInstance.scorch.call();
+        var initialScorchedEth = bigNumToDaiOrEth(await web3.eth.getBalance(glass));
+
+        // try to scorch from wrong account
+        var expectedError = false;
+        try {
+            // scorch from wrong account
+            await scorchablePaymentsInstance.releasePayment(6, 0.2 * weiInEth, {from: accounts[0]});
+        }
+        catch (err) {
+            expectedError = true;
+        }
+        if (!expectedError) {
+            throw "claimed payment before timeout";
+        }
+        // try to scorch too much
+        try {
+            // scorch from wrong account
+            await scorchablePaymentsInstance.releasePayment(6, 1.2 * weiInEth, {from: accounts[6]});
+        }
+        catch (err) {
+            expectedError = true;
+        }
+        if (!expectedError) {
+            throw "claimed payment before timeout";
+        }
+        // partial scorch eth payment 6 which was sent by 6, amount = 1.1eth
+        await scorchablePaymentsInstance.scorchPayment(6, 0.2 * weiInEth, {from: accounts[6]});
+        let payment = await scorchablePaymentsInstance.payments.call(6);
+        assert(bigNumToDaiOrEth(payment[amountIndex]) == 0.9); // 1.0 start + 0.1 bond - 0.2 scorched.
+        // complete scorch eth payment 6 which was sent by 6
+        await scorchablePaymentsInstance.scorchPayment(6, 0.9 * weiInEth, {from: accounts[6]});
+        let nullPayment = await scorchablePaymentsInstance.payments.call(6);
+        assert(nullPayment[payeeIndex] == 0);
+        // partial scorch dai payment 3 which was sent by 1, initially has 9 dai
+        await scorchablePaymentsInstance.scorchPayment(3, 2 * oneDai, {from: accounts[1]});
+        let daiPayment = await scorchablePaymentsInstance.payments.call(3);
+        assert(daiPayment[amountIndex] == 7 * oneDai);
+
+        // complete scorch dai payment 3 which was sent by 1
+        await scorchablePaymentsInstance.scorchPayment(3, 7 * oneDai, {from: accounts[1]});
+        nullPayment = await scorchablePaymentsInstance.payments.call(3);
+        assert(nullPayment[payeeIndex] == 0);
+
+        var newEthBalances = await getEthBalances();
+        var expectedEthDeltas = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        assertDifferences(previousEthBalances, newEthBalances, expectedEthDeltas);
+
+        var numPayments = await scorchablePaymentsInstance.getNumPayments.call();
+        assert.equal(numPayments, 1);
+
+        var scorchedDai = bigNumToDaiOrEth(await fakeDaiInstance.balanceOf.call(glass));
+        var finalScorchedEth = bigNumToDaiOrEth(await web3.eth.getBalance(glass));
+        assert.equal(scorchedDai, 9);
+        assertClose(finalScorchedEth - initialScorchedEth, 1.1);
+    });
+
+    it("final check balances are correct", async () => {
+        // remaining IDs are: 1 which should contain 12.9 dai, so contract should have 0 eth and 12.9 dai
+        let daiInContract = bigNumToDaiOrEth(await fakeDaiInstance.balanceOf.call(scorchablePaymentsInstance.address))
+        assert.equal(daiInContract, 12.9);
+        assertClose(bigNumToDaiOrEth(await web3.eth.getBalance(scorchablePaymentsInstance.address)), 0);
     });
 });
