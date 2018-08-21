@@ -271,7 +271,43 @@ contract('Payments test', async (accounts) => {
 
     it("releases", async () => {
         // remaining IDs are: 1, 2, 3, 5, 6, 7
+        var previousEthBalances = await getEthBalances();
+        var expectedError = false;
+        try {
+            // release from wrong account
+            await scorchablePaymentsInstance.releasePayment(5, 0.1 * weiInEth, {from: accounts[3]});
+        }
+        catch (err) {
+            expectedError = true;
+        }
+        if (!expectedError) {
+            throw "claimed payment before timeout";
+        }
 
+        expectedError = false;
+        try {
+            // release too much
+            await scorchablePaymentsInstance.releasePayment(5, 1.6 * weiInEth, {from: accounts[4]});
+        }
+        catch (err) {
+            expectedError = true;
+        }
+        if (!expectedError) {
+            throw "claimed payment before timeout";
+        }
+
+        //partial release eth
+        await scorchablePaymentsInstance.releasePayment(5, 0.05 * weiInEth, {from: accounts[4]});
+        let payment = await scorchablePaymentsInstance.payments.call(5);
+        assert(bigNumToDaiOrEth(payment[amountIndex]) == 1.05); // 1.0 start + 0.1 bond + 0.05 returned.
+        //complete release eth
+        await scorchablePaymentsInstance.releasePayment(8, {from: accounts[8]});
+        //partial release dai
+        await scorchablePaymentsInstance.releasePayment(8, {from: accounts[8]});
+
+        var newEthBalances = await getEthBalances();
+        var expectedEthDeltas = [0, -0.1 * weiInEth, 0, 0, -0.1 * weiInEth, 0, -0.1 * weiInEth, -0.1 * weiInEth, -0.5 * weiInEth, 0];
+        assertDifferences(previousEthBalances, newEthBalances, expectedEthDeltas);
     });
 
     it("scorches", async () => {
