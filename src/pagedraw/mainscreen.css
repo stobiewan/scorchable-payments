@@ -65,7 +65,26 @@
 .mainscreen-0-0-1 {
     width: 0px;
     flex-shrink: 0;
-    flex-grow: 1;
+    flex-grow: 0.3493975903614458;
+    flex-basis: 0px;
+}
+
+.mainscreen-0-0-2 {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+.mainscreen-centraltabgroup_instance-9 {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainscreen-0-0-3 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0.6506024096385542;
     flex-basis: 0px;
 }
 
