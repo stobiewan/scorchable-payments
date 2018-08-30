@@ -7,7 +7,7 @@ export default class Buttonwithstate extends React.Component {
   render() {
     return (
       <div className="buttonwithstate">
-          { ((this.props.state == 'selected' ? 'selected' : 'unselected') === "unselected") ?
+          { ((this.props.state === 'selected' ? 'selected' : 'unselected') === "unselected") ?
               <div className="buttonwithstate-unselected-3">
                   <div className="buttonwithstate-0-0-0">
                       <div className="buttonwithstate-buttonunselectedstate-4">
@@ -20,7 +20,7 @@ export default class Buttonwithstate extends React.Component {
                   </div>
               </div>
           : null}
-          { ((this.props.state == 'selected' ? 'selected' : 'unselected') === "selected") ?
+          { ((this.props.state === 'selected' ? 'selected' : 'unselected') === "selected") ?
               <div className="buttonwithstate-selected-8">
                   <div className="buttonwithstate-1-0-0">
                       <div className="buttonwithstate-buttonselectedstate-8">
