@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router'
-//import HomeContainer from './layouts/home/HomeContainer'
 /* import the MainScreen component drawn above in Pagedraw */
 import MainScreen from './pagedraw/mainscreen'
 
@@ -10,27 +9,24 @@ import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
 
-var DaysEnum = Object.freeze({"intro":1, "send":2, "receive":3})
+var DaysEnum = Object.freeze({"intro" : 1, "manageDai" : 2, "create" : 3, "ountgoing" : 4, "incoming" : 5})
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      selectedTab: DaysEnum.intro
+      selectedTab: DaysEnum.intro,
+      accountsApprovedDai: "123"
     };
   }
 
   render() {
-    return <MainScreen selectedTab={this.state.selectedTab} setSelectedTab={(i) => this.setState({selectedTab: i})}/>;
+    return <MainScreen selectedTab={this.state.selectedTab} setSelectedTab={(i) => this.setState({selectedTab: i})} approvedDai={this.state.accountsApprovedDai}/>;
   }
 
-//  render() {
-//    return (
-//      <div className="App">
-//        <Route exact path="/" component={HomeContainer}/>
-//      </div>
-//    );
-//  }
+  getAccountsApprovedDai() {
+    return "123";
+  }
 }
 
 export default App

@@ -27,64 +27,101 @@
 }
 
 .mainscreen-0-0-0 {
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
-}
-
-.mainscreen-tabbuttons-4 {
-    display: flex;
-    flex-direction: column;
-}
-
-.mainscreen-0-0-0-0-0 {
-    display: flex;
-    flex-shrink: 0;
-}
-
-.mainscreen-buttonwithstate_instance-3 {
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.mainscreen-buttonwithstate_instance_2 {
-    flex-shrink: 0;
-    margin-left: 26px;
-    display: flex;
-    flex-direction: column;
-}
-
-.mainscreen-buttonwithstate_instance_3 {
-    flex-shrink: 0;
-    margin-left: 24px;
-    display: flex;
-    flex-direction: column;
-}
-
-.mainscreen-0-0-1 {
     width: 0px;
     flex-shrink: 0;
-    flex-grow: 0.3493975903614458;
+    flex-grow: 0;
     flex-basis: 0px;
 }
 
-.mainscreen-0-0-2 {
+.mainscreen-0-0-1 {
     display: flex;
     flex-shrink: 0;
     justify-content: center;
 }
 
-.mainscreen-centraltabgroup_instance-9 {
+.mainscreen-tabbuttons-0 {
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0);
+}
+
+.mainscreen-0-0-1-0-0 {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.mainscreen-tabbutton1 {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
 }
 
-.mainscreen-0-0-3 {
+.mainscreen-tabbutton2 {
+    flex-shrink: 0;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainscreen-tabbutton3 {
+    flex-shrink: 0;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainscreen-tabbutton4 {
+    flex-shrink: 0;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainscreen-tabbutton5 {
+    flex-shrink: 0;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainscreen-0-0-2 {
     width: 0px;
     flex-shrink: 0;
-    flex-grow: 0.6506024096385542;
+    flex-grow: 0.1;
+    flex-basis: 0px;
+}
+
+.mainscreen-0-0-3 {
+    display: flex;
+    flex-shrink: 0;
+    flex-grow: 0.8;
+    flex-basis: 0px;
+    min-height: fit-content;
+}
+
+.mainscreen-0-0-3-0 {
+    height: 0px;
+    flex-grow: 0.1;
+    flex-basis: 0px;
+}
+
+.mainscreen-centraltabgroup_instance-9 {
+    flex-grow: 0.7994791666666666;
+    flex-basis: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainscreen-0-0-3-2 {
+    height: 0px;
+    flex-grow: 0.10052083333333334;
+    flex-basis: 0px;
+}
+
+.mainscreen-0-0-4 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0.1;
     flex-basis: 0px;
 }
 

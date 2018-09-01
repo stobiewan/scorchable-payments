@@ -12,13 +12,26 @@
 }
 
 .centraltabgroup-0-0-0 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-0-0-1 {
     display: flex;
     flex-shrink: 0;
 }
 
+.centraltabgroup-0-0-1-0 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
 .centraltabgroup-titletext-2 {
-    width: 1536px;
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: rgb(255, 255, 255);
     font-size: 27px;
@@ -31,14 +44,33 @@
     word-wrap: break-word;
 }
 
-.centraltabgroup-0-0-1 {
+.centraltabgroup-0-0-1-2 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-0-0-2 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-0-0-3 {
     display: flex;
     flex-shrink: 0;
 }
 
+.centraltabgroup-0-0-3-0 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
 .centraltabgroup-summarytext-9 {
-    width: 1536px;
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: rgb(255, 255, 255);
     font-size: 18px;
@@ -51,14 +83,33 @@
     word-wrap: break-word;
 }
 
-.centraltabgroup-0-0-2 {
+.centraltabgroup-0-0-3-2 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-0-0-4 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-0-0-5 {
     display: flex;
     flex-shrink: 0;
 }
 
+.centraltabgroup-0-0-5-0 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
 .centraltabgroup-phasestext-2 {
-    width: 1536px;
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: rgb(255, 255, 255);
     font-size: 18px;
@@ -71,15 +122,60 @@
     word-wrap: break-word;
 }
 
-.centraltabgroup-0-0-3 {
+.centraltabgroup-0-0-5-2 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-0-0-6 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-0-0-7 {
     display: flex;
     flex-shrink: 0;
-    margin-top: 329px;
+}
+
+.centraltabgroup-this_process_means_the_buyer_can_not_hope_to_gain_the_good_or_service_without_also_losing_the_funds_and_the_seller_can_not_hope_to_gain_the_funds_then_never_provide_the_good_or_service_the_seller_can_not_cause_the_buyer_to_lose_their_funds_without_also_losing_their_bond_the_payer_is_aware_of_the_destination_address_so_can_be_sure_it_is_not_an_extortion_contract_and_as_the_buyer_and_seller_know_who_each_other_are_to_some_degree_they_have_incentives_to_complete_the_trade_well_as_their_reputation_is_at_stake_as_there_is_nothing_to_be_gained_from_scams_they_are_extremely_unlikely_to_ever_occur_and_users_of_scorchable_payments_can_rationally_expect_the_counterparty_to_behave_with_the_objective_to_make_the_transaction_successful_-4 {
+    flex-grow: 1;
+    flex-basis: 0px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.centraltabgroup-0-0-8 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-0-0-9 {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.centraltabgroup-0-0-9-0 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
 }
 
 .centraltabgroup-contract_address_0 {
-    width: 1536px;
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: rgb(255, 255, 255);
     font-size: 16px;
@@ -92,42 +188,134 @@
     word-wrap: break-word;
 }
 
+.centraltabgroup-0-0-9-2 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-0-0-10 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
 .centraltabgroup-2-0 {
     display: flex;
     flex-direction: column;
-    padding-top: 386px;
-    padding-bottom: 462px;
     background: rgba(0, 0, 0, 0.1);
     flex-grow: 1;
 }
 
 .centraltabgroup-1-0-0 {
-    display: flex;
+    width: 0px;
     flex-shrink: 0;
-    padding-left: 727px;
-    padding-right: 709px;
+    flex-grow: 0;
+    flex-basis: 0px;
 }
 
-.centraltabgroup-send_-1 {
-    width: 100px;
+.centraltabgroup-1-0-1 {
+    display: flex;
     flex-shrink: 0;
+}
+
+.centraltabgroup-1-0-1-0 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-daisummarytext-1 {
+    flex-grow: 1;
+    flex-basis: 0px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: rgb(255, 255, 255);
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 18px;
+    line-height: 21px;
     letter-spacing: 0px;
     font-weight: normal;
     font-style: normal;
     text-decoration: none;
-    text-align: left;
+    text-align: center;
     word-wrap: break-word;
 }
 
-.centraltabgroup-3 {
+.centraltabgroup-1-0-1-2 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-1-0-2 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0.20242914979757085;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-1-0-3 {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.centraltabgroup-1-0-3-0 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-aproveddaitext-2 {
+    flex-grow: 1;
+    flex-basis: 0px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 27px;
+    line-height: 31px;
+    letter-spacing: 0px;
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.centraltabgroup-1-0-3-2 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-1-0-4 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0.2483130904183536;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-1-0-5 {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+.centraltabgroup-approvedaiwidget-4 {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.centraltabgroup-1-0-6 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0.5492577597840755;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-3-4 {
     display: flex;
     flex-direction: column;
     padding-top: 450px;
-    padding-bottom: 398px;
     background: rgba(0, 0, 0, 0.1);
     flex-grow: 1;
 }
@@ -139,7 +327,7 @@
     padding-right: 734px;
 }
 
-.centraltabgroup-receive_-6 {
+.centraltabgroup-create_payment-6 {
     width: 100px;
     flex-shrink: 0;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -152,6 +340,84 @@
     text-decoration: none;
     text-align: left;
     word-wrap: break-word;
+}
+
+.centraltabgroup-2-0-1 {
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-4-5 {
+    display: flex;
+    flex-direction: column;
+    padding-top: 450px;
+    background: rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+}
+
+.centraltabgroup-3-0-0 {
+    display: flex;
+    flex-shrink: 0;
+    padding-left: 702px;
+    padding-right: 734px;
+}
+
+.centraltabgroup-outgoing-4 {
+    width: 100px;
+    flex-shrink: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.centraltabgroup-3-0-1 {
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-5 {
+    display: flex;
+    flex-direction: column;
+    padding-top: 450px;
+    background: rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+}
+
+.centraltabgroup-4-0-0 {
+    display: flex;
+    flex-shrink: 0;
+    padding-left: 702px;
+    padding-right: 734px;
+}
+
+.centraltabgroup-incoming-0 {
+    width: 100px;
+    flex-shrink: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.centraltabgroup-4-0-1 {
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
 }
 
 * {
