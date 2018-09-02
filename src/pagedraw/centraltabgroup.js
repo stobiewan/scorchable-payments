@@ -2,7 +2,7 @@
 import React from 'react';
 import Textentrywithbutton from './textentrywithbutton';
 import './centraltabgroup.css';
-
+import {AccountData, ContractData, ContractForm} from 'drizzle-react-components'
 
 export default class Centraltabgroup extends React.Component {
   render() {
@@ -82,7 +82,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-1-0-3">
                       <div className="centraltabgroup-1-0-3-0" /> 
                       <div className="centraltabgroup-aproveddaitext-2">
-                          { "Quantity of Dai currently approved: " + this.props.daiApproved }
+                          <ContractData contract="DSToken" method="balanceOf"                                                                     methodArgs={[this.props.accounts[0]]}/>
                       </div>
                       <div className="centraltabgroup-1-0-3-2" /> 
                   </div>

@@ -37,7 +37,7 @@ export default class Mainscreen extends React.Component {
                   <div className="mainscreen-0-0-3">
                       <div className="mainscreen-0-0-3-0" /> 
                       <div className="mainscreen-centraltabgroup_instance-9">
-                          <Centraltabgroup state={(this.props.selectedTab.toString())} daiApproved={this.props.approvedDai} /> 
+                          <Centraltabgroup state={(this.props.selectedTab.toString())} accounts={this.props.accounts} /> 
                       </div>
                       <div className="mainscreen-0-0-3-2" /> 
                   </div>

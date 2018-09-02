@@ -1,4 +1,4 @@
-import Mainscreen from '../../pagedraw/mainscreen'
+import DrizzleApp from './DrizzleApp'
 import { drizzleConnect } from 'drizzle-react'
 
 // May still need this even with data function to refresh component on updates for this contract.
@@ -8,12 +8,9 @@ const mapStateToProps = state => {
     ScorchablePayments: state.contracts.ScorchablePayments,
     DSToken: state.contracts.DSToken,
     drizzleStatus: state.drizzleStatus,
-    selectedTab: this.props.selectedTab,
-    setSelectedTab: this.props.setSelectedTab,
-    approvedDai: this.props.approvedDai
   }
 }
 
-const HomeContainer = drizzleConnect(Mainscreen, mapStateToProps);
+const DrizzleAppContainer = drizzleConnect(DrizzleApp, mapStateToProps);
 
-export default HomeContainer
+export default DrizzleAppContainer

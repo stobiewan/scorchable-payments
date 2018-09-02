@@ -1,6 +1,5 @@
-import ComplexStorage from './../build/contracts/ComplexStorage.json'
-import SimpleStorage from './../build/contracts/SimpleStorage.json'
-import TutorialToken from './../build/contracts/TutorialToken.json'
+import ScorchablePayments from './../build/contracts/ScorchablePayments.json'
+import DSToken from './../build/contracts/DSToken.json'
 
 const drizzleOptions = {
   web3: {
@@ -11,12 +10,11 @@ const drizzleOptions = {
     }
   },
   contracts: [
-    ComplexStorage,
-    SimpleStorage,
-    TutorialToken
+    ScorchablePayments,
+    DSToken,
   ],
   events: {
-    SimpleStorage: ['StorageSet']
+    DSToken: ['Approval', 'Transfer'],
   },
   polls: {
     accounts: 1500

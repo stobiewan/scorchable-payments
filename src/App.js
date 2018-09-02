@@ -3,6 +3,8 @@ import { Route } from 'react-router'
 /* import the MainScreen component drawn above in Pagedraw */
 import MainScreen from './pagedraw/mainscreen'
 
+import DrizzleAppContainer from './layouts/drizzle_app/DrizzleAppContainer'
+
 // Styles
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -21,8 +23,13 @@ class App extends Component {
   }
 
   render() {
-    return <MainScreen selectedTab={this.state.selectedTab} setSelectedTab={(i) => this.setState({selectedTab: i})} approvedDai={this.state.accountsApprovedDai}/>;
+    return (
+      <div className="App">
+        <Route exact path="/" component={DrizzleAppContainer}/>
+      </div>
+    );
   }
+//    return <MainScreen selectedTab={this.state.selectedTab} setSelectedTab={(i) => this.setState({selectedTab: i})} approvedDai={this.state.accountsApprovedDai}/>;
 
   getAccountsApprovedDai() {
     return "123";
