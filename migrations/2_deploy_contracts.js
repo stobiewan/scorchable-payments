@@ -1,13 +1,3 @@
-var SimpleStorage = artifacts.require("SimpleStorage");
-var TutorialToken = artifacts.require("TutorialToken");
-var ComplexStorage = artifacts.require("ComplexStorage");
-//
-//module.exports = function(deployer) {
-//  deployer.deploy(SimpleStorage);
-//  deployer.deploy(TutorialToken);
-//  deployer.deploy(ComplexStorage);
-//};
-
 var fakeDai = artifacts.require("./DSToken");
 var scorchablePayments = artifacts.require("./ScorchablePayments");
 const oneDai = Math.pow(10, 18);
@@ -28,10 +18,6 @@ module.exports = function (deployer, network, accounts) {
         deployer.deploy(fakeDai, "FakeDai");
         deployer.deploy(scorchablePayments);
         deployer.then(async () => await asyncSetup(accounts))
-
-        deployer.deploy(SimpleStorage);
-        deployer.deploy(TutorialToken);
-        deployer.deploy(ComplexStorage);
     }
     else if (network == "rinkeby") {
         deployer.deploy(fakeDai, "FakeDai");
