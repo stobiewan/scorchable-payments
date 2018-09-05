@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router'
-/* import the MainScreen component drawn above in Pagedraw */
-import MainScreen from './pagedraw/mainscreen'
 
 import DrizzleAppContainer from './layouts/drizzle_app/DrizzleAppContainer'
 
@@ -17,8 +15,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      selectedTab: DaysEnum.intro,
-      accountsApprovedDai: "123"
+      selectedTab: DaysEnum.intro
     };
   }
 
@@ -28,11 +25,6 @@ class App extends Component {
         <Route exact path="/" component={DrizzleAppContainer}/>
       </div>
     );
-  }
-//    return <MainScreen selectedTab={this.state.selectedTab} setSelectedTab={(i) => this.setState({selectedTab: i})} approvedDai={this.state.accountsApprovedDai}/>;
-
-  getAccountsApprovedDai() {
-    return "123";
   }
 }
 

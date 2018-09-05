@@ -2,7 +2,7 @@
 import React from 'react';
 import Textentrywithbutton from './textentrywithbutton';
 import './centraltabgroup.css';
-import {AccountData, ContractData, ContractForm} from 'drizzle-react-components'
+import DaiBalanceContainer from '../layouts/components/DaiBalanceContainer'
 
 export default class Centraltabgroup extends React.Component {
   render() {
@@ -81,15 +81,18 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-1-0-2" /> 
                   <div className="centraltabgroup-1-0-3">
                       <div className="centraltabgroup-1-0-3-0" /> 
-                      <div className="centraltabgroup-aproveddaitext-2">
-                          <ContractData contract="DSToken" method="balanceOf"                                                                     methodArgs={[this.props.accounts[0]]}/>
+                      <div className="centraltabgroup-owneddaitext-2">
+                          <div>
+                              <DaiBalanceContainer account={this.props.accounts[0]}/> 
+                          </div>
+                          
                       </div>
                       <div className="centraltabgroup-1-0-3-2" /> 
                   </div>
                   <div className="centraltabgroup-1-0-4" /> 
                   <div className="centraltabgroup-1-0-5">
                       <div className="centraltabgroup-approvedaiwidget-4">
-                          <Textentrywithbutton text={"qwerty"} text2={"Approve Dai"} /> 
+                          <Textentrywithbutton text2={"Approve Dai"} text3={"0"} onButtonClicked={(() => this.props.onApproveDai())} /> 
                       </div>
                   </div>
                   <div className="centraltabgroup-1-0-6" /> 

@@ -9,8 +9,7 @@ const mapStateToProps = state => {
     DSToken: state.contracts.DSToken,
     drizzleStatus: state.drizzleStatus,
     selectedTab: this.props.selectedTab,
-    setSelectedTab: this.props.setSelectedTab,
-    approvedDai: this.props.approvedDai
+    setSelectedTab: this.props.setSelectedTab
   }
 }
 
