@@ -2,7 +2,11 @@
 import React from 'react';
 import Textentrywithbutton from './textentrywithbutton';
 import './centraltabgroup.css';
-import DaiBalanceContainer from '../layouts/components/DaiBalanceContainer'
+import DaiBalanceContainer from '../components/DaiBalanceContainer'
+
+import ContractForm from '../components/ContractForm'
+
+import ContractData from '../components/ContractData'
 
 export default class Centraltabgroup extends React.Component {
   render() {
@@ -80,22 +84,33 @@ export default class Centraltabgroup extends React.Component {
                   </div>
                   <div className="centraltabgroup-1-0-2" /> 
                   <div className="centraltabgroup-1-0-3">
-                      <div className="centraltabgroup-1-0-3-0" /> 
-                      <div className="centraltabgroup-owneddaitext-2">
+                      <div className="centraltabgroup-owneddaiplaceholder-4">
                           <div>
-                              <DaiBalanceContainer account={this.props.accounts[0]}/> 
+                              <ContractData contract="DSToken" method="balanceOf" isTokenValue={1} prefix="Dai you own: " methodArgs={[this.props.accounts[0]]}/>
                           </div>
-                          
                       </div>
-                      <div className="centraltabgroup-1-0-3-2" /> 
                   </div>
-                  <div className="centraltabgroup-1-0-4" /> 
-                  <div className="centraltabgroup-1-0-5">
+                  <div className="centraltabgroup-1-0-4">
+                      <div className="centraltabgroup-approveddaiplaceholder-8">
+                          <div>
+                              <ContractData contract="DSToken" method="allowance" isTokenValue={1} prefix="Dai approved for contract: " methodArgs={[this.props.accounts[0], "0x9a55AF7a7D5c3b2EA5f540fD7C9F735CB425e196"]}/>
+                          </div>
+                      </div>
+                  </div>
+                  <div className="centraltabgroup-1-0-5" /> 
+                  <div className="centraltabgroup-1-0-6">
                       <div className="centraltabgroup-approvedaiwidget-4">
                           <Textentrywithbutton text2={"Approve Dai"} text3={"0"} onButtonClicked={(() => this.props.onApproveDai())} /> 
                       </div>
                   </div>
-                  <div className="centraltabgroup-1-0-6" /> 
+                  <div className="centraltabgroup-1-0-7" /> 
+                  <div className="centraltabgroup-1-0-8">
+                      <div className="centraltabgroup-approvedaiplaceholder-4">
+                          <div>
+                              <ContractForm contract="DSToken" method="approve"/> 
+                          </div>
+                      </div>
+                  </div>
               </div>
           : null}
           { (this.props.state === "3") ?

@@ -204,6 +204,7 @@
 .centraltabgroup-2-0 {
     display: flex;
     flex-direction: column;
+    padding-bottom: 331px;
     background: rgba(0, 0, 0, 0.1);
     flex-grow: 1;
 }
@@ -250,42 +251,42 @@
 .centraltabgroup-1-0-2 {
     width: 0px;
     flex-shrink: 0;
-    flex-grow: 0.2112676056338028;
+    flex-grow: 0.509915014164306;
     flex-basis: 0px;
 }
 
 .centraltabgroup-1-0-3 {
     display: flex;
     flex-shrink: 0;
+    justify-content: center;
 }
 
-.centraltabgroup-1-0-3-0 {
-    height: 0px;
-    flex-grow: 0;
-    flex-basis: 0px;
-}
-
-.centraltabgroup-owneddaitext-2 {
-    flex-grow: 1;
-    flex-basis: 0px;
+.centraltabgroup-owneddaiplaceholder-4 {
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
 }
 
-.centraltabgroup-1-0-3-2 {
-    height: 0px;
-    flex-grow: 0;
-    flex-basis: 0px;
+.centraltabgroup-1-0-4 {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
 }
 
-.centraltabgroup-1-0-4 {
-    width: 0px;
+.centraltabgroup-approveddaiplaceholder-8 {
     flex-shrink: 0;
-    flex-grow: 0.21549295774647886;
-    flex-basis: 0px;
+    display: flex;
+    flex-direction: column;
 }
 
 .centraltabgroup-1-0-5 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0.34844192634560905;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-1-0-6 {
     display: flex;
     flex-shrink: 0;
     justify-content: center;
@@ -297,11 +298,23 @@
     flex-direction: column;
 }
 
-.centraltabgroup-1-0-6 {
+.centraltabgroup-1-0-7 {
     width: 0px;
     flex-shrink: 0;
-    flex-grow: 0.5732394366197183;
+    flex-grow: 0.141643059490085;
     flex-basis: 0px;
+}
+
+.centraltabgroup-1-0-8 {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+.centraltabgroup-approvedaiplaceholder-4 {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .centraltabgroup-3-4 {
