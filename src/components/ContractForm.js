@@ -18,8 +18,18 @@ class ContractForm extends Component {
         // Get the contract ABI
         const abi = this.contracts[this.props.contract].abi;
 
+        this.fixedParams = this.props.fixedParams;
+        this.paramNamesToScale = this.props.paramNamesToScale;
         this.inputs = [];
         var initialState = {};
+
+        // Replace placeholders in fixed params
+        for (var i = 0; i < this.fixedParams.length; i++) {
+            if (typeof this.fixedParams[i] === 'string' && this.fixedParams[i].startsWith("contractPlaceholder:")) {
+                let contractName = this.fixedParams[i].slice(20);
+                this.fixedParams[i] = this.contracts[contractName].address;
+            }
+        }
 
         // Iterate over abi for correct function.
         for (var i = 0; i < abi.length; i++) {
@@ -27,7 +37,11 @@ class ContractForm extends Component {
                 this.inputs = abi[i].inputs;
 
                 for (var i = 0; i < this.inputs.length; i++) {
-                    initialState[this.inputs[i].name] = '';
+                    if (this.fixedParams[i] === -1) {
+                        initialState[this.inputs[i].name] = '';
+                    } else {
+                        initialState[this.inputs[i].name] = this.fixedParams[i];
+                    }
                 }
 
                 break;
@@ -38,11 +52,17 @@ class ContractForm extends Component {
     }
 
     handleSubmit() {
-        if (this.props.sendArgs) {
-            return this.contracts[this.props.contract].methods[this.props.method].cacheSend(...Object.values(this.state), this.props.sendArgs);
+        let submitState = Object.assign({}, this.state);
+        // scale token values from whole token to wei
+        for (var i = 0; i < this.paramNamesToScale.length; i++) {
+            submitState[this.paramNamesToScale[i]] = submitState[this.paramNamesToScale[i]] * 10 ** 18;
         }
 
-        this.contracts[this.props.contract].methods[this.props.method].cacheSend(...Object.values(this.state));
+        if (this.props.sendArgs) {
+            return this.contracts[this.props.contract].methods[this.props.method].cacheSend(...Object.values(submitState), this.props.sendArgs);
+        }
+
+        this.contracts[this.props.contract].methods[this.props.method].cacheSend(...Object.values(submitState));
     }
 
     handleInputChange(event) {
@@ -69,10 +89,14 @@ class ContractForm extends Component {
         return (
             <form className="pure-form pure-form-stacked">
                 {this.inputs.map((input, index) => {
-                    var inputType = this.translateType(input.type)
-                    var inputLabel = this.props.labels ? this.props.labels[index] : input.name
-                    // check if input type is struct and if so loop out struct fields as well
-                    return (<input key={input.name} type={inputType} name={input.name} value={this.state[input.name]} placeholder={inputLabel} onChange={this.handleInputChange} />)
+                    if (this.fixedParams[index] === -1) {
+                        var inputType = this.translateType(input.type)
+                        var inputLabel = this.props.labels ? this.props.labels[index] : input.name
+                        // check if input type is struct and if so loop out struct fields as well
+                        return (
+                            <input key={input.name} type={inputType} name={input.name} value={this.state[input.name]}
+                                   placeholder={inputLabel} onChange={this.handleInputChange}/>)
+                    }
                 })}
                 <button key="submit" className="pure-button" type="button" onClick={this.handleSubmit}>Submit</button>
             </form>

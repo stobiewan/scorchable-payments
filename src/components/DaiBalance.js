@@ -20,8 +20,6 @@ class DaiBalance extends Component {
             )
         }
 
-        console.log(this.contracts.DSToken.address)
-
         // Show a loading spinner for future updates.
         var pendingSpinner = this.contracts.DSToken.synced ? '' : ' 🔄'
 

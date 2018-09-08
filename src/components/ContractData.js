@@ -17,6 +17,15 @@ class ContractData extends Component {
 
         // Fetch initial value from chain and return cache key for reactive updates.
         var methodArgs = this.props.methodArgs ? this.props.methodArgs : []
+
+        // Replace placeholders in fixed params
+        for (var i = 0; i < methodArgs.length; i++) {
+            if (typeof methodArgs[i] === 'string' && methodArgs[i].startsWith("contractPlaceholder:")) {
+                let contractName = methodArgs[i].slice(20);
+                methodArgs[i] = this.contracts[contractName].address;
+            }
+        }
+
         this.dataKey = this.contracts[this.props.contract].methods[this.props.method].cacheCall(...methodArgs)
     }
 
