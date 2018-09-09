@@ -26,12 +26,13 @@
     flex-shrink: 0;
 }
 
-.textentrycomponent-text_input-1 {
+.textentrycomponent-textinputofcomponent-1 {
     width: 496px;
     height: 46px;
     flex-shrink: 0;
-    border-radius: 4px;
+    border-radius: 10px;
     background: rgba(0, 0, 0, 0);
+    border-width: 0px;
     font-family: "Roboto", sans-serif;
     color: rgb(255, 255, 255);
     font-size: 18px;
@@ -42,7 +43,6 @@
     line-height: normal;
     word-wrap: normal;
     padding: 6px 12px;
-    border: 1px solid #cccccc;
 }
 
 .textentrycomponent-description-1 {
@@ -70,7 +70,7 @@
     font-weight: normal;
     font-style: normal;
     text-decoration: none;
-    text-align: CENTER;
+    text-align: left;
     word-wrap: break-word;
 }
 

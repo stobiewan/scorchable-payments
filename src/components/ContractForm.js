@@ -1,6 +1,7 @@
 import { drizzleConnect } from 'drizzle-react'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import TextEntryComponent from '../pagedraw/textentrycomponent'
 
 /*
  * Create component.
@@ -23,8 +24,8 @@ class ContractForm extends Component {
         this.inputs = [];
         var initialState = {};
 
-        // Replace placeholders in fixed params
-        for (var i = 0; i < this.fixedParams.length; i++) {
+        // Replace placeholders in fixed params. Pagedraw files don't get context.
+        for (let i = 0; i < this.fixedParams.length; i++) {
             if (typeof this.fixedParams[i] === 'string' && this.fixedParams[i].startsWith("contractPlaceholder:")) {
                 let contractName = this.fixedParams[i].slice(20);
                 this.fixedParams[i] = this.contracts[contractName].address;
@@ -32,15 +33,14 @@ class ContractForm extends Component {
         }
 
         // Iterate over abi for correct function.
-        for (var i = 0; i < abi.length; i++) {
+        for (let i = 0; i < abi.length; i++) {
             if (abi[i].name === this.props.method) {
                 this.inputs = abi[i].inputs;
-
-                for (var i = 0; i < this.inputs.length; i++) {
-                    if (this.fixedParams[i] === -1) {
-                        initialState[this.inputs[i].name] = '';
+                for (let j = 0; j < this.inputs.length; j++) {
+                    if (this.fixedParams[j] === -1) {
+                        initialState[this.inputs[j].name] = '';
                     } else {
-                        initialState[this.inputs[i].name] = this.fixedParams[i];
+                        initialState[this.inputs[j].name] = this.fixedParams[j];
                     }
                 }
 
@@ -61,12 +61,11 @@ class ContractForm extends Component {
         if (this.props.sendArgs) {
             return this.contracts[this.props.contract].methods[this.props.method].cacheSend(...Object.values(submitState), this.props.sendArgs);
         }
-
         this.contracts[this.props.contract].methods[this.props.method].cacheSend(...Object.values(submitState));
     }
 
-    handleInputChange(event) {
-        this.setState({ [event.target.name]: event.target.value });
+    handleInputChange(event, name) {
+        this.setState({ [name]: event.target.value });
     }
 
     translateType(type) {
@@ -87,15 +86,16 @@ class ContractForm extends Component {
 
     render() {
         return (
-            <form className="pure-form pure-form-stacked">
+            <form>
                 {this.inputs.map((input, index) => {
                     if (this.fixedParams[index] === -1) {
                         var inputType = this.translateType(input.type)
                         var inputLabel = this.props.labels ? this.props.labels[index] : input.name
+                        var inputPlaceholder = this.props.placeholders ? this.props.placeholders[index] : input.name
                         // check if input type is struct and if so loop out struct fields as well
                         return (
-                            <input key={input.name} type={inputType} name={input.name} value={this.state[input.name]}
-                                   placeholder={inputLabel} onChange={this.handleInputChange}/>)
+                            <TextEntryComponent key={input.name} type={inputType} name={input.name} value={this.state[input.name]}
+                                   placeholder={inputPlaceholder} onChange={this.handleInputChange} description={inputLabel}/>)
                     }
                 })}
                 <button key="submit" className="pure-button" type="button" onClick={this.handleSubmit}>Submit</button>

@@ -1,6 +1,7 @@
 import { drizzleConnect } from 'drizzle-react'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import './styles.css';
 
 /*
  * Create component.
@@ -11,9 +12,6 @@ class ContractData extends Component {
         super(props)
 
         this.contracts = context.drizzle.contracts
-
-        // Get the contract ABI
-        const abi = this.contracts[this.props.contract].abi;
 
         // Fetch initial value from chain and return cache key for reactive updates.
         var methodArgs = this.props.methodArgs ? this.props.methodArgs : []
@@ -71,7 +69,7 @@ class ContractData extends Component {
         }
 
         // If return value is an array
-        if (typeof displayData === 'array') {
+        if (Array.isArray(displayData)) {
             const displayListItems = displayData.map((datum, index) => {
                 <li key={index}>{`${datum}`}{pendingSpinner}</li>
             })
@@ -89,7 +87,7 @@ class ContractData extends Component {
             const displayObjectProps = []
 
             Object.keys(displayData).forEach((key) => {
-                if (i != key) {
+                if (i !== key) {
                     displayObjectProps.push(<li key={i}>
                         <strong>{key}</strong>{pendingSpinner}<br/>
                         {`${displayData[key]}`}

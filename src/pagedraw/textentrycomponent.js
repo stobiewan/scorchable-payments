@@ -10,13 +10,13 @@ export default class Textentrycomponent extends React.Component {
           <div className="textentrycomponent-0">
               <div className="textentrycomponent-textentry-2">
                   <div className="textentrycomponent-0-0-0">
-                      <input type="text" placeholder="0x0000000000000000000000000000000000000000" value={this.props.value} onChange={this.props.onChange} className="textentrycomponent-text_input-1" /> 
+                      <input type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={((e) => this.props.onChange(e, this.props.name))} className="textentrycomponent-textinputofcomponent-1" /> 
                   </div>
               </div>
               <div className="textentrycomponent-description-1">
                   <div className="textentrycomponent-0-1-0">
                       <div className="textentrycomponent-description_-2">
-                          {"Description:"}
+                          { this.props.description }
                       </div>
                   </div>
               </div>

@@ -251,7 +251,7 @@
 .centraltabgroup-1-0-2 {
     width: 0px;
     flex-shrink: 0;
-    flex-grow: 0.509915014164306;
+    flex-grow: 1;
     flex-basis: 0px;
 }
 
@@ -280,34 +280,9 @@
 }
 
 .centraltabgroup-1-0-5 {
-    width: 0px;
-    flex-shrink: 0;
-    flex-grow: 0.34844192634560905;
-    flex-basis: 0px;
-}
-
-.centraltabgroup-1-0-6 {
     display: flex;
     flex-shrink: 0;
-    justify-content: center;
-}
-
-.centraltabgroup-approvedaiwidget-4 {
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.centraltabgroup-1-0-7 {
-    width: 0px;
-    flex-shrink: 0;
-    flex-grow: 0.141643059490085;
-    flex-basis: 0px;
-}
-
-.centraltabgroup-1-0-8 {
-    display: flex;
-    flex-shrink: 0;
+    margin-top: 223px;
     justify-content: center;
 }
 
