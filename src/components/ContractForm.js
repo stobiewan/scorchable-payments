@@ -2,6 +2,7 @@ import { drizzleConnect } from 'drizzle-react'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import TextEntryComponent from '../pagedraw/textentrycomponent'
+import Statelessbutton from '../pagedraw/statelessbutton'
 
 /*
  * Create component.
@@ -98,7 +99,7 @@ class ContractForm extends Component {
                                    placeholder={inputPlaceholder} onChange={this.handleInputChange} description={inputLabel}/>)
                     }
                 })}
-                <button key="submit" className="pure-button" type="button" onClick={this.handleSubmit}>Submit</button>
+                <Statelessbutton className="text-center" key={this.props.purpose} onClick={this.handleSubmit} buttonText={this.props.purpose}></Statelessbutton>
             </form>
         )
     }

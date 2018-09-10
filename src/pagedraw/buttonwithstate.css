@@ -36,6 +36,7 @@
 .buttonwithstate-unselectedtext-1 {
     width: 146px;
     flex-shrink: 0;
+    cursor: pointer;
     font-family: "Roboto", sans-serif;
     color: rgba(255,255,255,1);
     font-size: 18px;
@@ -78,6 +79,7 @@
 .buttonwithstate-selectedtext-4 {
     width: 146px;
     flex-shrink: 0;
+    cursor: pointer;
     font-family: "Roboto", sans-serif;
     color: rgba(255,255,255,1);
     font-size: 18px;

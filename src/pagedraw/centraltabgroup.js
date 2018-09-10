@@ -97,7 +97,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-1-0-5">
                       <div className="centraltabgroup-approvedaiplaceholder-4">
                           <div>
-                              <ContractForm contract="DSToken" method="approve" fixedParams={["contractPlaceholder:ScorchablePayments", -1]} paramNamesToScale={["wad"]} labels={["guy", "Dai Quantity"]}  placeholders={["0", "0"]}/> 
+                              <ContractForm contract="DSToken" method="approve" purpose="Approve Dai" fixedParams={["contractPlaceholder:ScorchablePayments", -1]} paramNamesToScale={["wad"]} labels={["guy", "Dai Quantity"]}  placeholders={["0", "0"]}/> 
                           </div>
                       </div>
                   </div>
