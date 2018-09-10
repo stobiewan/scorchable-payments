@@ -74,33 +74,48 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-1-0-0" /> 
                   <div className="centraltabgroup-1-0-1">
                       <div className="centraltabgroup-1-0-1-0" /> 
-                      <div className="centraltabgroup-daisummarytext-1">
-                          Before you can send Dai for payments or bonds you need to approve this contract to transfer it. You can approve as much as you want, only what you actually send can be transferred from your balance.
+                      <div className="centraltabgroup-rectangle_2">
+                          <div className="centraltabgroup-1-0-1-1-0" /> 
+                          <div className="centraltabgroup-1-0-1-1-1">
+                              <div className="centraltabgroup-1-0-1-1-1-0" /> 
+                              <div className="centraltabgroup-daisummarytext-1">
+                                  Before you can send Dai for payments or bonds you need to approve this contract to transfer it. You can approve as much as you want, only what you actually send can be transferred from your balance.
+                              </div>
+                              <div className="centraltabgroup-1-0-1-1-1-2" /> 
+                          </div>
+                          <div className="centraltabgroup-1-0-1-1-2" /> 
+                          <div className="centraltabgroup-1-0-1-1-3">
+                              <div className="centraltabgroup-1-0-1-1-3-0" /> 
+                              <div className="centraltabgroup-rectangle-3">
+                                  <div className="centraltabgroup-1-0-1-1-3-1-0">
+                                      <div className="centraltabgroup-owneddaiplaceholder-4">
+                                          <div>
+                                              <ContractData contract="DSToken" method="balanceOf" isTokenValue={1} prefix="Dai you own: " methodArgs={[this.props.accounts[0]]}/>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div className="centraltabgroup-1-0-1-1-3-1-1">
+                                      <div className="centraltabgroup-approveddaiplaceholder-8">
+                                          <div>
+                                              <ContractData contract="DSToken" method="allowance" isTokenValue={1} prefix="Dai approved for contract: " methodArgs={[this.props.accounts[0], "contractPlaceholder:ScorchablePayments"]}/>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div className="centraltabgroup-1-0-1-1-3-2" /> 
+                          </div>
+                          <div className="centraltabgroup-1-0-1-1-4" /> 
+                          <div className="centraltabgroup-1-0-1-1-5">
+                              <div className="centraltabgroup-approvedaiplaceholder-4">
+                                  <div>
+                                      <ContractForm contract="DSToken" method="approve" purpose="Approve Dai" fixedParams={["contractPlaceholder:ScorchablePayments", -1]} paramNamesToScale={["wad"]} labels={["guy", "Dai Quantity"]}  placeholders={["0", "0"]}/> 
+                                  </div>
+                              </div>
+                          </div>
                       </div>
                       <div className="centraltabgroup-1-0-1-2" /> 
                   </div>
                   <div className="centraltabgroup-1-0-2" /> 
-                  <div className="centraltabgroup-1-0-3">
-                      <div className="centraltabgroup-owneddaiplaceholder-4">
-                          <div>
-                              <ContractData contract="DSToken" method="balanceOf" isTokenValue={1} prefix="Dai you own: " methodArgs={[this.props.accounts[0]]}/>
-                          </div>
-                      </div>
-                  </div>
-                  <div className="centraltabgroup-1-0-4">
-                      <div className="centraltabgroup-approveddaiplaceholder-8">
-                          <div>
-                              <ContractData contract="DSToken" method="allowance" isTokenValue={1} prefix="Dai approved for contract: " methodArgs={[this.props.accounts[0], "contractPlaceholder:ScorchablePayments"]}/>
-                          </div>
-                      </div>
-                  </div>
-                  <div className="centraltabgroup-1-0-5">
-                      <div className="centraltabgroup-approvedaiplaceholder-4">
-                          <div>
-                              <ContractForm contract="DSToken" method="approve" purpose="Approve Dai" fixedParams={["contractPlaceholder:ScorchablePayments", -1]} paramNamesToScale={["wad"]} labels={["guy", "Dai Quantity"]}  placeholders={["0", "0"]}/> 
-                          </div>
-                      </div>
-                  </div>
               </div>
           : null}
           { (this.props.state === "3") ?

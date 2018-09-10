@@ -8,16 +8,16 @@ export default class Textentrycomponent extends React.Component {
     return (
       <div className="textentrycomponent-textentrycomponent-2">
           <div className="textentrycomponent-0">
-              <div className="textentrycomponent-textentry-2">
-                  <div className="textentrycomponent-0-0-0">
-                      <input type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={((e) => this.props.onChange(e, this.props.name))} className="textentrycomponent-textinputofcomponent-1" /> 
-                  </div>
-              </div>
               <div className="textentrycomponent-description-1">
-                  <div className="textentrycomponent-0-1-0">
+                  <div className="textentrycomponent-0-0-0">
                       <div className="textentrycomponent-description_-2">
                           { this.props.description }
                       </div>
+                  </div>
+              </div>
+              <div className="textentrycomponent-textentry-2">
+                  <div className="textentrycomponent-0-1-0">
+                      <input type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={((e) => this.props.onChange(e, this.props.name))} className="textentrycomponent-textinputofcomponent-1" /> 
                   </div>
               </div>
           </div>
