@@ -26,7 +26,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-0-0-3">
                       <div className="centraltabgroup-0-0-3-0" /> 
                       <div className="centraltabgroup-summarytext-9">
-                          <div>{"Scorchable payments are a simple way of making payments in Dai or ether with improved safety over direct transfers for both the payer and payee. There are no fees involved nor any centralised third party controlling escrows. The risks associated with direct transfers are reduced by removing the ability to profit through fraud for both parties, so there is no incentive for scammers to ever participate. The process follows the following three stages:"}</div>
+                          <div>{"Scorchable payments are a simple way of making payments in Dai or ether with more safety than direct transfers for both the payer and payee. There are no fees involved nor any centralised third party controlling escrows. The risks associated with direct transfers are reduced by removing the ability to profit through fraud for both parties, so there is no incentive for scammers to ever participate. The process follows the following three stages:"}</div>
                           <br/>
                           <br/>
                       </div>
@@ -121,11 +121,21 @@ export default class Centraltabgroup extends React.Component {
           { (this.props.state === "3") ?
               <div className="centraltabgroup-3-4">
                   <div className="centraltabgroup-2-0-0">
+                      <div className="centraltabgroup-2-0-0-0" /> 
                       <div className="centraltabgroup-create_payment-6">
-                          Create payment
+                          Create a payment to a payee in ether or Dai. Once it is created the funds will be stored in the smart contract. If a bond is specified the payee will then be able to pay the bond and until they do the payment can be cancelled with all of the funds returned to you. 
                       </div>
+                      <div className="centraltabgroup-2-0-0-2" /> 
                   </div>
                   <div className="centraltabgroup-2-0-1" /> 
+                  <div className="centraltabgroup-2-0-2">
+                      <div className="centraltabgroup-createpaymentplaceholder-6">
+                          <div>
+                              <ContractForm contract="ScorchablePayments" method="createPayment" purpose="Create Payment" fixedParams={[-1, -1, -1, -1, -1]} paramNamesToScale={["amountToPay", "payeeBondAmount"]} labels={["Payee address:", "Payment amount:", "Bond required:", "Inaction timeout s:", "Currency:"]}  placeholders={["0x0000000000000000000000000000000000000000", "0.0", "0.0", "604800", "true"]}/> 
+                          </div>
+                      </div>
+                  </div>
+                  <div className="centraltabgroup-2-0-3" /> 
               </div>
           : null}
           { (this.props.state === "4") ?

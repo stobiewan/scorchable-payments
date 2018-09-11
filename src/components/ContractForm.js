@@ -2,7 +2,7 @@ import { drizzleConnect } from 'drizzle-react'
 import React, { Component } from 'react'
 import './ContractForm.css';
 import PropTypes from 'prop-types'
-import TextEntryComponent from '../pagedraw/textentrycomponent'
+import InputComponent from '../pagedraw/inputcomponent'
 import Statelessbutton from '../pagedraw/statelessbutton'
 
 /*
@@ -40,7 +40,11 @@ class ContractForm extends Component {
                 this.inputs = abi[i].inputs;
                 for (let j = 0; j < this.inputs.length; j++) {
                     if (this.fixedParams[j] === -1) {
-                        initialState[this.inputs[j].name] = '';
+                        let initialValue = '';
+                        if (this.translateType(this.inputs[j].type) === 'checkbox') {
+                            initialValue = 1;
+                        }
+                        initialState[this.inputs[j].name] = initialValue;
                     } else {
                         initialState[this.inputs[j].name] = this.fixedParams[j];
                     }
@@ -91,12 +95,12 @@ class ContractForm extends Component {
             <form>
                 {this.inputs.map((input, index) => {
                     if (this.fixedParams[index] === -1) {
-                        var inputType = this.translateType(input.type)
-                        var inputLabel = this.props.labels ? this.props.labels[index] : input.name
-                        var inputPlaceholder = this.props.placeholders ? this.props.placeholders[index] : input.name
+                        let inputType = this.translateType(input.type)
+                        let inputLabel = this.props.labels ? this.props.labels[index] : input.name
+                        let inputPlaceholder = this.props.placeholders ? this.props.placeholders[index] : input.name
                         // check if input type is struct and if so loop out struct fields as well
                         return (
-                            <TextEntryComponent key={input.name} type={inputType} name={input.name} value={this.state[input.name]}
+                            <InputComponent key={input.name} type={inputType} name={input.name} value={this.state[input.name]}
                                    placeholder={inputPlaceholder} onChange={this.handleInputChange} description={inputLabel}/>)
                     }
                 })}
