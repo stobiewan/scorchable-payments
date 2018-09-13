@@ -21,7 +21,7 @@ export default class Radiobutton extends React.Component {
           { ((this.props.state === 'selected' ? 'selected' : 'unselected') === "unselected") ?
               <div className="radiobutton-unselected-8">
                   <div className="radiobutton-1-0-0">
-                      <div onClick={this.props.onClick} className="radiobutton-oval-1" /> 
+                      <div onClick={() => this.props.onClick(this.props.id, this.props.name)} className="radiobutton-oval-1" /> 
                   </div>
               </div>
           : null}

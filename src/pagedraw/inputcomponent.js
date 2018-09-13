@@ -39,7 +39,7 @@ export default class Inputcomponent extends React.Component {
                       <div className="inputcomponent-background-6">
                           <div className="inputcomponent-1-0-0-1-0">
                               <div className="inputcomponent-etherradiobutton-7">
-                                  <Radiobutton state={(this.props.value === 1 ? "selected" : "unselected")} onClick={(((e) => this.props.onChange(e, this.props.name)))} /> 
+                                  <Radiobutton state={(this.props.value === 1 ? "selected" : "unselected")} id={(1)} name={this.props.name} onClick={this.props.onClick} /> 
                               </div>
                               <div className="inputcomponent-1-0-0-1-0-1">
                                   <div className="inputcomponent-1-0-0-1-0-1-0">
@@ -47,7 +47,7 @@ export default class Inputcomponent extends React.Component {
                                   </div>
                               </div>
                               <div className="inputcomponent-dairadiobutton-2">
-                                  <Radiobutton state={(this.props.value === 0 ? "selected" : "unselected")} onClick={()} /> 
+                                  <Radiobutton state={(this.props.value === 0 ? "selected" : "unselected")} id={(0)} name={this.props.name} onClick={this.props.onClick} /> 
                               </div>
                               <div className="inputcomponent-1-0-0-1-0-3">
                                   <div className="inputcomponent-1-0-0-1-0-3-0">

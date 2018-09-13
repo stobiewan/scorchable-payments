@@ -131,7 +131,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-2-0-2">
                       <div className="centraltabgroup-createpaymentplaceholder-6">
                           <div>
-                              <ContractForm contract="ScorchablePayments" method="createPayment" purpose="Create Payment" fixedParams={[-1, -1, -1, -1, -1]} paramNamesToScale={["amountToPay", "payeeBondAmount"]} labels={["Payee address:", "Payment amount:", "Bond required:", "Inaction timeout s:", "Currency:"]}  placeholders={["0x0000000000000000000000000000000000000000", "0.0", "0.0", "604800", "true"]}/> 
+                              <ContractForm contract="ScorchablePayments" method="createPayment" purpose="Create Payment" fixedParams={[-1, -1, -1, -1, -1]} paramNamesToScale={["amountToPay", "payeeBondAmount"]} labels={["Payee address:", "Payment amount:", "Bond required:", "Inaction timeout s:", "Currency:"]}  placeholders={["0x0000000000000000000000000000000000000000", "0.0", "0.0", "604800", "true"]} amountInputs={{"conditional": "isEthPayment", "value": "amountToPay"}}/> 
                           </div>
                       </div>
                   </div>
