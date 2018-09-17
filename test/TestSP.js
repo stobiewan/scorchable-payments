@@ -125,6 +125,18 @@ contract('Payments test', async (accounts) => {
         numPayments = await scorchablePaymentsInstance.getNumPayments.call();
         assert.equal(numPayments, 8);
 
+        let relevantPayments = await scorchablePaymentsInstance.getPaymentsForAccount.call(accounts[0]);
+        let outgoingPayments = relevantPayments[0];
+        let incomingPayments = relevantPayments[1];
+        for (i = 0; i < outgoingPayments.length; i++) {
+            outgoingPayments[i] = outgoingPayments[i].toNumber()
+        }
+        for (i = 0; i < incomingPayments.length; i++) {
+            incomingPayments[i] = incomingPayments[i].toNumber()
+        }
+        assert.deepEqual(outgoingPayments, [1, 2]);
+        assert.deepEqual(incomingPayments, [1, 6]);
+
         // Make sure shuffling has worked after canceled payment
         existingIds = [];
         for (i = 0; i < numPayments; i++) {

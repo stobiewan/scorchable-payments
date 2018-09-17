@@ -8,7 +8,7 @@ export default class Rightbutton extends React.Component {
     return (
       <div onClick={this.props.onClick} className="rightbutton-rightbutton-3">
           <div className="rightbutton-0">
-              <div className="rightbutton-leftbuttonbackground-7">
+              <div className="rightbutton-rightbuttonbackground-7">
                   <div className="rightbutton-0-0-0">
                       <div className="rightbutton-lefttext-5">{">"}</div>
                   </div>

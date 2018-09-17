@@ -6,9 +6,7 @@ import "./SafeMath.sol";
 import "./DaiInterface.sol";
 
 
-// TODO add tests
 // TODO tests must cover underflow throws, using safemath
-// TODO update migration
 // TODO frontend
 
 
@@ -111,14 +109,6 @@ contract ScorchablePayments is DaiTransferrer {
         }
     }
 
-    function getNumPayments() external view returns (uint length) {
-        return paymentIds.length;
-    }
-
-    function extendInactionTimeout(uint64 paymentId) public onlyPayer(paymentId) {
-        payments[paymentId].payerInactionTimeout = now + 5 weeks;
-    }
-
     function topUp(uint64 paymentId, uint amount) external payable {
         transferTokens(msg.sender, address(this), amount, payments[paymentId].isEthPayment);
         payments[paymentId].amount += amount;
@@ -150,6 +140,43 @@ contract ScorchablePayments is DaiTransferrer {
             payments[paymentId].isEthPayment
         );
         _deletePayment(paymentId);
+    }
+
+    function getNumPayments() external view returns (uint length) {
+        return paymentIds.length;
+    }
+
+    function getPaymentsForAccount(address account) external view returns (uint64[], uint64[]) {
+        uint64[] memory outgoingIds = new uint64[](paymentIds.length);
+        uint64[] memory incomingIds = new uint64[](paymentIds.length);
+        uint outgoingReturnLength = 0;
+        uint incomingReturnLength = 0;
+
+        for (uint i=0; i < paymentIds.length; i++) {
+            if (payments[paymentIds[i]].payer == account) {
+                outgoingIds[outgoingReturnLength] = paymentIds[i];
+                outgoingReturnLength += 1;
+            }
+            if (payments[paymentIds[i]].payee == account) {
+                incomingIds[incomingReturnLength] = paymentIds[i];
+                incomingReturnLength += 1;
+            }
+        }
+
+        uint64[] memory returnOutgoingIds = new uint64[](outgoingReturnLength);
+        uint64[] memory returnIncomingIds = new uint64[](incomingReturnLength);
+
+        for (uint j=0; j < outgoingReturnLength; j++) {
+            returnOutgoingIds[j] = outgoingIds[j];
+        }
+        for (uint k=0; k < incomingReturnLength; k++) {
+            returnIncomingIds[k] = incomingIds[k];
+        }
+        return (returnOutgoingIds, returnIncomingIds);
+    }
+
+    function extendInactionTimeout(uint64 paymentId) public onlyPayer(paymentId) {
+        payments[paymentId].payerInactionTimeout = now + 5 weeks;
     }
 
     function transferTokens(address source, address dest, uint amount, bool isEthPayment) internal {
