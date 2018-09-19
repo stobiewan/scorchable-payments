@@ -12,7 +12,7 @@ class DrizzleApp extends Component {
         this.relevantPaymentsKey = this.contracts.ScorchablePayments.methods.getPaymentsForAccount.cacheCall(this.props.accounts[0])
         this.relevantPayments = [[], []]
         this.changeOutgoingPaymentIndex = this.changeOutgoingPaymentIndex.bind(this);
-        this.changeOutgoingPaymentIndex = this.updateOutgoingIndices.bind(this);
+        this.updateOutgoingIndices = this.updateOutgoingIndices.bind(this);
         this.state = {
             selectedTab: DaysEnum.intro,
             localOutgoingIndex: -1,
@@ -22,13 +22,16 @@ class DrizzleApp extends Component {
 
     updateOutgoingIndices() {
         let outgoing = this.relevantPayments[0]
-        if (outgoing.length == 0) {
+        if (outgoing.length === 0) {
             this.setState({localOutgoingIndex: -1})
             this.setState({selectedOutgoingPaymentId: -1})
         }
         else {
-            // if payments have been removed change the index so the payment id selected is the same.
-            let newLocalIndex = outgoing.indexOf(this.state.selectedOutgoingPaymentId)
+            let newLocalIndex = 0
+            if (this.state.localOutgoingIndex !== -1) {
+                // if payments have been removed change the index so the payment id selected is the same.
+                newLocalIndex = outgoing.indexOf(this.state.selectedOutgoingPaymentId)
+            }
             this.setState({localOutgoingIndex: newLocalIndex})
             if (newLocalIndex === -1) {
                 this.setState({selectedOutgoingPaymentId: -1})
@@ -38,7 +41,7 @@ class DrizzleApp extends Component {
 
     changeOutgoingPaymentIndex(change) {
         let outgoing = this.relevantPayments[0]
-        if (outgoing.length == 0) {
+        if (outgoing.length === 0) {
             this.setState({localOutgoingIndex: -1})
             this.setState({selectedOutgoingPaymentId: -1})
         }
@@ -48,12 +51,11 @@ class DrizzleApp extends Component {
                 newIndex = 0;
             }
             if (newIndex >= outgoing.length) {
-                newIndex = outgoing.length - 1;
+                newIndex = outgoing.length - 1
             }
             this.setState({localOutgoingIndex: newIndex});
             this.setState({selectedOutgoingPaymentId: outgoing[newIndex]})
         }
-
     }
 
     render() {
@@ -73,7 +75,7 @@ class DrizzleApp extends Component {
                            setSelectedTab={(i) => this.setState({selectedTab: i})}
                            accounts={this.props.accounts}
                            onChangeOutgoingIndex={this.changeOutgoingPaymentIndex}
-                           outgoingPaymentIndex={this.state.localOutgoingIndex}/>;
+                           outgoingPaymentIndex={this.state.selectedOutgoingPaymentId}/>;
     }
 }
 

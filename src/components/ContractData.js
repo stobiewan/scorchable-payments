@@ -53,7 +53,7 @@ class ContractData extends Component {
         var displayData = this.props.contracts[this.props.contract][this.props.method][this.dataKey].value
         var prefix = this.props.prefix
 
-        // Optionally scale reult to show whole token values
+        // Optionally scale result to show whole token values
         if (this.props.isTokenValue) {
             displayData = displayData / 10 ** 18
         }
@@ -98,9 +98,11 @@ class ContractData extends Component {
             })
 
             return(
-                <ul>
-                    {displayObjectProps}
-                </ul>
+                <div className="medium-text">
+                    <ul>
+                        {displayObjectProps}
+                    </ul>
+                </div>
             )
         }
 

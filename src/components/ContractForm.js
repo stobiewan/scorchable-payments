@@ -106,13 +106,10 @@ class ContractForm extends Component {
         switch(true) {
             case /^uint/.test(type):
                 return 'number'
-                break
             case /^string/.test(type) || /^bytes/.test(type):
                 return 'text'
-                break
             case /^bool/.test(type):
                 return 'checkbox'
-                break
             default:
                 return 'text'
         }

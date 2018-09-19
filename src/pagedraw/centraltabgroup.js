@@ -158,7 +158,9 @@ export default class Centraltabgroup extends React.Component {
                   </div>
                   <div className="centraltabgroup-3-0-2">
                       <div className="centraltabgroup-payment_data_placeholder_-3">
-                          payment data placeholder
+                          <div>
+                              <ContractData contract="ScorchablePayments" method="payments" isTokenValue={0} prefix="" methodArgs={[this.props.outgoingPaymentIndex]}/>
+                          </div>
                       </div>
                   </div>
                   <div className="centraltabgroup-3-0-3">
