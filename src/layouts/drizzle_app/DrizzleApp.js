@@ -28,7 +28,11 @@ class DrizzleApp extends Component {
         }
         else {
             let newLocalIndex = 0
-            if (this.state.localOutgoingIndex !== -1) {
+            if (this.state.localOutgoingIndex === -1) {
+                // There are payments so select the first
+                this.changeOutgoingPaymentIndex(1)
+            }
+            else {
                 // if payments have been removed change the index so the payment id selected is the same.
                 newLocalIndex = outgoing.indexOf(this.state.selectedOutgoingPaymentId)
             }
@@ -58,6 +62,16 @@ class DrizzleApp extends Component {
         }
     }
 
+    getLocalOutgoingIndexString() {
+        let numOutgoingPayments = this.relevantPayments[0].length
+        if (numOutgoingPayments === 0) {
+            return("You have zero outgoing payments")
+        }
+        else {
+            return((this.state.localOutgoingIndex + 1).toString() + ' / ' + numOutgoingPayments.toString())
+        }
+    }
+
     render() {
         // If the cache key we received earlier isn't in the store yet; the initial value is still being fetched.
         if(!(this.relevantPaymentsKey in this.props.ScorchablePayments.getPaymentsForAccount)) {
@@ -66,16 +80,20 @@ class DrizzleApp extends Component {
             )
         }
 
+        return <MainScreen selectedTab={this.state.selectedTab}
+                           setSelectedTab={(i) => this.setState({selectedTab: i})}
+                           accounts={this.props.accounts}
+                           onChangeOutgoingIndex={this.changeOutgoingPaymentIndex}
+                           outgoingPaymentIndex={this.state.selectedOutgoingPaymentId}
+                           localOutgoingIndexString={this.getLocalOutgoingIndexString()}/>;
+    }
+
+    componentDidUpdate() {
         let newRelevantPayments = this.props.ScorchablePayments.getPaymentsForAccount[this.relevantPaymentsKey].value
         if (newRelevantPayments !== this.relevantPayments) {
             this.relevantPayments = newRelevantPayments
             this.updateOutgoingIndices();
         }
-        return <MainScreen selectedTab={this.state.selectedTab}
-                           setSelectedTab={(i) => this.setState({selectedTab: i})}
-                           accounts={this.props.accounts}
-                           onChangeOutgoingIndex={this.changeOutgoingPaymentIndex}
-                           outgoingPaymentIndex={this.state.selectedOutgoingPaymentId}/>;
     }
 }
 

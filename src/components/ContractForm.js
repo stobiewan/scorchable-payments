@@ -28,12 +28,6 @@ class ContractForm extends Component {
         this.paramNamesToScale = this.props.paramNamesToScale;
         this.inputs = [];
         this.sendArgs = Object.assign({}, this.props.sendArgs);
-        // if (this.props.sendArgs) {
-        //     this.sendArgs = this.props.sendArgs;
-        // }
-        // else {
-        //     this.sendArgs = {};
-        // }
 
         var initialState = {};
 

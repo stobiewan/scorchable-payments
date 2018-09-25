@@ -14,17 +14,13 @@ class ContractData extends Component {
         this.contracts = context.drizzle.contracts
 
         // Fetch initial value from chain and return cache key for reactive updates.
-        var methodArgs = this.props.methodArgs ? this.props.methodArgs : []
-
-        // Replace placeholders in fixed params
-        for (var i = 0; i < methodArgs.length; i++) {
-            if (typeof methodArgs[i] === 'string' && methodArgs[i].startsWith("contractPlaceholder:")) {
-                let contractName = methodArgs[i].slice(20);
-                methodArgs[i] = this.contracts[contractName].address;
-            }
-        }
+        var methodArgs = this.getMethodArgs()
 
         this.dataKey = this.contracts[this.props.contract].methods[this.props.method].cacheCall(...methodArgs)
+
+        this.state = {
+            stateMethodArgs: methodArgs
+        };
     }
 
     render() {
@@ -87,13 +83,13 @@ class ContractData extends Component {
             const displayObjectProps = []
 
             Object.keys(displayData).forEach((key) => {
-                if (i !== key) {
+                if (i != key) {
                     displayObjectProps.push(<li key={i}>
                         <strong>{key}</strong>{pendingSpinner}<br/>
                         {`${displayData[key]}`}
                     </li>)
                 }
-
+                // console.log("i = " + i + ", key is " + key + " and i !== key is " + (i != key))
                 i++
             })
 
@@ -111,6 +107,28 @@ class ContractData extends Component {
                 <span>{prefix}{`${displayData}`}{pendingSpinner}</span>
             </div>
         )
+    }
+
+    componentDidUpdate() {
+        let newMethodArgs = this.getMethodArgs()
+        if (newMethodArgs !== this.state.stateMethodArgs) {
+            this.dataKey = this.contracts[this.props.contract].methods[this.props.method].cacheCall(...newMethodArgs)
+            this.setState({stateMethodArgs: newMethodArgs})
+        }
+    }
+
+    getMethodArgs() {
+        let methodArgs = this.props.methodArgs ? this.props.methodArgs : []
+
+        // Replace placeholders in fixed params
+        for (var i = 0; i < methodArgs.length; i++) {
+            if (typeof methodArgs[i] === 'string' && methodArgs[i].startsWith("contractPlaceholder:")) {
+                let contractName = methodArgs[i].slice(20);
+                methodArgs[i] = this.contracts[contractName].address;
+            }
+        }
+
+        return(methodArgs)
     }
 }
 
