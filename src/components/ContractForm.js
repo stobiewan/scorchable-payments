@@ -77,14 +77,12 @@ class ContractForm extends Component {
 
     addAmountSendArg(submitState) {
         let ethToSend = 0;
-        console.log(this.sendArgs)
         if (this.props.amountInputs && submitState[this.props.amountInputs["conditional"]] > 0) {
             ethToSend = submitState[this.props.amountInputs["value"]];
         }
         if (ethToSend > 0) {
             this.sendArgs = {value: ethToSend};
         }
-        console.log(this.sendArgs)
     }
 
     handleInputChange(event, name) {
@@ -92,7 +90,6 @@ class ContractForm extends Component {
     }
 
     handleRadioInputClick(value, name) {
-        console.log("val and name is " + value + ",  " + name)
         this.setState({ [name]: value });
     }
 
@@ -119,12 +116,12 @@ class ContractForm extends Component {
                         let inputPlaceholder = this.props.placeholders ? this.props.placeholders[index] : input.name
                         // check if input type is struct and if so loop out struct fields as well
                         return (
-                            <div>
+                            <div key={index + 32}>
                                 <InputComponent key={input.name} type={inputType} name={input.name}
                                                 value={this.state[input.name]} placeholder={inputPlaceholder}
                                                 onChange={this.handleInputChange} onClick={this.handleRadioInputClick}
                                                 description={inputLabel}/>
-                                <SpacerFive/>
+                                <SpacerFive key={index}/>
                             </div>)
                     }
                 })}
@@ -135,6 +132,19 @@ class ContractForm extends Component {
                 </div>
             </form>
         )
+    }
+
+    componentDidUpdate() {
+        if (this.fixedParams !== this.props.fixedParams) {
+            let newState = this.state
+            for (let j = 0; j < this.inputs.length; j++) {
+                if (this.props.fixedParams[j] !== -1) {
+                    newState[this.inputs[j].name] = this.props.fixedParams[j];
+                }
+            }
+            this.fixedParams = this.props.fixedParams
+            this.setState(newState)
+        }
     }
 }
 

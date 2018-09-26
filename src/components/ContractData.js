@@ -89,7 +89,6 @@ class ContractData extends Component {
                         {`${displayData[key]}`}
                     </li>)
                 }
-                // console.log("i = " + i + ", key is " + key + " and i !== key is " + (i != key))
                 i++
             })
 
