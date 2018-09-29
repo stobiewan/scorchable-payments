@@ -25,41 +25,45 @@ class ContractForm extends Component {
         const abi = this.contracts[this.props.contract].abi;
 
         this.fixedParams = this.props.fixedParams;
+        this.processedFixedParams = []
         this.paramNamesToScale = this.props.paramNamesToScale;
         this.inputs = [];
         this.sendArgs = Object.assign({}, this.props.sendArgs);
 
         var initialState = {};
 
-        // Replace placeholders in fixed params. Pagedraw files don't get context.
-        for (let i = 0; i < this.fixedParams.length; i++) {
-            if (typeof this.fixedParams[i] === 'string' && this.fixedParams[i].startsWith("contractPlaceholder:")) {
-                let contractName = this.fixedParams[i].slice(20);
-                this.fixedParams[i] = this.contracts[contractName].address;
-            }
-        }
+        this.processFixedParams()
 
         // Iterate over abi for correct function.
         for (let i = 0; i < abi.length; i++) {
             if (abi[i].name === this.props.method) {
                 this.inputs = abi[i].inputs;
                 for (let j = 0; j < this.inputs.length; j++) {
-                    if (this.fixedParams[j] === -1) {
+                    if (this.processedFixedParams[j] === -1) {
                         let initialValue = '';
                         if (this.translateType(this.inputs[j].type) === 'checkbox') {
                             initialValue = 1;
                         }
                         initialState[this.inputs[j].name] = initialValue;
                     } else {
-                        initialState[this.inputs[j].name] = this.fixedParams[j];
+                        initialState[this.inputs[j].name] = this.processedFixedParams[j];
                     }
                 }
-
                 break;
             }
         }
-
         this.state = initialState;
+    }
+
+    processFixedParams() {
+        this.processedFixedParams = Array.from(this.fixedParams)
+        // Replace placeholders in fixed params. Pagedraw files don't get context.
+        for (let i = 0; i < this.fixedParams.length; i++) {
+            if (typeof this.fixedParams[i] === 'string' && this.fixedParams[i].startsWith("contractPlaceholder:")) {
+                let contractName = this.fixedParams[i].slice(20);
+                this.processedFixedParams[i] = this.contracts[contractName].address;
+            }
+        }
     }
 
     handleSubmit() {
@@ -136,14 +140,15 @@ class ContractForm extends Component {
 
     componentDidUpdate() {
         if (this.fixedParams !== this.props.fixedParams) {
-            let newState = this.state
+            this.fixedParams = this.props.fixedParams
+            this.processFixedParams()
+            let newState = Object.assign({}, this.state);
             for (let j = 0; j < this.inputs.length; j++) {
-                if (this.props.fixedParams[j] !== -1) {
-                    newState[this.inputs[j].name] = this.props.fixedParams[j];
+                if (this.processedFixedParams[j] !== -1) {
+                    newState[this.inputs[j].name] = this.processedFixedParams[j]
                 }
             }
-            this.fixedParams = this.props.fixedParams
-            this.setState(newState)
+            this.state = newState;
         }
     }
 }

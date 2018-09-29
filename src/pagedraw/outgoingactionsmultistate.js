@@ -34,11 +34,11 @@ export default class Outgoingactionsmultistate extends React.Component {
                               <div className="outgoingactionsmultistate-0-0-1-1-1-2" /> 
                           </div>
                           <div className="outgoingactionsmultistate-0-0-1-1-2">
-                              <div className="outgoingactionsmultistate-0-0-1-1-2-0" /> 
                               <div className="outgoingactionsmultistate-scorchplaceholder-2">
-                                  scorch placeholder
+                                  <div>
+                                      <ContractForm contract="ScorchablePayments" method="scorchPayment" purpose="Scorch Payment" fixedParams={[this.props.outgoingPaymentIndex, -1]} paramNamesToScale={["amountToScorch"]} labels={["Payment ID:", "Amount:"]}  placeholders={["0", "0.0"]}/> 
+                                  </div>
                               </div>
-                              <div className="outgoingactionsmultistate-0-0-1-1-2-2" /> 
                           </div>
                           <div className="outgoingactionsmultistate-0-0-1-1-3">
                               <div className="outgoingactionsmultistate-0-0-1-1-3-0" /> 

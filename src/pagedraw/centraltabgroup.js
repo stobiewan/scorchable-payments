@@ -189,12 +189,7 @@ export default class Centraltabgroup extends React.Component {
               </div>
           : null}
           { (this.props.state === "5") ?
-              <div className="centraltabgroup-5">
-                  <div className="centraltabgroup-4-0-0">
-                      <div className="centraltabgroup-incoming-0">incoming</div>
-                  </div>
-                  <div className="centraltabgroup-4-0-1" /> 
-              </div>
+              <div className="centraltabgroup-5" /> 
           : null}
       </div>
     );
