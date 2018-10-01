@@ -1,6 +1,7 @@
 import { drizzleConnect } from 'drizzle-react'
 import React, { Component } from 'react'
 import './ContractForm.css';
+import './styles.css';
 import PropTypes from 'prop-types'
 import InputComponent from '../pagedraw/inputcomponent'
 import SpacerFive from '../pagedraw/spacerfive'
@@ -112,29 +113,31 @@ class ContractForm extends Component {
 
     render() {
         return (
-            <form>
-                {this.inputs.map((input, index) => {
-                    if (this.fixedParams[index] === -1) {
-                        let inputType = this.translateType(input.type)
-                        let inputLabel = this.props.labels ? this.props.labels[index] : input.name
-                        let inputPlaceholder = this.props.placeholders ? this.props.placeholders[index] : input.name
-                        // check if input type is struct and if so loop out struct fields as well
-                        return (
-                            <div key={index + 32}>
-                                <InputComponent key={input.name} type={inputType} name={input.name}
-                                                value={this.state[input.name]} placeholder={inputPlaceholder}
-                                                onChange={this.handleInputChange} onClick={this.handleRadioInputClick}
-                                                description={inputLabel}/>
-                                <SpacerFive key={index}/>
-                            </div>)
-                    }
-                })}
-                <div className="center-button-1">
-                    <div className="center-button-2">
-                        <Statelessbutton key={this.props.purpose} onClick={this.handleSubmit} buttonText={this.props.purpose} ></Statelessbutton>
+            <div className="vertical-margins">
+                <form>
+                    {this.inputs.map((input, index) => {
+                        if (this.fixedParams[index] === -1) {
+                            let inputType = this.translateType(input.type)
+                            let inputLabel = this.props.labels ? this.props.labels[index] : input.name
+                            let inputPlaceholder = this.props.placeholders ? this.props.placeholders[index] : input.name
+                            // check if input type is struct and if so loop out struct fields as well
+                            return (
+                                <div key={index + 32}>
+                                    <InputComponent key={input.name} type={inputType} name={input.name}
+                                                    value={this.state[input.name]} placeholder={inputPlaceholder}
+                                                    onChange={this.handleInputChange} onClick={this.handleRadioInputClick}
+                                                    description={inputLabel}/>
+                                    <SpacerFive key={index}/>
+                                </div>)
+                        }
+                    })}
+                    <div className="center-button-1">
+                        <div className="center-button-2">
+                            <Statelessbutton key={this.props.purpose} onClick={this.handleSubmit} buttonText={this.props.purpose} ></Statelessbutton>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         )
     }
 

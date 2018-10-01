@@ -19,7 +19,7 @@ export default class Outgoingactionsmultistate extends React.Component {
                               <div className="outgoingactionsmultistate-0-0-1-1-0-0" /> 
                               <div className="outgoingactionsmultistate-payment_data_placeholder_-3">
                                   <div>
-                                      <ContractData contract="ScorchablePayments" method="payments" isTokenValue={0} prefix="" methodArgs={[this.props.outgoingPaymentIndex]}/>
+                                      <ContractData contract="ScorchablePayments" method="payments" isTokenValue={0} keysToScale={["amount", "payeeBondAmount"]} prefix="" methodArgs={[this.props.outgoingPaymentIndex]}/>
                                   </div>
                               </div>
                               <div className="outgoingactionsmultistate-0-0-1-1-0-2" /> 
@@ -42,22 +42,28 @@ export default class Outgoingactionsmultistate extends React.Component {
                           </div>
                           <div className="outgoingactionsmultistate-0-0-1-1-3">
                               <div className="outgoingactionsmultistate-0-0-1-1-3-0" /> 
-                              <div className="outgoingactionsmultistate-extendtimeoutpaceholder-9">
-                                  extend inaction timeout placeholder
+                              <div className="outgoingactionsmultistate-topupplaceholder-0">
+                                  <div>
+                                      <ContractForm contract="ScorchablePayments" method="topUp" purpose="Top Up" fixedParams={[this.props.outgoingPaymentIndex, -1]} paramNamesToScale={["amount"]} labels={["Payment ID:", "Amount:"]}  placeholders={["0", "0.0"]}/> 
+                                  </div>
                               </div>
                               <div className="outgoingactionsmultistate-0-0-1-1-3-2" /> 
                           </div>
                           <div className="outgoingactionsmultistate-0-0-1-1-4">
                               <div className="outgoingactionsmultistate-0-0-1-1-4-0" /> 
-                              <div className="outgoingactionsmultistate-topupplaceholder-0">
-                                  topup placeholder
+                              <div className="outgoingactionsmultistate-extendtimeoutpaceholder-9">
+                                  <div>
+                                      <ContractForm contract="ScorchablePayments" method="extendInactionTimeout" purpose="Extend Timeout" fixedParams={[this.props.outgoingPaymentIndex]} paramNamesToScale={[]} labels={["Payment ID:"]}  placeholders={["0"]}/> 
+                                  </div>
                               </div>
                               <div className="outgoingactionsmultistate-0-0-1-1-4-2" /> 
                           </div>
                           <div className="outgoingactionsmultistate-0-0-1-1-5">
                               <div className="outgoingactionsmultistate-0-0-1-1-5-0" /> 
                               <div className="outgoingactionsmultistate-cancelpaceholder-9">
-                                  cancel placeholder
+                                  <div>
+                                      <ContractForm contract="ScorchablePayments" method="cancelPayment" purpose="Cancel Payment" fixedParams={[this.props.outgoingPaymentIndex]} paramNamesToScale={[]} labels={["Payment ID:"]}  placeholders={["0"]}/> 
+                                  </div>
                               </div>
                               <div className="outgoingactionsmultistate-0-0-1-1-5-2" /> 
                           </div>

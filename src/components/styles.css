@@ -15,3 +15,24 @@
     text-align: center;
     word-wrap: break-word;
 }
+
+.vertical-margins {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.border-container {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+.data-border {
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.5);
+    width: 850px;
+    display: flex;
+    flex-direction: column;
+    min-height: fit-content;
+    justify-content: center;
+}

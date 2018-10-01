@@ -1,6 +1,7 @@
 import { drizzleConnect } from 'drizzle-react'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import PlainBorder from '../pagedraw/plainborder'
 import './styles.css';
 
 /*
@@ -84,19 +85,28 @@ class ContractData extends Component {
 
             Object.keys(displayData).forEach((key) => {
                 if (i != key) {
+                    let displayValue = displayData[key]
+                    if (this.props.keysToScale.includes(key)) {
+                        displayValue /= 10 ** 18
+                    }
                     displayObjectProps.push(<li key={i}>
-                        <strong>{key}</strong>{pendingSpinner}<br/>
-                        {`${displayData[key]}`}
+                        <strong>{key}</strong>: {`${displayValue}`} {pendingSpinner}
                     </li>)
                 }
                 i++
             })
 
             return(
-                <div className="medium-text">
-                    <ul>
-                        {displayObjectProps}
-                    </ul>
+                <div className="vertical-margins">
+                    <div className="border-container">
+                        <div className="data-border">
+                            <div className="medium-text">
+                                <ul>
+                                    {displayObjectProps}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )
         }
