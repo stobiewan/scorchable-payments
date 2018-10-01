@@ -1,7 +1,6 @@
 import { drizzleConnect } from 'drizzle-react'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import PlainBorder from '../pagedraw/plainborder'
 import './styles.css';
 
 /*
