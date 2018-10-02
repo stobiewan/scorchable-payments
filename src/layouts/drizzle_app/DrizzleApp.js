@@ -20,6 +20,7 @@ class DrizzleApp extends Component {
         };
     }
 
+    // On outgoing payments from this address changed
     updateOutgoingIndices() {
         let outgoing = this.relevantPayments[0]
         if (outgoing.length === 0) {
@@ -27,22 +28,18 @@ class DrizzleApp extends Component {
             this.setState({selectedOutgoingPaymentId: -1})
         }
         else {
-            let newLocalIndex = 0
-            if (this.state.localOutgoingIndex === -1) {
-                // There are payments so select the first
-                this.changeOutgoingPaymentIndex(1)
-            }
-            else {
-                // if payments have been removed change the index so the payment id selected is the same.
-                newLocalIndex = outgoing.indexOf(this.state.selectedOutgoingPaymentId)
+            // if payments have been removed change the index so the payment id selected is the same.
+            let newLocalIndex = outgoing.indexOf(this.state.selectedOutgoingPaymentId)
+            if (newLocalIndex === -1) {
+                // Previously selected payment is invalid or deleted, so go to the first.
+                newLocalIndex = 0
             }
             this.setState({localOutgoingIndex: newLocalIndex})
-            if (newLocalIndex === -1) {
-                this.setState({selectedOutgoingPaymentId: -1})
-            }
+            this.setState({selectedOutgoingPaymentId: outgoing[newLocalIndex]})
         }
     }
 
+    // On cycle left / right button clicked
     changeOutgoingPaymentIndex(change) {
         let outgoing = this.relevantPayments[0]
         if (outgoing.length === 0) {

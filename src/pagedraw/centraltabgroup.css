@@ -532,42 +532,11 @@
     min-height: fit-content;
 }
 
-.centraltabgroup-rectangle_7 {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    flex-basis: 0px;
-    min-height: fit-content;
-    padding-top: 328px;
-    padding-bottom: 379px;
-    background: rgba(0, 0, 0, 0);
-}
-
-.centraltabgroup-3-0-1-2-2-0-0 {
-    display: flex;
-    flex-shrink: 0;
-    flex-grow: 1;
-    flex-basis: 0px;
-    min-height: fit-content;
-}
-
-.centraltabgroup-3-0-1-2-2-0-0-0 {
-    height: 0px;
-    flex-grow: 0;
-    flex-basis: 0px;
-}
-
 .centraltabgroup-outgoingactionsmultistate_instance-3 {
     flex-grow: 1;
     flex-basis: 0px;
     display: flex;
     flex-direction: column;
-}
-
-.centraltabgroup-3-0-1-2-2-0-0-2 {
-    height: 0px;
-    flex-grow: 0;
-    flex-basis: 0px;
 }
 
 .centraltabgroup-3-0-1-3 {
