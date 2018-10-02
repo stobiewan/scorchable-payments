@@ -13,11 +13,12 @@ class ContractData extends Component {
 
         this.contracts = context.drizzle.contracts
 
-        // Fetch initial value from chain and return cache key for reactive updates.
         var methodArgs = this.getMethodArgs()
 
+        // Fetch initial value from chain and return cache key for reactive updates.
         this.dataKey = this.contracts[this.props.contract].methods[this.props.method].cacheCall(...methodArgs)
 
+        // State method args has converted placeholders
         this.state = {
             stateMethodArgs: methodArgs
         };
@@ -119,7 +120,7 @@ class ContractData extends Component {
 
     componentDidUpdate() {
         let newMethodArgs = this.getMethodArgs()
-        if (newMethodArgs !== this.state.stateMethodArgs) {
+        if (! this.arraysEqual(newMethodArgs, this.state.stateMethodArgs)) {
             this.dataKey = this.contracts[this.props.contract].methods[this.props.method].cacheCall(...newMethodArgs)
             this.setState({stateMethodArgs: newMethodArgs})
         }
@@ -135,8 +136,18 @@ class ContractData extends Component {
                 methodArgs[i] = this.contracts[contractName].address;
             }
         }
-
         return(methodArgs)
+    }
+
+    arraysEqual(arr1, arr2) {
+        if(arr1.length !== arr2.length)
+            return false;
+        for(var i = arr1.length; i--;) {
+            if(arr1[i] !== arr2[i])
+                return false;
+        }
+
+        return true;
     }
 }
 

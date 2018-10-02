@@ -151,7 +151,7 @@ class ContractForm extends Component {
                     newState[this.inputs[j].name] = this.processedFixedParams[j]
                 }
             }
-            this.state = newState;
+            this.setState(newState);
         }
     }
 }
