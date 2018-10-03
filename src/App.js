@@ -9,14 +9,9 @@ import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
 
-var DaysEnum = Object.freeze({"intro" : 1, "manageDai" : 2, "create" : 3, "ountgoing" : 4, "incoming" : 5})
-
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      selectedTab: DaysEnum.intro
-    };
   }
 
   render() {

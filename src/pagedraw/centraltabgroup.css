@@ -279,13 +279,16 @@
 .centraltabgroup-1-0-1-1-2 {
     width: 0px;
     flex-shrink: 0;
-    flex-grow: 0.4883401920438957;
+    flex-grow: 0.3065326633165829;
     flex-basis: 0px;
 }
 
 .centraltabgroup-1-0-1-1-3 {
     display: flex;
     flex-shrink: 0;
+    flex-grow: 0.24874371859296482;
+    flex-basis: 0px;
+    min-height: fit-content;
 }
 
 .centraltabgroup-1-0-1-1-3-0 {
@@ -300,6 +303,7 @@
     flex-grow: 1;
     flex-basis: 0px;
     min-height: fit-content;
+    padding-top: 59px;
 }
 
 .centraltabgroup-1-0-1-1-3-1-0 {
@@ -308,7 +312,7 @@
     justify-content: center;
 }
 
-.centraltabgroup-owneddaiplaceholder-4 {
+.centraltabgroup-accountaddressplaceholder-2 {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -321,10 +325,43 @@
     justify-content: center;
 }
 
+.centraltabgroup-accountbalanceplaceholder-8 {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.centraltabgroup-1-0-1-1-3-1-2 {
+    display: flex;
+    flex-shrink: 0;
+    margin-top: 5px;
+    justify-content: center;
+}
+
+.centraltabgroup-owneddaiplaceholder-4 {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.centraltabgroup-1-0-1-1-3-1-3 {
+    display: flex;
+    flex-shrink: 0;
+    margin-top: 5px;
+    justify-content: center;
+}
+
 .centraltabgroup-approveddaiplaceholder-8 {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
+}
+
+.centraltabgroup-1-0-1-1-3-1-4 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
 }
 
 .centraltabgroup-1-0-1-1-3-2 {
@@ -336,7 +373,7 @@
 .centraltabgroup-1-0-1-1-4 {
     width: 0px;
     flex-shrink: 0;
-    flex-grow: 0.5116598079561042;
+    flex-grow: 0.44472361809045224;
     flex-basis: 0px;
 }
 

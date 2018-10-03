@@ -16,7 +16,8 @@ class DrizzleApp extends Component {
         this.state = {
             selectedTab: DaysEnum.intro,
             localOutgoingIndex: -1,
-            selectedOutgoingPaymentId: -1
+            selectedOutgoingPaymentId: -1,
+            currentAddress: this.props.accounts[0]
         };
     }
 
@@ -79,7 +80,7 @@ class DrizzleApp extends Component {
 
         return <MainScreen selectedTab={this.state.selectedTab}
                            setSelectedTab={(i) => this.setState({selectedTab: i})}
-                           accounts={this.props.accounts}
+                           selectedAccount={this.state.currentAddress}
                            onChangeOutgoingIndex={this.changeOutgoingPaymentIndex}
                            outgoingPaymentIndex={this.state.selectedOutgoingPaymentId}
                            localOutgoingIndexString={this.getLocalOutgoingIndexString()}/>;
@@ -90,6 +91,10 @@ class DrizzleApp extends Component {
         if (newRelevantPayments !== this.relevantPayments) {
             this.relevantPayments = newRelevantPayments
             this.updateOutgoingIndices();
+        }
+
+        if (this.state.currentAddress != this.props.accounts[0]) {
+            window.location.reload()
         }
     }
 }

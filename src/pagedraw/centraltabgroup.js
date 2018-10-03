@@ -8,6 +8,8 @@ import ContractForm from '../components/ContractForm'
 
 import ContractData from '../components/ContractData'
 
+import AccountData from '../components/AccountData'
+
 export default class Centraltabgroup extends React.Component {
   render() {
     return (
@@ -91,19 +93,34 @@ export default class Centraltabgroup extends React.Component {
                               <div className="centraltabgroup-1-0-1-1-3-0" /> 
                               <div className="centraltabgroup-rectangle-3">
                                   <div className="centraltabgroup-1-0-1-1-3-1-0">
-                                      <div className="centraltabgroup-owneddaiplaceholder-4">
+                                      <div className="centraltabgroup-accountaddressplaceholder-2">
                                           <div>
-                                              <ContractData contract="DSToken" method="balanceOf" isTokenValue={1} prefix="Dai you own: " methodArgs={[this.props.accounts[0]]}/>
+                                              <AccountData accountIndex="0" units="ether" displayOption="onlyAddress"/>
                                           </div>
                                       </div>
                                   </div>
                                   <div className="centraltabgroup-1-0-1-1-3-1-1">
-                                      <div className="centraltabgroup-approveddaiplaceholder-8">
+                                      <div className="centraltabgroup-accountbalanceplaceholder-8">
                                           <div>
-                                              <ContractData contract="DSToken" method="allowance" isTokenValue={1} prefix="Dai approved for contract: " methodArgs={[this.props.accounts[0], "contractPlaceholder:ScorchablePayments"]}/>
+                                              <AccountData accountIndex="0" units="ether" displayOption="onlyBalance"/>
                                           </div>
                                       </div>
                                   </div>
+                                  <div className="centraltabgroup-1-0-1-1-3-1-2">
+                                      <div className="centraltabgroup-owneddaiplaceholder-4">
+                                          <div>
+                                              <ContractData contract="DSToken" method="balanceOf" isTokenValue={1} prefix="Dai you own: " methodArgs={[this.props.selectedAccount]}/>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div className="centraltabgroup-1-0-1-1-3-1-3">
+                                      <div className="centraltabgroup-approveddaiplaceholder-8">
+                                          <div>
+                                              <ContractData contract="DSToken" method="allowance" isTokenValue={1} prefix="Dai approved for contract: " methodArgs={[this.props.selectedAccount, "contractPlaceholder:ScorchablePayments"]}/>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div className="centraltabgroup-1-0-1-1-3-1-4" /> 
                               </div>
                               <div className="centraltabgroup-1-0-1-1-3-2" /> 
                           </div>
