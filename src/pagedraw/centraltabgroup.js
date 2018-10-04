@@ -3,6 +3,7 @@ import React from 'react';
 import Leftbutton from './leftbutton';
 import Outgoingactionsmultistate from './outgoingactionsmultistate';
 import Rightbutton from './rightbutton';
+import Incomingactionsmultistate from './incomingactionsmultistate';
 import './centraltabgroup.css';
 import ContractForm from '../components/ContractForm'
 
@@ -200,7 +201,45 @@ export default class Centraltabgroup extends React.Component {
               </div>
           : null}
           { (this.props.state === "5") ?
-              <div className="centraltabgroup-5" /> 
+              <div className="centraltabgroup-5">
+                  <div className="centraltabgroup-4-0-0" /> 
+                  <div className="centraltabgroup-4-0-1">
+                      <div className="centraltabgroup-rectangle_7">
+                          <div className="centraltabgroup-4-0-1-0-0">
+                              <div className="centraltabgroup-leftbutton_instance_2">
+                                  <Leftbutton onClick={(() => this.props.onChangeIncomingIndex(-1))} /> 
+                              </div>
+                          </div>
+                      </div>
+                      <div className="centraltabgroup-4-0-1-1" /> 
+                      <div className="centraltabgroup-4-0-1-2">
+                          <div className="centraltabgroup-4-0-1-2-0">
+                              <div className="centraltabgroup-incomingpaymentsheader-9">
+                                  These are the ongoing payments which have been sent to your address. You can cycle through them to pay any required bonds, release them back to the sender or claim them if they have timed out.
+                              </div>
+                          </div>
+                          <div className="centraltabgroup-4-0-1-2-1">
+                              <div className="centraltabgroup-incomingpaymentindextext-8">
+                                  { this.props.localIncomingIndexString }
+                              </div>
+                          </div>
+                          <div className="centraltabgroup-4-0-1-2-2">
+                              <div className="centraltabgroup-incomingactionsmultistate_instance-7">
+                                  <Incomingactionsmultistate incomingPaymentIndex={this.props.incomingPaymentIndex} /> 
+                              </div>
+                          </div>
+                      </div>
+                      <div className="centraltabgroup-4-0-1-3" /> 
+                      <div className="centraltabgroup-rectangle_8">
+                          <div className="centraltabgroup-4-0-1-4-0">
+                              <div className="centraltabgroup-rightbutton_instance_2">
+                                  <Rightbutton onClick={(() => this.props.onChangeIncomingIndex(1))} /> 
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div className="centraltabgroup-4-0-2" /> 
+              </div>
           : null}
       </div>
     );

@@ -608,8 +608,141 @@
 }
 
 .centraltabgroup-5 {
+    display: flex;
+    flex-direction: column;
     background: rgba(0, 0, 0, 0.1);
     flex-grow: 1;
+}
+
+.centraltabgroup-4-0-0 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-4-0-1 {
+    display: flex;
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
+    min-height: fit-content;
+}
+
+.centraltabgroup-rectangle_7 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0);
+}
+
+.centraltabgroup-4-0-1-0-0 {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.centraltabgroup-leftbutton_instance_2 {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.centraltabgroup-4-0-1-1 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-4-0-1-2 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 0px;
+    min-height: fit-content;
+}
+
+.centraltabgroup-4-0-1-2-0 {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.centraltabgroup-incomingpaymentsheader-9 {
+    width: 1436px;
+    flex-shrink: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.centraltabgroup-4-0-1-2-1 {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.centraltabgroup-incomingpaymentindextext-8 {
+    flex-grow: 1;
+    flex-basis: 0px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 27px;
+    line-height: 31px;
+    letter-spacing: 0px;
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.centraltabgroup-4-0-1-2-2 {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.centraltabgroup-incomingactionsmultistate_instance-7 {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 1436px;
+    min-height: 791px;
+}
+
+.centraltabgroup-4-0-1-3 {
+    height: 0px;
+    flex-grow: 0;
+    flex-basis: 0px;
+}
+
+.centraltabgroup-rectangle_8 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0);
+}
+
+.centraltabgroup-4-0-1-4-0 {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.centraltabgroup-rightbutton_instance_2 {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.centraltabgroup-4-0-2 {
+    width: 0px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 0px;
 }
 
 * {

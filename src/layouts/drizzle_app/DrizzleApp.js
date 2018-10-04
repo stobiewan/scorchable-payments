@@ -83,7 +83,10 @@ class DrizzleApp extends Component {
                            selectedAccount={this.state.currentAddress}
                            onChangeOutgoingIndex={this.changeOutgoingPaymentIndex}
                            outgoingPaymentIndex={this.state.selectedOutgoingPaymentId}
-                           localOutgoingIndexString={this.getLocalOutgoingIndexString()}/>;
+                           localOutgoingIndexString={this.getLocalOutgoingIndexString()}
+                           onChangeIncomingIndex={this.changeIncomingPaymentIndex}
+                           incomingPaymentIndex={this.state.selectedIncomingPaymentId}
+                           localIncomingIndexString={this.getLocalIncomingIndexString()}/>;
     }
 
     componentDidUpdate() {
