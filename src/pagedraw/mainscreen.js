@@ -37,7 +37,7 @@ export default class Mainscreen extends React.Component {
                   <div className="mainscreen-0-0-3">
                       <div className="mainscreen-0-0-3-0" /> 
                       <div className="mainscreen-centraltabgroup_instance-9">
-                          <Centraltabgroup state={(this.props.selectedTab.toString())} selectedAccount={this.props.selectedAccount} onChangeOutgoingIndex={this.props.onChangeOutgoingIndex} outgoingPaymentIndex={this.props.outgoingPaymentIndex} localOutgoingIndexString={this.props.localOutgoingIndexString} onChangeIncomingIndex={this.props.onChangeIncomingIndex} incomingPaymentIndex={this.props.incomingPaymentIndex} localIncomingIndexString={this.props.localIncomingIndexString} /> 
+                          <Centraltabgroup state={(this.props.selectedTab.toString())} selectedAccount={this.props.selectedAccount} onChangeOutgoingIndex={this.props.onChangeOutgoingIndex} outgoingPaymentIndex={this.props.outgoingPaymentIndex} localOutgoingIndexString={this.props.localOutgoingIndexString} onChangeIncomingIndex={this.props.onChangeIncomingIndex} incomingPaymentIndex={this.props.incomingPaymentIndex} localIncomingIndexString={this.props.localIncomingIndexString} text={""} /> 
                       </div>
                       <div className="mainscreen-0-0-3-2" /> 
                   </div>

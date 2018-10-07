@@ -143,8 +143,8 @@ export default class Centraltabgroup extends React.Component {
               <div className="centraltabgroup-3-4">
                   <div className="centraltabgroup-2-0-0">
                       <div className="centraltabgroup-2-0-0-0" /> 
-                      <div className="centraltabgroup-create_payment-6">
-                          Create a payment to a payee in ether or Dai. Once it is created the funds will be stored in the smart contract. If a bond is specified the payee will then be able to pay the bond and until they do the payment can be cancelled with all of the funds returned to you. 
+                      <div className="centraltabgroup-createpaymentheader-6">
+                          { "Create a payment to a payee in ether or Dai. Once it is created the funds will be stored in the smart contract. If a bond is specified the payee will then be able to pay the bond and until they do the payment can be cancelled with all of the funds returned to you. Use " + (Math.round(Date.now() / 1000) + 2419200).toString() + " for the inaction timeout to set it to four weeks from now." }
                       </div>
                       <div className="centraltabgroup-2-0-0-2" /> 
                   </div>
@@ -152,7 +152,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-2-0-2">
                       <div className="centraltabgroup-createpaymentplaceholder-6">
                           <div>
-                              <ContractForm contract="ScorchablePayments" method="createPayment" purpose="Create Payment" fixedParams={[-1, -1, -1, -1, -1]} paramNamesToScale={["amountToPay", "payeeBondAmount"]} labels={["Payee address:", "Payment amount:", "Bond required:", "Inaction timeout s:", "Currency:"]}  placeholders={["0x0000000000000000000000000000000000000000", "0.0", "0.0", "604800", "true"]} amountInputs={{"conditional": "isEthPayment", "value": "amountToPay"}}/> 
+                              <ContractForm contract="ScorchablePayments" method="createPayment" purpose="Create Payment" fixedParams={[-1, -1, -1, -1, -1]} paramNamesToScale={["amountToPay", "payeeBondAmount"]} labels={["Payee address:", "Payment amount:", "Bond required:", "Inaction timeout s:", "Currency:"]}  placeholders={["0x0000000000000000000000000000000000000000", "0.0", "0.0", Math.round(Date.now() / 1000) + 2419200, "true"]} amountInputs={{"conditional": "isEthPayment", "value": "amountToPay"}}/> 
                           </div>
                       </div>
                   </div>

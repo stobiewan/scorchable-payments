@@ -5,69 +5,94 @@ import MainScreen from '../../pagedraw/mainscreen'
 
 var DaysEnum = Object.freeze({"intro": 1, "manageDai": 2, "create": 3, "ountgoing": 4, "incoming": 5})
 
+
+class PaymentCycler {
+    constructor() {
+        this.paymentsArray = []
+        this.localIndex = -1  // the index relative to payments relevant to this account
+        this.selectedIndex = -1  // the index used in the smart contract
+        this.cyclePaymentIndex = this.cyclePaymentIndex.bind(this);
+        this.updateIndices = this.updateIndices.bind(this);
+    }
+
+    setRelevantPayments(paymentsArray) {
+        this.paymentsArray = Array.from(paymentsArray)
+        this.updateIndices()
+
+        console.log("lent set to " + this.paymentsArray.length)
+    }
+
+    updateIndices() {
+        if (this.paymentsArray.length === 0) {
+            this._invalidate()
+        }
+        else {
+            // if payments have been removed change the index so the payment id selected is the same.
+            let newLocalIndex = this.paymentsArray.indexOf(this.selectedIndex)
+            if (newLocalIndex === -1) {
+                // Previously selected payment is invalid or deleted, so go to the first.
+                newLocalIndex = 0
+            }
+            this._setNewLocalIndex(newLocalIndex)
+        }
+    }
+
+    cyclePaymentIndex(change) {
+        if (this.paymentsArray.length === 0) {
+            this._invalidate()
+        }
+        else {
+            let newLocalIndex = this.localIndex + change;
+            if (newLocalIndex < 0) {
+                newLocalIndex = 0;
+            }
+            if (newLocalIndex >= this.paymentsArray.length) {
+                newLocalIndex = this.paymentsArray.length - 1
+            }
+            this._setNewLocalIndex(newLocalIndex)
+        }
+    }
+
+    _invalidate(){
+        this.localIndex = -1
+        this.selectedIndex = -1
+    }
+
+    _setNewLocalIndex(newIndex) {
+        this.localIndex = newIndex
+        this.selectedIndex = this.paymentsArray[newIndex]
+    }
+
+    getLocalIndexString() {
+        let numPayments = this.paymentsArray.length
+        if (numPayments === 0) {
+            return("No payments found for this address")
+        }
+        else {
+            return((this.localIndex + 1).toString() + ' / ' + numPayments.toString())
+        }
+    }
+
+    // The index of the selected payment
+    getSelectedPaymentIndex() {
+        return this.selectedIndex
+    }
+
+}
+
+
 class DrizzleApp extends Component {
     constructor(props, context) {
         super(props);
         this.contracts = context.drizzle.contracts
         this.relevantPaymentsKey = this.contracts.ScorchablePayments.methods.getPaymentsForAccount.cacheCall(this.props.accounts[0])
-        this.relevantPayments = [[], []]
-        this.changeOutgoingPaymentIndex = this.changeOutgoingPaymentIndex.bind(this);
-        this.updateOutgoingIndices = this.updateOutgoingIndices.bind(this);
+        this.incomingPaymentCycler = new PaymentCycler()
+        this.outgoingPaymentCycler = new PaymentCycler()
         this.state = {
             selectedTab: DaysEnum.intro,
-            localOutgoingIndex: -1,
-            selectedOutgoingPaymentId: -1,
+            relevantPayments: [[], []],
             currentAddress: this.props.accounts[0]
         };
-    }
-
-    // On outgoing payments from this address changed
-    updateOutgoingIndices() {
-        let outgoing = this.relevantPayments[0]
-        if (outgoing.length === 0) {
-            this.setState({localOutgoingIndex: -1})
-            this.setState({selectedOutgoingPaymentId: -1})
-        }
-        else {
-            // if payments have been removed change the index so the payment id selected is the same.
-            let newLocalIndex = outgoing.indexOf(this.state.selectedOutgoingPaymentId)
-            if (newLocalIndex === -1) {
-                // Previously selected payment is invalid or deleted, so go to the first.
-                newLocalIndex = 0
-            }
-            this.setState({localOutgoingIndex: newLocalIndex})
-            this.setState({selectedOutgoingPaymentId: outgoing[newLocalIndex]})
-        }
-    }
-
-    // On cycle left / right button clicked
-    changeOutgoingPaymentIndex(change) {
-        let outgoing = this.relevantPayments[0]
-        if (outgoing.length === 0) {
-            this.setState({localOutgoingIndex: -1})
-            this.setState({selectedOutgoingPaymentId: -1})
-        }
-        else {
-            let newIndex = this.state.localOutgoingIndex + change;
-            if (newIndex < 0) {
-                newIndex = 0;
-            }
-            if (newIndex >= outgoing.length) {
-                newIndex = outgoing.length - 1
-            }
-            this.setState({localOutgoingIndex: newIndex});
-            this.setState({selectedOutgoingPaymentId: outgoing[newIndex]})
-        }
-    }
-
-    getLocalOutgoingIndexString() {
-        let numOutgoingPayments = this.relevantPayments[0].length
-        if (numOutgoingPayments === 0) {
-            return("You have zero outgoing payments")
-        }
-        else {
-            return((this.state.localOutgoingIndex + 1).toString() + ' / ' + numOutgoingPayments.toString())
-        }
     }
 
     render() {
@@ -81,24 +106,42 @@ class DrizzleApp extends Component {
         return <MainScreen selectedTab={this.state.selectedTab}
                            setSelectedTab={(i) => this.setState({selectedTab: i})}
                            selectedAccount={this.state.currentAddress}
-                           onChangeOutgoingIndex={this.changeOutgoingPaymentIndex}
-                           outgoingPaymentIndex={this.state.selectedOutgoingPaymentId}
-                           localOutgoingIndexString={this.getLocalOutgoingIndexString()}
-                           onChangeIncomingIndex={this.changeIncomingPaymentIndex}
-                           incomingPaymentIndex={this.state.selectedIncomingPaymentId}
-                           localIncomingIndexString={this.getLocalIncomingIndexString()}/>;
+                           onChangeOutgoingIndex={this.outgoingPaymentCycler.cyclePaymentIndex}
+                           outgoingPaymentIndex={this.outgoingPaymentCycler.getSelectedPaymentIndex()}
+                           localOutgoingIndexString={this.outgoingPaymentCycler.getLocalIndexString()}
+                           onChangeIncomingIndex={this.incomingPaymentCycler.cyclePaymentIndex}
+                           incomingPaymentIndex={this.incomingPaymentCycler.getSelectedPaymentIndex()}
+                           localIncomingIndexString={this.incomingPaymentCycler.getLocalIndexString()}/>;
     }
 
     componentDidUpdate() {
         let newRelevantPayments = this.props.ScorchablePayments.getPaymentsForAccount[this.relevantPaymentsKey].value
-        if (newRelevantPayments !== this.relevantPayments) {
-            this.relevantPayments = newRelevantPayments
-            this.updateOutgoingIndices();
+        if (! this.paymentArraysEqual(newRelevantPayments, this.state.relevantPayments)) {
+            this.outgoingPaymentCycler.setRelevantPayments(newRelevantPayments[0])
+            this.incomingPaymentCycler.setRelevantPayments(newRelevantPayments[1])
+            this.setState({relevantPayments: newRelevantPayments})
         }
 
         if (this.state.currentAddress != this.props.accounts[0]) {
             window.location.reload()
         }
+    }
+
+    paymentArraysEqual(rp1, rp2) {
+        let outgoingEqual = this.arraysEqual(rp1[0], rp2[0])
+        let incomingEqual = this.arraysEqual(rp1[1], rp2[1])
+        return (outgoingEqual && incomingEqual)
+    }
+
+    arraysEqual(arr1, arr2) {
+        if(arr1.length !== arr2.length)
+            return false;
+        for(var i = arr1.length; i--;) {
+            if(arr1[i] !== arr2[i])
+                return false;
+        }
+
+        return true;
     }
 }
 
