@@ -7,7 +7,8 @@ var DaysEnum = Object.freeze({"intro": 1, "manageDai": 2, "create": 3, "ountgoin
 
 
 class PaymentCycler {
-    constructor() {
+    constructor(app) {
+        this.app = app
         this.paymentsArray = []
         this.localIndex = -1  // the index relative to payments relevant to this account
         this.selectedIndex = -1  // the index used in the smart contract
@@ -51,6 +52,7 @@ class PaymentCycler {
             }
             this._setNewLocalIndex(newLocalIndex)
         }
+        this.app.updatedSelection()
     }
 
     _invalidate(){
@@ -86,8 +88,8 @@ class DrizzleApp extends Component {
         super(props);
         this.contracts = context.drizzle.contracts
         this.relevantPaymentsKey = this.contracts.ScorchablePayments.methods.getPaymentsForAccount.cacheCall(this.props.accounts[0])
-        this.incomingPaymentCycler = new PaymentCycler()
-        this.outgoingPaymentCycler = new PaymentCycler()
+        this.incomingPaymentCycler = new PaymentCycler(this)
+        this.outgoingPaymentCycler = new PaymentCycler(this)
         this.state = {
             selectedTab: DaysEnum.intro,
             relevantPayments: [[], []],
@@ -125,6 +127,10 @@ class DrizzleApp extends Component {
         if (this.state.currentAddress != this.props.accounts[0]) {
             window.location.reload()
         }
+    }
+
+    updatedSelection() {
+        this.setState(this.state)
     }
 
     paymentArraysEqual(rp1, rp2) {
