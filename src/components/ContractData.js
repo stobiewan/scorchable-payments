@@ -18,6 +18,8 @@ class ContractData extends Component {
         // Fetch initial value from chain and return cache key for reactive updates.
         this.dataKey = this.contracts[this.props.contract].methods[this.props.method].cacheCall(...methodArgs)
 
+        this.onDataCallback = this.props.onDataCallback ? this.props.onDataCallback : null
+
         // State method args has converted placeholders
         this.state = {
             stateMethodArgs: methodArgs
@@ -48,6 +50,9 @@ class ContractData extends Component {
         }
 
         var displayData = this.props.contracts[this.props.contract][this.props.method][this.dataKey].value
+        if (this.onDataCallback !== null) {
+            this.onDataCallback(displayData)
+        }
         var prefix = this.props.prefix
 
         // Optionally scale result to show whole token values

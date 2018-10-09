@@ -19,7 +19,7 @@ export default class Outgoingactionsmultistate extends React.Component {
                               <div className="outgoingactionsmultistate-0-0-1-1-0-0" /> 
                               <div className="outgoingactionsmultistate-payment_data_placeholder_-3">
                                   <div>
-                                      <ContractData contract="ScorchablePayments" method="payments" isTokenValue={0} keysToScale={["amount", "payeeBondAmount"]} prefix="" methodArgs={[this.props.outgoingPaymentIndex]}/>
+                                      <ContractData contract="ScorchablePayments" method="payments" isTokenValue={0} keysToScale={["amount", "payeeBondAmount"]} prefix="" methodArgs={[this.props.outgoingPaymentIndex]} onDataCallback={this.props.outgoingPaymentDataCallback}/>
                                   </div>
                               </div>
                               <div className="outgoingactionsmultistate-0-0-1-1-0-2" /> 
@@ -44,7 +44,7 @@ export default class Outgoingactionsmultistate extends React.Component {
                               <div className="outgoingactionsmultistate-0-0-1-1-3-0" /> 
                               <div className="outgoingactionsmultistate-topupplaceholder-0">
                                   <div>
-                                      <ContractForm contract="ScorchablePayments" method="topUp" purpose="Top Up" fixedParams={[this.props.outgoingPaymentIndex, -1]} paramNamesToScale={["amount"]} labels={["Payment ID:", "Amount:"]}  placeholders={["0", "0.0"]}/> 
+                                      <ContractForm contract="ScorchablePayments" method="topUp" purpose="Top Up" fixedParams={[this.props.outgoingPaymentIndex, -1]} paramNamesToScale={["amount"]} labels={["Payment ID:", "Amount:"]}  placeholders={["0", "0.0"]} amountInputs={{"conditional": this.props.outgoingPaymentUsesEth(), "value": "amount"}}/> 
                                   </div>
                               </div>
                               <div className="outgoingactionsmultistate-0-0-1-1-3-2" /> 
