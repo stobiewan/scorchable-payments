@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import MainScreen from '../../pagedraw/mainscreen'
 
 var TabEnum = Object.freeze({"intro": 1, "manageDai": 2, "create": 3, "ountgoing": 4, "incoming": 5});
+const payeeBondAmountIndex = 3;
 const isEthPaymentIndex = 7;
 
 
@@ -96,6 +97,7 @@ class DrizzleApp extends Component {
         this.getOutgoingPaymentData = this.getOutgoingPaymentData.bind(this);
         this.getIncomingPaymentData = this.getIncomingPaymentData.bind(this);
         this.outgoingPaymentUsesEth = this.outgoingPaymentUsesEth.bind(this);
+        this.incomingPaymentEthBondSize = this.incomingPaymentEthBondSize.bind(this);
         this.state = {
             selectedTab: TabEnum.intro,
             relevantPayments: [[], []],
@@ -126,8 +128,17 @@ class DrizzleApp extends Component {
             return false
         }
         else {
-            let isEth = this.outgoingPaymentData[isEthPaymentIndex]
             return (this.outgoingPaymentData[isEthPaymentIndex])
+        }
+    }
+
+    incomingPaymentEthBondSize() {
+        if (this.incomingPaymentData !== null &&
+            this.incomingPaymentData[isEthPaymentIndex]) {
+            return (this.incomingPaymentData[payeeBondAmountIndex])
+        }
+        else {
+            return (0)
         }
     }
 
@@ -150,7 +161,8 @@ class DrizzleApp extends Component {
                            localIncomingIndexString={this.incomingPaymentCycler.getLocalIndexString()}
                            outgoingPaymentDataCallback={this.setOutgoingPaymentData}
                            incomingPaymentDataCallback={this.setIncomingPaymentData}
-                           outgoingPaymentUsesEth={this.outgoingPaymentUsesEth}/>;
+                           outgoingPaymentUsesEth={this.outgoingPaymentUsesEth}
+                           incomingPaymentEthBondSize={this.incomingPaymentEthBondSize}/>;
     }
 
     componentDidUpdate() {

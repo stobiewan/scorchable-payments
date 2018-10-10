@@ -81,16 +81,24 @@ class ContractForm extends Component {
     }
 
     addAmountSendArg(submitState) {
+        let sendAnyEth = false;
         let ethToSend = 0;
         if (this.props.amountInputs) {
             let conditionInput = this.props.amountInputs["conditional"]
             if (typeof(conditionInput) === "boolean") {
-                if (conditionInput === true) {
-                    ethToSend = submitState[this.props.amountInputs["value"]];
-                }
+                sendAnyEth = conditionInput
             }
-            else if (submitState[conditionInput] > 0) {
-                ethToSend = submitState[this.props.amountInputs["value"]];
+            else {
+                sendAnyEth = submitState[conditionInput] > 0
+            }
+            if(sendAnyEth) {
+                let valueInput = this.props.amountInputs["value"]
+                if (typeof(valueInput) !== "string") {
+                    ethToSend = valueInput
+                }
+                else {
+                    ethToSend = submitState[valueInput]
+                }
             }
         }
         if (ethToSend > 0) {

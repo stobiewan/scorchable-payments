@@ -225,7 +225,7 @@ export default class Centraltabgroup extends React.Component {
                           </div>
                           <div className="centraltabgroup-4-0-1-2-2">
                               <div className="centraltabgroup-incomingactionsmultistate_instance-7">
-                                  <Incomingactionsmultistate incomingPaymentIndex={this.props.incomingPaymentIndex} incomingPaymentDataCallback={this.props.incomingPaymentDataCallback} /> 
+                                  <Incomingactionsmultistate incomingPaymentIndex={this.props.incomingPaymentIndex} incomingPaymentDataCallback={this.props.incomingPaymentDataCallback} incomingPaymentEthBondSize={this.props.incomingPaymentEthBondSize} /> 
                               </div>
                           </div>
                       </div>
