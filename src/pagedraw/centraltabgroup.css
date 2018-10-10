@@ -667,8 +667,8 @@
 }
 
 .centraltabgroup-incomingpaymentsheader-9 {
-    width: 1436px;
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: rgb(255, 255, 255);
     font-size: 18px;
@@ -704,14 +704,16 @@
 .centraltabgroup-4-0-1-2-2 {
     display: flex;
     flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
+    min-height: fit-content;
 }
 
 .centraltabgroup-incomingactionsmultistate_instance-7 {
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
     display: flex;
     flex-direction: column;
-    min-width: 1436px;
-    min-height: 791px;
 }
 
 .centraltabgroup-4-0-1-3 {

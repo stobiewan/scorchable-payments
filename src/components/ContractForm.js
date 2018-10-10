@@ -93,10 +93,8 @@ class ContractForm extends Component {
             }
             if(sendAnyEth) {
                 let valueInput = this.props.amountInputs["value"]
-                if (typeof(valueInput) !== "string") {
-                    ethToSend = valueInput
-                }
-                else {
+                ethToSend = parseInt(valueInput)
+                if (isNaN(ethToSend)) {
                     ethToSend = submitState[valueInput]
                 }
             }

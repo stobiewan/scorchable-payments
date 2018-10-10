@@ -106,12 +106,10 @@ class DrizzleApp extends Component {
     }
 
     setOutgoingPaymentData(paymentData) {
-        console.log("out set")
         this.outgoingPaymentData = paymentData
     }
 
     setIncomingPaymentData(paymentData) {
-        console.log("in set")
         this.incomingPaymentData = paymentData
     }
 
