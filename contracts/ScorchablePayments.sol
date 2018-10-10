@@ -87,6 +87,7 @@ contract ScorchablePayments is DaiTransferrer {
     external
     payable
     {
+        require(payments[paymentId].payeeBondPaid == false);
         transferTokens(
             msg.sender,
             address(this),
