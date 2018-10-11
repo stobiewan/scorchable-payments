@@ -130,10 +130,15 @@ class DrizzleApp extends Component {
         }
     }
 
+    // returns -1 for dai payments
     incomingPaymentEthBondSize() {
-        if (this.incomingPaymentData !== null &&
-            this.incomingPaymentData[isEthPaymentIndex]) {
-            return (this.incomingPaymentData[payeeBondAmountIndex])
+        if (this.incomingPaymentData !== null) {
+            if(this.incomingPaymentData[isEthPaymentIndex]) {
+                return (this.incomingPaymentData[payeeBondAmountIndex])
+            }
+            else {
+                return (-1)
+            }
         }
         else {
             return (0)

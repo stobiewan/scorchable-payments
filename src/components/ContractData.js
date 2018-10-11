@@ -89,13 +89,18 @@ class ContractData extends Component {
             const displayObjectProps = []
 
             Object.keys(displayData).forEach((key) => {
-                if (i != key) {
+                if (i != key && ! this.keysToExclude.includes(key)) {
                     let displayValue = displayData[key]
+                    let keysToRename = this.props.keysToRename ? this.props.keysToRename : {}
                     if (this.props.keysToScale.includes(key)) {
                         displayValue /= 10 ** 18
                     }
+                    let displayName = key
+                    if (Object.keys(keysToRename).includes(key)) {
+                        displayName = keysToRename[key]
+                    }
                     displayObjectProps.push(<li key={i}>
-                        <strong>{key}</strong>: {`${displayValue}`} {pendingSpinner}
+                        <strong>{displayName}</strong>: {`${displayValue}`} {pendingSpinner}
                     </li>)
                 }
                 i++
