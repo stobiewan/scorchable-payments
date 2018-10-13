@@ -42,11 +42,13 @@ export default class Incomingactionsmultistate extends React.Component {
                               <div className="incomingactionsmultistate-1-0-1-1-0-2" /> 
                           </div>
                           <div className="incomingactionsmultistate-1-0-1-1-1">
+                              <div className="incomingactionsmultistate-1-0-1-1-1-0" /> 
                               <div className="incomingactionsmultistate-paybondpaceholder-2">
                                   <div>
                                       <ContractForm contract="ScorchablePayments" method="payBond" purpose="Pay Bond" fixedParams={[this.props.incomingPaymentIndex]} paramNamesToScale={[]} labels={["Payment ID:"]}  placeholders={["0"]} amountInputs={{"conditional": this.props.incomingPaymentEthBondSize() > 0, "value": this.props.incomingPaymentEthBondSize()}}/> 
                                   </div>
                               </div>
+                              <div className="incomingactionsmultistate-1-0-1-1-1-2" /> 
                           </div>
                           <div className="incomingactionsmultistate-1-0-1-1-2">
                               <div className="incomingactionsmultistate-returntokenstosenderplaceholder-2">

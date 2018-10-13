@@ -21,10 +21,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-0-0-1">
                       <div className="centraltabgroup-0-0-1-0" /> 
                       <div className="centraltabgroup-titletext-2">
-                          <br/>
-                          <div>Scorchable Payments Overview</div>
-                          <br/>
-                          <br/>
+                          Scorchable Payments Overview
                       </div>
                       <div className="centraltabgroup-0-0-1-2" /> 
                   </div>
@@ -32,9 +29,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-0-0-3">
                       <div className="centraltabgroup-0-0-3-0" /> 
                       <div className="centraltabgroup-summarytext-9">
-                          <div>{"Scorchable payments are a simple way of making payments in Dai or ether with more safety than direct transfers for both the payer and payee. There are no fees involved nor any centralised third party controlling escrows. The risks associated with direct transfers are reduced by removing the ability to profit through fraud for both parties, so there is no incentive for scammers to ever participate. The process follows the following three stages:"}</div>
-                          <br/>
-                          <br/>
+                          {"Scorchable payments are a simple method for making payments in Dai or ether with more safety than direct transfers for everyone. They are free  and have no centralised third party controlling escrows. Neither party can benefit from dishonouring the deal so there is no incentive for scams to ever occur. The process follows three stages:"}
                       </div>
                       <div className="centraltabgroup-0-0-3-2" /> 
                   </div>
@@ -42,24 +37,20 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-0-0-5">
                       <div className="centraltabgroup-0-0-5-0" /> 
                       <div className="centraltabgroup-phasestext-2">
-                          <div>{"Stage 1 -> A payer creates a payment by sending the Dai or ether into the contract, specifying the payee address, payee bond quantity required and the timeout period the payer must act by. During this stage the payer can cancel the payment to reclaim all of the funds."}</div>
+                          <div>{"1 -> A payer creates a payment by sending Dai or ether into the contract and specifying who can receive it and what bond they should pay. During this stage the payer can cancel the payment to reclaim all of the funds unless the bond was zero."}</div>
                           <br/>
                           <br/>
-                          <div>{"Stage 2 -> If a bond was specified the payee pays the bond, otherwise this step is skipped. Once the bond is paid the payer can no longer cancel the payment."}</div>
+                          <div>{"2 -> The payee can pay the bond to remove the payers option to cancel the payment."}</div>
                           <br/>
                           <br/>
-                          <div>{"Stage 3 -> After the payee optionally provides the good or service, the payer can either release the funds (including the payees bond) to the payee, or scorch them. Either action can be taken on any fraction of the funds. The payee may release the funds back to the payer in case they can not fulfil the deal. If the payer fails to act before the timeout date, or extend the timeout date, the payee may claim the funds."}</div>
-                          <br/>
-                          <br/>
+                          <div>{"3 -> The payer can release any portion of the funds (payment plus bond) to the payee, or scorch them (funds lost to both parties). The payee can also send the funds back to the payer in case they can not fulfil their end. If the payer fails to act before the timeout date, or extend the timeout date, the payee may claim the funds."}</div>
                       </div>
                       <div className="centraltabgroup-0-0-5-2" /> 
                   </div>
                   <div className="centraltabgroup-0-0-6" /> 
                   <div className="centraltabgroup-0-0-7">
-                      <div className="centraltabgroup-this_process_means_the_buyer_can_not_hope_to_gain_the_good_or_service_without_also_losing_the_funds_and_the_seller_can_not_hope_to_gain_the_funds_then_never_provide_the_good_or_service_the_seller_can_not_cause_the_buyer_to_lose_their_funds_without_also_losing_their_bond_the_payer_is_aware_of_the_destination_address_so_can_be_sure_it_is_not_an_extortion_contract_and_as_the_buyer_and_seller_know_who_each_other_are_to_some_degree_they_have_incentives_to_complete_the_trade_well_as_their_reputation_is_at_stake_as_there_is_nothing_to_be_gained_from_scams_they_are_extremely_unlikely_to_ever_occur_and_users_of_scorchable_payments_can_rationally_expect_the_counterparty_to_behave_with_the_objective_to_make_the_transaction_successful_-4">
-                          <div>This process means the buyer can not hope to gain the good or service without also losing the funds, and the seller can not hope to gain the funds then never provide the good or service. The seller can not cause the buyer to lose their funds without also losing their bond. The payer is aware of the destination address so can be sure it is not an extortion contract, and as the buyer and seller know who each other are to some degree they have incentives to complete the trade well as their reputation is at stake. As there is nothing to be gained from  scams they are extremely unlikely to ever occur and users of scorchable payments can rationally expect the counterparty to behave with the objective to make the transaction successful.</div>
-                          <br/>
-                          <br/>
+                      <div className="centraltabgroup-this_process_means_the_buyer_can_not_gain_the_good_or_service_without_also_losing_the_payment_and_the_seller_can_not_gain_the_funds_then_never_provide_the_good_or_service_the_seller_can_not_cause_the_buyer_to_lose_their_funds_without_also_losing_their_bond_and_the_payer_enters_the_destination_address_so_can_be_sure_it_is_not_an_extortion_contract_as_the_buyer_and_seller_know_who_each_other_are_to_some_degree_they_have_incentives_to_complete_the_trade_well_as_their_reputation_is_at_stake_-4">
+                          This process means the buyer can not  gain the good or service without also losing the payment, and the seller can not  gain the funds then never provide the good or service. The seller can not cause the buyer to lose their funds without also losing their bond and the payer enters the destination address so can be sure it is not an extortion contract. As the buyer and seller know who each other are to some degree they have incentives to complete the trade well as their reputation is at stake.
                       </div>
                   </div>
                   <div className="centraltabgroup-0-0-8" /> 

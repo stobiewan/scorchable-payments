@@ -25,20 +25,20 @@ export default class Outgoingactionsmultistate extends React.Component {
                               <div className="outgoingactionsmultistate-0-0-1-1-0-2" /> 
                           </div>
                           <div className="outgoingactionsmultistate-0-0-1-1-1">
-                              <div className="outgoingactionsmultistate-0-0-1-1-1-0" /> 
                               <div className="outgoingactionsmultistate-releasepaceholder-9">
                                   <div>
                                       <ContractForm contract="ScorchablePayments" method="releasePayment" purpose="Release Payment" fixedParams={[this.props.outgoingPaymentIndex, -1]} paramNamesToScale={["amount"]} labels={["Payment ID:", "Amount:"]}  placeholders={["0", "0.0"]}/> 
                                   </div>
                               </div>
-                              <div className="outgoingactionsmultistate-0-0-1-1-1-2" /> 
                           </div>
                           <div className="outgoingactionsmultistate-0-0-1-1-2">
+                              <div className="outgoingactionsmultistate-0-0-1-1-2-0" /> 
                               <div className="outgoingactionsmultistate-scorchplaceholder-2">
                                   <div>
                                       <ContractForm contract="ScorchablePayments" method="scorchPayment" purpose="Scorch Payment" fixedParams={[this.props.outgoingPaymentIndex, -1]} paramNamesToScale={["amountToScorch"]} labels={["Payment ID:", "Amount:"]}  placeholders={["0", "0.0"]}/> 
                                   </div>
                               </div>
+                              <div className="outgoingactionsmultistate-0-0-1-1-2-2" /> 
                           </div>
                           <div className="outgoingactionsmultistate-0-0-1-1-3">
                               <div className="outgoingactionsmultistate-0-0-1-1-3-0" /> 
@@ -59,13 +59,11 @@ export default class Outgoingactionsmultistate extends React.Component {
                               <div className="outgoingactionsmultistate-0-0-1-1-4-2" /> 
                           </div>
                           <div className="outgoingactionsmultistate-0-0-1-1-5">
-                              <div className="outgoingactionsmultistate-0-0-1-1-5-0" /> 
                               <div className="outgoingactionsmultistate-cancelpaceholder-9">
                                   <div>
                                       <ContractForm contract="ScorchablePayments" method="cancelPayment" purpose="Cancel Payment" fixedParams={[this.props.outgoingPaymentIndex]} paramNamesToScale={[]} labels={["Payment ID:"]}  placeholders={["0"]}/> 
                                   </div>
                               </div>
-                              <div className="outgoingactionsmultistate-0-0-1-1-5-2" /> 
                           </div>
                           <div className="outgoingactionsmultistate-0-0-1-1-6" /> 
                       </div>
