@@ -19,6 +19,8 @@ class ContractData extends Component {
         this.dataKey = this.contracts[this.props.contract].methods[this.props.method].cacheCall(...methodArgs)
 
         this.onDataCallback = this.props.onDataCallback ? this.props.onDataCallback : null
+        this.keysToExclude = this.props.keysToExclude ? this.props.keysToExclude : []
+        this.keysToRename = this.props.keysToRename ? this.props.keysToRename : []
 
         // State method args has converted placeholders
         this.state = {
@@ -97,7 +99,7 @@ class ContractData extends Component {
                     }
                     let displayName = key
                     if (Object.keys(keysToRename).includes(key)) {
-                        displayName = keysToRename[key]
+                        displayName = keysToRename[key]()
                     }
                     displayObjectProps.push(<li key={i}>
                         <strong>{displayName}</strong>: {`${displayValue}`} {pendingSpinner}

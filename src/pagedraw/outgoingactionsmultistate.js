@@ -19,7 +19,7 @@ export default class Outgoingactionsmultistate extends React.Component {
                               <div className="outgoingactionsmultistate-0-0-1-1-0-0" /> 
                               <div className="outgoingactionsmultistate-payment_data_placeholder_-3">
                                   <div>
-                                      <ContractData contract="ScorchablePayments" method="payments" isTokenValue={0} keysToScale={["amount", "payeeBondAmount"]} keysToExclude={["isEthPayment", "listIndex"]} keysToRename={{"amount": this.props.outgoingPaymentUsesEth() ? "etherAmount" : "daiAmount"}} prefix="" methodArgs={[this.props.outgoingPaymentIndex]} onDataCallback={this.props.outgoingPaymentDataCallback}/>
+                                      <ContractData contract="ScorchablePayments" method="payments" isTokenValue={0} keysToScale={["amount", "payeeBondAmount"]} keysToExclude={["isEthPayment", "listIndex"]} keysToRename={{"amount": this.props.getOutgoingAmountString}} prefix="" methodArgs={[this.props.outgoingPaymentIndex]} onDataCallback={this.props.outgoingPaymentDataCallback}/>
                                   </div>
                               </div>
                               <div className="outgoingactionsmultistate-0-0-1-1-0-2" /> 

@@ -36,7 +36,7 @@ export default class Incomingactionsmultistate extends React.Component {
                               <div className="incomingactionsmultistate-1-0-1-1-0-0" /> 
                               <div className="incomingactionsmultistate-payment_data_placeholder_-8">
                                   <div>
-                                      <ContractData contract="ScorchablePayments" method="payments" isTokenValue={0} keysToScale={["amount", "payeeBondAmount"]} keysToExclude={["isEthPayment", "listIndex"]} keysToRename={{"amount": this.props.incomingPaymentEthBondSize() != -1 ? "etherAmount" : "daiAmount"}} prefix="" methodArgs={[this.props.incomingPaymentIndex]} onDataCallback={this.props.incomingPaymentDataCallback}/>
+                                      <ContractData contract="ScorchablePayments" method="payments" isTokenValue={0} keysToScale={["amount", "payeeBondAmount"]} keysToExclude={["isEthPayment", "listIndex"]} keysToRename={{"amount": this.props.getIncomingAmountString}} prefix="" methodArgs={[this.props.incomingPaymentIndex]} onDataCallback={this.props.incomingPaymentDataCallback}/>
                                   </div>
                               </div>
                               <div className="incomingactionsmultistate-1-0-1-1-0-2" /> 

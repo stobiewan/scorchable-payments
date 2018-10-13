@@ -98,6 +98,8 @@ class DrizzleApp extends Component {
         this.getIncomingPaymentData = this.getIncomingPaymentData.bind(this);
         this.outgoingPaymentUsesEth = this.outgoingPaymentUsesEth.bind(this);
         this.incomingPaymentEthBondSize = this.incomingPaymentEthBondSize.bind(this);
+        this.getOutgoingAmountString = this.getOutgoingAmountString.bind(this);
+        this.getIncomingAmountString = this.getIncomingAmountString.bind(this);
         this.state = {
             selectedTab: TabEnum.intro,
             relevantPayments: [[], []],
@@ -145,6 +147,14 @@ class DrizzleApp extends Component {
         }
     }
 
+    getOutgoingAmountString() {
+        return this.outgoingPaymentUsesEth() ? "etherAmount" : "daiAmount"
+    }
+
+    getIncomingAmountString() {
+        return this.incomingPaymentEthBondSize() === -1 ? "daiAmount" : "etherAmount"
+    }
+
     render() {
         // If the cache key we received earlier isn't in the store yet; the initial value is still being fetched.
         if(!(this.relevantPaymentsKey in this.props.ScorchablePayments.getPaymentsForAccount)) {
@@ -165,7 +175,9 @@ class DrizzleApp extends Component {
                            outgoingPaymentDataCallback={this.setOutgoingPaymentData}
                            incomingPaymentDataCallback={this.setIncomingPaymentData}
                            outgoingPaymentUsesEth={this.outgoingPaymentUsesEth}
-                           incomingPaymentEthBondSize={this.incomingPaymentEthBondSize}/>;
+                           incomingPaymentEthBondSize={this.incomingPaymentEthBondSize}
+                           getOutgoingAmountString={this.getOutgoingAmountString}
+                           getIncomingAmountString={this.getIncomingAmountString}/>;
     }
 
     componentDidUpdate() {

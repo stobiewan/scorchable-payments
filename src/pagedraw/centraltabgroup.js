@@ -175,7 +175,7 @@ export default class Centraltabgroup extends React.Component {
                           </div>
                           <div className="centraltabgroup-3-0-1-2-2">
                               <div className="centraltabgroup-outgoingactionsmultistate_instance-3">
-                                  <Outgoingactionsmultistate outgoingPaymentIndex={this.props.outgoingPaymentIndex} outgoingPaymentDataCallback={this.props.outgoingPaymentDataCallback} outgoingPaymentUsesEth={this.props.outgoingPaymentUsesEth} /> 
+                                  <Outgoingactionsmultistate outgoingPaymentIndex={this.props.outgoingPaymentIndex} outgoingPaymentDataCallback={this.props.outgoingPaymentDataCallback} outgoingPaymentUsesEth={this.props.outgoingPaymentUsesEth} getOutgoingAmountString={this.props.getOutgoingAmountString} /> 
                               </div>
                           </div>
                       </div>
@@ -216,7 +216,7 @@ export default class Centraltabgroup extends React.Component {
                           </div>
                           <div className="centraltabgroup-4-0-1-2-2">
                               <div className="centraltabgroup-incomingactionsmultistate_instance-7">
-                                  <Incomingactionsmultistate incomingPaymentIndex={this.props.incomingPaymentIndex} incomingPaymentDataCallback={this.props.incomingPaymentDataCallback} incomingPaymentEthBondSize={this.props.incomingPaymentEthBondSize} /> 
+                                  <Incomingactionsmultistate incomingPaymentIndex={this.props.incomingPaymentIndex} incomingPaymentDataCallback={this.props.incomingPaymentDataCallback} incomingPaymentEthBondSize={this.props.incomingPaymentEthBondSize} getIncomingAmountString={this.props.getIncomingAmountString} /> 
                               </div>
                           </div>
                       </div>
