@@ -55,7 +55,7 @@ class PaymentCycler {
         this.app.updatedSelection()
     }
 
-    _invalidate(){
+    _invalidate() {
         this.localIndex = -1;
         this.selectedIndex = -1
     }
@@ -68,10 +68,10 @@ class PaymentCycler {
     getLocalIndexString() {
         let numPayments = this.paymentsArray.length;
         if (numPayments === 0) {
-            return("No payments found for this address")
+            return ("No payments found for this address")
         }
         else {
-            return((this.localIndex + 1).toString() + ' / ' + numPayments.toString())
+            return ((this.localIndex + 1).toString() + ' / ' + numPayments.toString())
         }
     }
 
@@ -135,7 +135,7 @@ class DrizzleApp extends Component {
     // returns -1 for dai payments
     incomingPaymentEthBondSize() {
         if (this.incomingPaymentData !== null) {
-            if(this.incomingPaymentData[isEthPaymentIndex]) {
+            if (this.incomingPaymentData[isEthPaymentIndex]) {
                 return (this.incomingPaymentData[payeeBondAmountIndex])
             }
             else {
@@ -157,7 +157,7 @@ class DrizzleApp extends Component {
 
     render() {
         // If the cache key we received earlier isn't in the store yet; the initial value is still being fetched.
-        if(!(this.relevantPaymentsKey in this.props.ScorchablePayments.getPaymentsForAccount)) {
+        if (!(this.relevantPaymentsKey in this.props.ScorchablePayments.getPaymentsForAccount)) {
             return (
                 <span>Fetching...</span>
             )
@@ -182,7 +182,7 @@ class DrizzleApp extends Component {
 
     componentDidUpdate() {
         let newRelevantPayments = this.props.ScorchablePayments.getPaymentsForAccount[this.relevantPaymentsKey].value;
-        if (! this.paymentArraysEqual(newRelevantPayments, this.state.relevantPayments)) {
+        if (!this.paymentArraysEqual(newRelevantPayments, this.state.relevantPayments)) {
             this.outgoingPaymentCycler.setRelevantPayments(newRelevantPayments[0]);
             this.incomingPaymentCycler.setRelevantPayments(newRelevantPayments[1]);
             this.setState({relevantPayments: newRelevantPayments})
@@ -204,10 +204,10 @@ class DrizzleApp extends Component {
     }
 
     arraysEqual(arr1, arr2) {
-        if(arr1.length !== arr2.length)
+        if (arr1.length !== arr2.length)
             return false;
-        for(var i = arr1.length; i--;) {
-            if(arr1[i] !== arr2[i])
+        for (var i = arr1.length; i--;) {
+            if (arr1[i] !== arr2[i])
                 return false;
         }
 

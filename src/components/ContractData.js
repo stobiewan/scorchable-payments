@@ -1,5 +1,5 @@
-import { drizzleConnect } from 'drizzle-react'
-import React, { Component } from 'react'
+import {drizzleConnect} from 'drizzle-react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import './styles.css';
 
@@ -30,14 +30,14 @@ class ContractData extends Component {
 
     render() {
         // Contract is not yet intialized.
-        if(!this.props.contracts[this.props.contract].initialized) {
+        if (!this.props.contracts[this.props.contract].initialized) {
             return (
                 <span>Initializing...</span>
             )
         }
 
         // If the cache key we received earlier isn't in the store yet; the initial value is still being fetched.
-        if(!(this.dataKey in this.props.contracts[this.props.contract][this.props.method])) {
+        if (!(this.dataKey in this.props.contracts[this.props.contract][this.props.method])) {
             return (
                 <span>Fetching...</span>
             )
@@ -78,7 +78,7 @@ class ContractData extends Component {
                 <li key={index}>{`${datum}`}{pendingSpinner}</li>
             })
 
-            return(
+            return (
                 <ul>
                     {displayListItems}
                 </ul>
@@ -91,7 +91,7 @@ class ContractData extends Component {
             const displayObjectProps = []
 
             Object.keys(displayData).forEach((key) => {
-                if (i != key && ! this.keysToExclude.includes(key)) {
+                if (i != key && !this.keysToExclude.includes(key)) {
                     let displayValue = displayData[key]
                     let keysToRename = this.props.keysToRename ? this.props.keysToRename : {}
                     if (this.props.keysToScale.includes(key)) {
@@ -108,7 +108,7 @@ class ContractData extends Component {
                 i++
             })
 
-            return(
+            return (
                 <div className="vertical-margins">
                     <div className="border-container">
                         <div className="data-border">
@@ -123,7 +123,7 @@ class ContractData extends Component {
             )
         }
 
-        return(
+        return (
             <div className="medium-text">
                 <span>{prefix}{`${displayData}`}{pendingSpinner}</span>
             </div>
@@ -132,7 +132,7 @@ class ContractData extends Component {
 
     componentDidUpdate() {
         let newMethodArgs = this.getMethodArgs()
-        if (! this.arraysEqual(newMethodArgs, this.state.stateMethodArgs)) {
+        if (!this.arraysEqual(newMethodArgs, this.state.stateMethodArgs)) {
             this.dataKey = this.contracts[this.props.contract].methods[this.props.method].cacheCall(...newMethodArgs)
             this.setState({stateMethodArgs: newMethodArgs})
         }
@@ -148,14 +148,14 @@ class ContractData extends Component {
                 methodArgs[i] = this.contracts[contractName].address;
             }
         }
-        return(methodArgs)
+        return (methodArgs)
     }
 
     arraysEqual(arr1, arr2) {
-        if(arr1.length !== arr2.length)
+        if (arr1.length !== arr2.length)
             return false;
-        for(var i = arr1.length; i--;) {
-            if(arr1[i] !== arr2[i])
+        for (var i = arr1.length; i--;) {
+            if (arr1[i] !== arr2[i])
                 return false;
         }
 

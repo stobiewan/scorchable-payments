@@ -2,109 +2,109 @@
 
 body,
 .pure-g [class*=pure-u] {
-  font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .header {
-  text-align: center;
+    text-align: center;
 }
 
 h1, h2, h3 {
-  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
 }
 
 code {
-  padding: .25rem;
-  margin: 0 .25rem;
-  background: #eee;
+    padding: .25rem;
+    margin: 0 .25rem;
+    background: #eee;
 }
 
 .container {
-  box-sizing: border-box;
-  width: calc(100% - 60px);
-  max-width: 600px;
-  padding: 45px 20px;
-  margin: 0 auto;
+    box-sizing: border-box;
+    width: calc(100% - 60px);
+    max-width: 600px;
+    padding: 45px 20px;
+    margin: 0 auto;
 }
 
 .pure-button-primary {
-  background-color: #0c1a2b;
+    background-color: #0c1a2b;
 }
 
 .pure-button-primary:hover {
-  background-color: #233e5e;
+    background-color: #233e5e;
 }
 
 .pure-form input[type="text"]:focus {
-  border-color: #0c1a2b;
+    border-color: #0c1a2b;
 }
 
 ul {
-  list-style-type: none;
-  padding-left: 0;
+    list-style-type: none;
+    padding-left: 0;
 }
 
 ul li:not(:last-child) {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 /* NAVBAR */
 
 .navbar {
-  position: fixed;
-  padding: 5px;
-  background: #0c1a2b;
-  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    position: fixed;
+    padding: 5px;
+    background: #0c1a2b;
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
 }
 
 .navbar a {
-  color: #fff;
+    color: #fff;
 }
 
 .navbar a:active,
 .navbar a:focus,
 .navbar a:hover {
-  background: #233e5e;
+    background: #233e5e;
 }
 
 .navbar .pure-menu-heading {
-  font-weight: bold;
-  text-transform: none;
+    font-weight: bold;
+    text-transform: none;
 }
 
 .navbar .navbar-right {
-  float: right;
+    float: right;
 }
 
 .navbar .uport-logo {
-  height: 16px;
-  margin-right: 10px;
+    height: 16px;
+    margin-right: 10px;
 }
 
 /* LOADING SCREEN */
 
 .loading-screen {
-  opacity: 1;
-  visibility: visible;
-  transition: all .25s ease-in-out;
+    opacity: 1;
+    visibility: visible;
+    transition: all .25s ease-in-out;
 }
 
 .loading-screen.loaded {
-  opacity: 0;
-  visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
 }
 
 /* FORMS */
 
 .pure-form {
-  display: inline-block;
+    display: inline-block;
 }
 
 /* ALERTS */
 
 .alert {
-  padding: .5rem;
-  color: darkgreen;
-  background: darkseagreen;
-  border: 1px solid darkgreen;
+    padding: .5rem;
+    color: darkgreen;
+    background: darkseagreen;
+    border: 1px solid darkgreen;
 }

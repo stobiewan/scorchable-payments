@@ -1,5 +1,5 @@
-import { drizzleConnect } from 'drizzle-react'
-import React, { Component } from 'react'
+import {drizzleConnect} from 'drizzle-react'
+import React, {Component} from 'react'
 import './ContractForm.css';
 import './styles.css';
 import PropTypes from 'prop-types'
@@ -71,9 +71,10 @@ class ContractForm extends Component {
         let submitState = Object.assign({}, this.state);
         // scale token values from whole token to wei
         for (var i = 0; i < this.paramNamesToScale.length; i++) {
-            submitState[this.paramNamesToScale[i]] = submitState[this.paramNamesToScale[i]] * 10 ** 18;
+            submitState[this.paramNamesToScale[i]] = this.context.drizzle.web3.utils.toWei(submitState[this.paramNamesToScale[i]]);
         }
         this.addAmountSendArg(submitState);
+        console.log("submitState = " + submitState)
         if (this.sendArgs) {
             return this.contracts[this.props.contract].methods[this.props.method].cacheSend(...Object.values(submitState), this.sendArgs);
         }
@@ -91,7 +92,7 @@ class ContractForm extends Component {
             else {
                 sendAnyEth = submitState[conditionInput] > 0
             }
-            if(sendAnyEth) {
+            if (sendAnyEth) {
                 let valueInput = this.props.amountInputs["value"]
                 ethToSend = parseInt(valueInput)
                 if (isNaN(ethToSend)) {
@@ -105,15 +106,15 @@ class ContractForm extends Component {
     }
 
     handleInputChange(event, name) {
-        this.setState({ [name]: event.target.value });
+        this.setState({[name]: event.target.value});
     }
 
     handleRadioInputClick(value, name) {
-        this.setState({ [name]: value });
+        this.setState({[name]: value});
     }
 
     translateType(type) {
-        switch(true) {
+        switch (true) {
             case /^uint/.test(type):
                 return 'number'
             case /^string/.test(type) || /^bytes/.test(type):
@@ -139,7 +140,8 @@ class ContractForm extends Component {
                                 <div key={index + 32}>
                                     <InputComponent key={input.name} type={inputType} name={input.name}
                                                     value={this.state[input.name]} placeholder={inputPlaceholder}
-                                                    onChange={this.handleInputChange} onClick={this.handleRadioInputClick}
+                                                    onChange={this.handleInputChange}
+                                                    onClick={this.handleRadioInputClick}
                                                     description={inputLabel}/>
                                     <SpacerFive key={index}/>
                                 </div>)
@@ -147,7 +149,8 @@ class ContractForm extends Component {
                     })}
                     <div className="center-button-1">
                         <div className="center-button-2">
-                            <Statelessbutton key={this.props.purpose} onClick={this.handleSubmit} buttonText={this.props.purpose} ></Statelessbutton>
+                            <Statelessbutton key={this.props.purpose} onClick={this.handleSubmit}
+                                             buttonText={this.props.purpose}></Statelessbutton>
                         </div>
                     </div>
                 </form>

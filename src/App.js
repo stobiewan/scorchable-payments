@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Route } from 'react-router'
+import React, {Component} from 'react'
+import {Route} from 'react-router'
 
 import DrizzleAppContainer from './layouts/drizzle_app/DrizzleAppContainer'
 
@@ -10,17 +10,17 @@ import './css/pure-min.css'
 import './App.css'
 
 class App extends Component {
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 
-  render() {
-    return (
-      <div className="App">
-        <Route exact path="/" component={DrizzleAppContainer}/>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <Route exact path="/" component={DrizzleAppContainer}/>
+            </div>
+        );
+    }
 }
 
 export default App

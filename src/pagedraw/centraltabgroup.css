@@ -446,7 +446,7 @@
 .centraltabgroup-2-0-1 {
     width: 0px;
     flex-shrink: 0;
-    flex-grow: 0.47281921618204803;
+    flex-grow: 0.48645320197044334;
     flex-basis: 0px;
 }
 
@@ -465,7 +465,7 @@
 .centraltabgroup-2-0-3 {
     width: 0px;
     flex-shrink: 0;
-    flex-grow: 0.527180783817952;
+    flex-grow: 0.5135467980295566;
     flex-basis: 0px;
 }
 
@@ -546,6 +546,7 @@
 .centraltabgroup-3-0-1-2-1 {
     display: flex;
     flex-shrink: 0;
+    margin-top: 5px;
 }
 
 .centraltabgroup-paymentindextext-1 {
@@ -569,6 +570,7 @@
     flex-grow: 1;
     flex-basis: 0px;
     min-height: fit-content;
+    margin-top: 5px;
 }
 
 .centraltabgroup-outgoingactionsmultistate_instance-3 {

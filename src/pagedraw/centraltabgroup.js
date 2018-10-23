@@ -76,7 +76,7 @@ export default class Centraltabgroup extends React.Component {
                           <div className="centraltabgroup-1-0-1-1-1">
                               <div className="centraltabgroup-1-0-1-1-1-0" /> 
                               <div className="centraltabgroup-daisummarytext-1">
-                                  Before you can send Dai for payments or bonds you need to approve this contract to transfer it. You can approve as much as you want, only what you actually send can be transferred from your balance.
+                                  Here you can approve this contract to transfer Dai from your balance. You need to do this before paying bonds or making payments with Dai. The contract can only transfer the Dai when you sign transactions requesting it to.
                               </div>
                               <div className="centraltabgroup-1-0-1-1-1-2" /> 
                           </div>
@@ -135,7 +135,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-2-0-0">
                       <div className="centraltabgroup-2-0-0-0" /> 
                       <div className="centraltabgroup-createpaymentheader-6">
-                          { "Create a payment to a payee in ether or Dai. Once it is created the funds will be stored in the smart contract. If a bond is specified the payee will then be able to pay the bond and until they do the payment can be cancelled with all of the funds returned to you. Use " + (Math.round(Date.now() / 1000) + 2419200).toString() + " for the inaction timeout to set it to four weeks from now." }
+                          { "Create an ether or Dai payment, the funds will be then be stored in the smart contract. If the bond is set to above zero you will be able to cancel the payment and have all funds returned until the payee pays the bond. The timeout period is in seconds since the epoch, use " + (Math.round(Date.now() / 1000) + 2419200).toString() + " for the inaction timeout to set it to four weeks from now. You can extend the timeout at any time, if it expires before the payment is finalised the payee can claim the funds." }
                       </div>
                       <div className="centraltabgroup-2-0-0-2" /> 
                   </div>
@@ -165,7 +165,7 @@ export default class Centraltabgroup extends React.Component {
                       <div className="centraltabgroup-3-0-1-2">
                           <div className="centraltabgroup-3-0-1-2-0">
                               <div className="centraltabgroup-outgoingpaymentsheader-1">
-                                  These are the outgoing payments from your address. You can cycle through them and depending no their state cancel, release or scorch them.
+                                  {"These are the outgoing payments from your address. You can cycle through them and depending on their state cancel, release or scorch them. You can also top up the payment quantity and extend the timeout so the payee can't claim the payment at any time."}
                               </div>
                           </div>
                           <div className="centraltabgroup-3-0-1-2-1">

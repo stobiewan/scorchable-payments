@@ -1,9 +1,9 @@
-import { drizzleConnect } from 'drizzle-react'
-import React, { Component } from 'react'
+import {drizzleConnect} from 'drizzle-react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
 
-const DisplayOptions = Object.freeze({"both" : 1, "onlyAddress" : 2, "onlyBalance" : 3})
+const DisplayOptions = Object.freeze({"both": 1, "onlyAddress": 2, "onlyBalance": 3})
 
 
 class AccountData extends Component {
@@ -22,7 +22,7 @@ class AccountData extends Component {
 
     render() {
         // No accounts found.
-        if(Object.keys(this.props.accounts).length === 0) {
+        if (Object.keys(this.props.accounts).length === 0) {
             return (
                 <span>Initializing...</span>
             )
@@ -49,23 +49,23 @@ class AccountData extends Component {
             balance = this.precisionRound(balance, this.props.precision)
         }
 
-        switch(this.displayOption) {
+        switch (this.displayOption) {
             case DisplayOptions.onlyAddress:
-                return(
+                return (
                     <div className="medium-text">
                         <div>Current address: {address}</div>
                     </div>
                 )
                 break;
             case DisplayOptions.onlyBalance:
-                return(
+                return (
                     <div className="medium-text">
                         <span>{units}: {balance} </span>
                     </div>
                 )
                 break;
             default:
-                return(
+                return (
                     <div className="medium-text">
                         <div>Current address: {address}</div>
                         <div>{units}: {balance} </div>
