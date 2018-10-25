@@ -19,6 +19,7 @@ class ContractForm extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleRadioInputClick = this.handleRadioInputClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
 
         this.contracts = context.drizzle.contracts;
 
@@ -67,7 +68,8 @@ class ContractForm extends Component {
         }
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
+        e.preventDefault()
         let submitState = Object.assign({}, this.state);
         // scale token values from whole token to wei
         for (var i = 0; i < this.paramNamesToScale.length; i++) {
@@ -113,6 +115,12 @@ class ContractForm extends Component {
         this.setState({[name]: value});
     }
 
+    handleKeyDown(e) {
+        if (e.which === 13) {
+            this.handleSubmit(e)
+        }
+    }
+
     translateType(type) {
         switch (true) {
             case /^uint/.test(type):
@@ -142,6 +150,7 @@ class ContractForm extends Component {
                                                     value={this.state[input.name]} placeholder={inputPlaceholder}
                                                     onChange={this.handleInputChange}
                                                     onClick={this.handleRadioInputClick}
+                                                    onKeyDown={this.handleKeyDown}
                                                     description={inputLabel}/>
                                     <SpacerFive key={index}/>
                                 </div>)

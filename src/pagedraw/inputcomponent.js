@@ -20,7 +20,7 @@ export default class Inputcomponent extends React.Component {
                       </div>
                       <div className="inputcomponent-textentry-2">
                           <div className="inputcomponent-0-0-0-1-0">
-                              <input type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={((e) => this.props.onChange(e, this.props.name))} className="inputcomponent-textinputofcomponent-1" /> 
+                              <input type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={((e) => this.props.onChange(e, this.props.name))} onKeyDown={((e) => this.props.onKeyDown(e))} className="inputcomponent-textinputofcomponent-1" /> 
                           </div>
                       </div>
                   </div>

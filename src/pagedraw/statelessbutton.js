@@ -6,7 +6,7 @@ import './statelessbutton.css';
 export default class Statelessbutton extends React.Component {
   render() {
     return (
-      <div onClick={this.props.onClick} className="statelessbutton-statelessbutton-8">
+      <div onClick={((e) => this.props.onClick(e))} className="statelessbutton-statelessbutton-8">
           <div className="statelessbutton-0">
               <div className="statelessbutton-buttonstateless-8">
                   <div className="statelessbutton-0-0-0">
