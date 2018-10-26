@@ -4,8 +4,23 @@
 .medium-text {
     flex-grow: 1;
     flex-basis: 0px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     color: rgb(255, 255, 255);
+    font-size: 27px;
+    line-height: 31px;
+    letter-spacing: 0px;
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.medium-black-text {
+    flex-grow: 1;
+    flex-basis: 0px;
+    font-family: "Roboto", sans-serif;
+    color: rgb(0, 0, 0);
     font-size: 27px;
     line-height: 31px;
     letter-spacing: 0px;
