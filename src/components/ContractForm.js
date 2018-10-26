@@ -76,7 +76,6 @@ class ContractForm extends Component {
             submitState[this.paramNamesToScale[i]] = this.context.drizzle.web3.utils.toWei(submitState[this.paramNamesToScale[i]]);
         }
         this.addAmountSendArg(submitState);
-        console.log("submitState = " + submitState)
         if (this.sendArgs) {
             return this.contracts[this.props.contract].methods[this.props.method].cacheSend(...Object.values(submitState), this.sendArgs);
         }
