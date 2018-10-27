@@ -6,13 +6,10 @@ import "./SafeMath.sol";
 import "./DaiInterface.sol";
 
 
-// TODO tests must cover underflow throws, using safemath
-// TODO frontend
-
-
 contract ScorchablePayments is DaiTransferrer {
 
     using SafeMath for uint256;
+    using SafeMath64 for uint64;
 
     event NewPayment();
     event PayeeBondPaid();
@@ -55,18 +52,18 @@ contract ScorchablePayments is DaiTransferrer {
     payable
     {
         transferTokens(msg.sender, address(this), amountToPay, isEthPayment);
-        require(payerInactionTimeout < now + 27 weeks);
+        require(payerInactionTimeout < now.add(27 weeks));
         payments[currentId] = Payment(
             msg.sender,
             payee,
             amountToPay,
             payeeBondAmount,
             payerInactionTimeout,
-            paymentIds.push(currentId) - 1,
+            paymentIds.push(currentId).sub(1),
             payeeBondAmount == 0,
             isEthPayment
         );
-        currentId++;
+        currentId = currentId.add(1);
         emit NewPayment();
     }
 
@@ -94,7 +91,7 @@ contract ScorchablePayments is DaiTransferrer {
             payments[paymentId].payeeBondAmount,
             payments[paymentId].isEthPayment
         );
-        payments[paymentId].amount += payments[paymentId].payeeBondAmount;
+        payments[paymentId].amount = payments[paymentId].amount.add(payments[paymentId].payeeBondAmount);
         payments[paymentId].payeeBondPaid = true;
         emit PayeeBondPaid();
     }
@@ -106,18 +103,18 @@ contract ScorchablePayments is DaiTransferrer {
             _deletePayment(paymentId);
         }
         else {
-            payments[paymentId].amount -= amount;
+            payments[paymentId].amount = payments[paymentId].amount.sub(amount);
         }
     }
 
     function topUp(uint64 paymentId, uint amount) external payable {
         transferTokens(msg.sender, address(this), amount, payments[paymentId].isEthPayment);
-        payments[paymentId].amount += amount;
+        payments[paymentId].amount = payments[paymentId].amount.add(amount);
     }
 
     function releasePayment(uint64 paymentId, uint amount) external onlyPayer(paymentId) {
         require(amount <= payments[paymentId].amount);
-        payments[paymentId].amount -= amount;
+        payments[paymentId].amount = payments[paymentId].amount.sub(amount);
         transferTokens(address(this), payments[paymentId].payee, amount, payments[paymentId].isEthPayment);
         if (payments[paymentId].amount == 0) {
             _deletePayment(paymentId);
@@ -125,7 +122,7 @@ contract ScorchablePayments is DaiTransferrer {
     }
 
     function scorchPayment(uint64 paymentId, uint256 amountToScorch) external onlyPayer(paymentId) {
-        payments[paymentId].amount -= amountToScorch;
+        payments[paymentId].amount = payments[paymentId].amount.sub(amountToScorch);
         transferTokens(address(this), scorch, amountToScorch, payments[paymentId].isEthPayment);
         if (payments[paymentId].amount == 0) {
             _deletePayment(paymentId);
@@ -153,31 +150,31 @@ contract ScorchablePayments is DaiTransferrer {
         uint outgoingReturnLength = 0;
         uint incomingReturnLength = 0;
 
-        for (uint i=0; i < paymentIds.length; i++) {
+        for (uint i=0; i < paymentIds.length; i = i.add(1)) {
             if (payments[paymentIds[i]].payer == account) {
                 outgoingIds[outgoingReturnLength] = paymentIds[i];
-                outgoingReturnLength += 1;
+                outgoingReturnLength = outgoingReturnLength.add(1);
             }
             if (payments[paymentIds[i]].payee == account) {
                 incomingIds[incomingReturnLength] = paymentIds[i];
-                incomingReturnLength += 1;
+                incomingReturnLength = incomingReturnLength.add(1);
             }
         }
 
         uint64[] memory returnOutgoingIds = new uint64[](outgoingReturnLength);
         uint64[] memory returnIncomingIds = new uint64[](incomingReturnLength);
 
-        for (uint j=0; j < outgoingReturnLength; j++) {
+        for (uint j=0; j < outgoingReturnLength; j = j.add(1)) {
             returnOutgoingIds[j] = outgoingIds[j];
         }
-        for (uint k=0; k < incomingReturnLength; k++) {
+        for (uint k=0; k < incomingReturnLength; k = k.add(1)) {
             returnIncomingIds[k] = incomingIds[k];
         }
         return (returnOutgoingIds, returnIncomingIds);
     }
 
     function extendInactionTimeout(uint64 paymentId) public onlyPayer(paymentId) {
-        payments[paymentId].payerInactionTimeout = now + 5 weeks;
+        payments[paymentId].payerInactionTimeout = now.add(5 weeks);
     }
 
     function transferTokens(address source, address dest, uint amount, bool isEthPayment) internal {
@@ -196,10 +193,10 @@ contract ScorchablePayments is DaiTransferrer {
 
     function _deletePayment(uint64 paymentId) internal {
         uint listIndex = payments[paymentId].listIndex;
-        paymentIds[listIndex] = paymentIds[paymentIds.length - 1];
+        paymentIds[listIndex] = paymentIds[paymentIds.length.sub(1)];
         payments[paymentIds[listIndex]].listIndex = listIndex;
         delete payments[paymentId];
-        paymentIds.length --;
+        paymentIds.length = paymentIds.length.sub(1);
         emit PaymentDeleted();
     }
 }
