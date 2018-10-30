@@ -1,3 +1,5 @@
+//This isn't used, only for windows
+
 module.exports = {
     migrations_directory: "./migrations",
     networks: {

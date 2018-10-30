@@ -337,7 +337,7 @@ contract('Payments test', async (accounts) => {
     it("scorches", async () => {
         // remaining IDs are: 1, 3, 6
         var previousEthBalances = await getEthBalances();
-        var glass = await scorchablePaymentsInstance.scorch.call();
+        var glass = await scorchablePaymentsInstance.scorchAddress.call();
         var initialScorchedEth = bigNumToDaiOrEth(await web3.eth.getBalance(glass));
 
         // try to scorch from wrong account
