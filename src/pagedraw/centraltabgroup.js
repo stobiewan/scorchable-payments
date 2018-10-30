@@ -56,10 +56,10 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-0-0-8" /> 
                   <div className="centraltabgroup-0-0-9">
                       <div className="centraltabgroup-0-0-9-0" /> 
-                      <div className="centraltabgroup-contract_address_0">
-                          <div>Contract address 0x000</div>
+                      <div className="centraltabgroup-donations_-_0">
+                          <div>Donations - 0x300afbE08EE4619EC93524f9255CE59a013a5b63</div>
                           <div>{"https://github.com/stobiewan/scorchable-payments"}</div>
-                          <div>{"https://en.wikipedia.org/wiki/Scorched_earth"}</div>
+                          <div>Contract address 0x000</div>
                       </div>
                       <div className="centraltabgroup-0-0-9-2" /> 
                   </div>

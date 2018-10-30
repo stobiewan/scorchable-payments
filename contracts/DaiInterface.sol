@@ -9,16 +9,13 @@ contract DaiInterface {
     function balanceOf(address src) public view returns (uint);
 }
 
-contract DaiTransferrer is Ownable {
+contract DaiTransferrer {
 
-    DaiInterface daiContract;
+    address daiAddress = 0x444254706E8F1FB62a6EC26A7FA2b942ef672495; // Kovan
+    DaiInterface daiContract = DaiInterface(daiAddress);
 
     function transferDai(address _src, address _dst, uint _dai) internal {
         require(daiContract.transferFrom(_src, _dst, _dai));
-    }
-
-    function setDaiContractAddress(address _address) external onlyOwner {
-        daiContract = DaiInterface(_address);
     }
 
     function getDaiBalance(address _address) public view returns (uint) {
