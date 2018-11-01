@@ -1,5 +1,4 @@
 import ScorchablePayments from './../build/contracts/ScorchablePayments.json'
-import DSToken from './../build/contracts/DSToken.json'
 
 const drizzleOptions = {
     web3: {
@@ -11,10 +10,8 @@ const drizzleOptions = {
     },
     contracts: [
         ScorchablePayments,
-        DSToken,
     ],
     events: {
-        DSToken: ['Approval', 'Transfer'],
     },
     polls: {
         accounts: 1500
