@@ -101,14 +101,14 @@ export default class Centraltabgroup extends React.Component {
                                   <div className="centraltabgroup-1-0-1-1-3-1-2">
                                       <div className="centraltabgroup-owneddaiplaceholder-4">
                                           <div>
-                                              <ContractData contract="ScorchablePayments" method="getDaiBalance" isTokenValue={1} prefix="Dai you own: " methodArgs={[this.props.selectedAccount]}/>
+                                              <ContractData contract="DSToken" method="balanceOf" isTokenValue={1} prefix="Dai you own: " methodArgs={[this.props.selectedAccount]}/>
                                           </div>
                                       </div>
                                   </div>
                                   <div className="centraltabgroup-1-0-1-1-3-1-3">
                                       <div className="centraltabgroup-approveddaiplaceholder-8">
                                           <div>
-                                              <ContractData contract="ScorchablePayments" method="getDaiAllowance" isTokenValue={1} prefix="Dai approved for contract: " methodArgs={[this.props.selectedAccount, "contractPlaceholder:ScorchablePayments"]}/>
+                                              <ContractData contract="DSToken" method="allowance" isTokenValue={1} prefix="Dai approved for contract: " methodArgs={[this.props.selectedAccount, "contractPlaceholder:ScorchablePayments"]}/>
                                           </div>
                                       </div>
                                   </div>
@@ -120,7 +120,7 @@ export default class Centraltabgroup extends React.Component {
                           <div className="centraltabgroup-1-0-1-1-5">
                               <div className="centraltabgroup-approvedaiplaceholder-4">
                                   <div>
-                                      <ContractForm contract="ScorchablePayments" method="approveDai" purpose="Approve Dai" fixedParams={["contractPlaceholder:ScorchablePayments", -1]} paramNamesToScale={["wad"]} labels={["guy", "Dai Quantity"]}  placeholders={["0", "0"]}/> 
+                                      <ContractForm contract="DSToken" method="approve" purpose="Approve Dai" fixedParams={["contractPlaceholder:ScorchablePayments", -1]} paramNamesToScale={["wad"]} labels={["guy", "Dai Quantity"]}  placeholders={["0", "0"]}/> 
                                   </div>
                               </div>
                           </div>

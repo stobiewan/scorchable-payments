@@ -6,6 +6,7 @@ const mapStateToProps = state => {
     return {
         accounts: state.accounts,
         ScorchablePayments: state.contracts.ScorchablePayments,
+        DSToken: state.contracts.DSToken,
         drizzleStatus: state.drizzleStatus,
     }
 }
