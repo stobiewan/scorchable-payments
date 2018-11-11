@@ -10,10 +10,6 @@ contract ScorchablePayments is DaiTransferrer {
     using SafeMath for uint256;
     using SafeMath64 for uint64;
 
-    event NewPayment();
-    event PayeeBondPaid();
-    event PaymentDeleted();
-
     struct Payment {
         address payer;
         address payee;
@@ -63,7 +59,6 @@ contract ScorchablePayments is DaiTransferrer {
             isEthPayment
         );
         currentId = currentId.add(1);
-        emit NewPayment();
     }
 
     function cancelPayment(uint64 paymentId) external onlyPayer(paymentId) {
@@ -92,7 +87,6 @@ contract ScorchablePayments is DaiTransferrer {
         );
         payments[paymentId].amount = payments[paymentId].amount.add(payments[paymentId].payeeBondAmount);
         payments[paymentId].payeeBondPaid = true;
-        emit PayeeBondPaid();
     }
 
     function returnTokensToSender(uint64 paymentId, uint amount) external onlyPayee(paymentId) {
@@ -196,6 +190,5 @@ contract ScorchablePayments is DaiTransferrer {
         payments[paymentIds[listIndex]].listIndex = listIndex;
         delete payments[paymentId];
         paymentIds.length = paymentIds.length.sub(1);
-        emit PaymentDeleted();
     }
 }
