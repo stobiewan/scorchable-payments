@@ -2,8 +2,10 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 /* import the MainScreen component drawn above in Pagedraw */
 import MainScreen from '../../pagedraw/mainscreen'
+import DSToken from "../../../build/contracts/DSToken.json";
 
-var TabEnum = Object.freeze({"intro": 1, "manageDai": 2, "create": 3, "ountgoing": 4, "incoming": 5});
+
+var TabEnum = Object.freeze({"intro": 1, "manageDai": 2, "create": 3, "outgoing": 4, "incoming": 5});
 const payeeBondAmountIndex = 3;
 const isEthPaymentIndex = 7;
 
@@ -86,8 +88,7 @@ class PaymentCycler {
 class DrizzleApp extends Component {
     constructor(props, context) {
         super(props);
-        this.contracts = context.drizzle.contracts;
-        this.relevantPaymentsKey = this.contracts.ScorchablePayments.methods.getPaymentsForAccount.cacheCall(this.props.accounts[0]);
+        this.relevantPaymentsKey = context.drizzle.contracts.ScorchablePayments.methods.getPaymentsForAccount.cacheCall(this.props.accounts[0]);
         this.incomingPaymentCycler = new PaymentCycler(this);
         this.outgoingPaymentCycler = new PaymentCycler(this);
         this.outgoingPaymentData = null;
@@ -105,6 +106,14 @@ class DrizzleApp extends Component {
             relevantPayments: [[], []],
             currentAddress: this.props.accounts[0]
         };
+    }
+
+    componentDidMount() {
+        const daiContract = new this.context.drizzle.web3.eth.Contract(DSToken.abi, "0x444254706E8F1FB62a6EC26A7FA2b942ef672495", {from: this.props.accounts[0]});
+        this.context.drizzle.addContract({
+            contractName: 'DSToken',
+            web3Contract: daiContract,
+        });
     }
 
     setOutgoingPaymentData(paymentData) {
@@ -181,11 +190,13 @@ class DrizzleApp extends Component {
     }
 
     componentDidUpdate() {
-        let newRelevantPayments = this.props.ScorchablePayments.getPaymentsForAccount[this.relevantPaymentsKey].value;
-        if (!this.paymentArraysEqual(newRelevantPayments, this.state.relevantPayments)) {
-            this.outgoingPaymentCycler.setRelevantPayments(newRelevantPayments[0]);
-            this.incomingPaymentCycler.setRelevantPayments(newRelevantPayments[1]);
-            this.setState({relevantPayments: newRelevantPayments})
+        if (this.relevantPaymentsKey in this.props.ScorchablePayments.getPaymentsForAccount) {
+            let newRelevantPayments = this.props.ScorchablePayments.getPaymentsForAccount[this.relevantPaymentsKey].value;
+            if (!this.paymentArraysEqual(newRelevantPayments, this.state.relevantPayments)) {
+                this.outgoingPaymentCycler.setRelevantPayments(newRelevantPayments[0]);
+                this.incomingPaymentCycler.setRelevantPayments(newRelevantPayments[1]);
+                this.setState({relevantPayments: newRelevantPayments})
+            }
         }
 
         if (this.state.currentAddress != this.props.accounts[0]) {
