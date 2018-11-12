@@ -1,6 +1,7 @@
 {
   "name": "drizzle-box",
   "version": "1.0.0",
+  "homepage": "https://stobiewan.github.io/scorchable-payments",
   "devDependencies": {
     "ganache-cli": "^6.1.8",
     "openzeppelin-solidity": "^1.12.0",
@@ -34,6 +35,7 @@
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "object-assign": "4.1.1",
@@ -62,6 +64,8 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "node scripts/start.js",
     "build": "truffle compile && node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
