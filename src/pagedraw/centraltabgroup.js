@@ -43,7 +43,7 @@ export default class Centraltabgroup extends React.Component {
                           <div>{"2 -> The payee can pay the bond to remove the payers option to cancel the payment."}</div>
                           <br/>
                           <br/>
-                          <div>{"3 -> The payer can release any portion of the funds (payment plus bond) to the payee, or scorch them (funds lost to both parties). The payee can also send the funds back to the payer in case they can not fulfil their end. If the payer fails to act before the timeout date, or extend the timeout date, the payee may claim the funds."}</div>
+                          <div>{"3 -> The payer can release any portion of the funds (payment plus bond) to the payee, or scorch them (funds sent to 0x0). The payee can also send the funds back to the payer in case they can not fulfil their end. If the payer fails to act before the timeout date, or extend the timeout date, the payee may claim the funds."}</div>
                       </div>
                       <div className="centraltabgroup-0-0-5-2" /> 
                   </div>
