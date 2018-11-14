@@ -68,18 +68,27 @@ class ContractForm extends Component {
         }
     }
 
+    removeWhitespace(value, key, map) {
+        if (typeof value === 'string' || value instanceof String) {
+            map.set(key, value.trim());
+        }
+    }
+
     handleSubmit(e) {
-        e.preventDefault()
-        let submitState = Object.assign({}, this.state);
+        e.preventDefault();
+        let submitState = new Map(Object.entries(this.state));
+        submitState.forEach(this.removeWhitespace);
+
         // scale token values from whole token to wei
         for (var i = 0; i < this.paramNamesToScale.length; i++) {
-            submitState[this.paramNamesToScale[i]] = this.context.drizzle.web3.utils.toWei(submitState[this.paramNamesToScale[i]]);
+            submitState.set(this.paramNamesToScale[i], this.context.drizzle.web3.utils.toWei(submitState.get(this.paramNamesToScale[i])));
         }
         this.addAmountSendArg(submitState);
+
         if (this.sendArgs) {
-            return this.contracts[this.props.contract].methods[this.props.method].cacheSend(...Object.values(submitState), this.sendArgs);
+            return this.contracts[this.props.contract].methods[this.props.method].cacheSend(...submitState.values(), this.sendArgs);
         }
-        this.contracts[this.props.contract].methods[this.props.method].cacheSend(...Object.values(submitState));
+        this.contracts[this.props.contract].methods[this.props.method].cacheSend(...submitState.values());
     }
 
     addAmountSendArg(submitState) {
@@ -91,13 +100,13 @@ class ContractForm extends Component {
                 sendAnyEth = conditionInput
             }
             else {
-                sendAnyEth = submitState[conditionInput] > 0
+                sendAnyEth = submitState.get(conditionInput) > 0
             }
             if (sendAnyEth) {
                 let valueInput = this.props.amountInputs["value"]
                 ethToSend = parseInt(valueInput)
                 if (isNaN(ethToSend)) {
-                    ethToSend = submitState[valueInput]
+                    ethToSend = submitState.get(valueInput)
                 }
             }
         }
