@@ -50,6 +50,9 @@ class LoadingContainer extends Component {
                         <h1>🦊</h1>
                         <p><strong>We can't find any Ethereum accounts!</strong> Please check and make sure Metamask
                             or your browser are pointed at the correct network and your account is unlocked.</p>
+                        <p>
+                            <a href="https://brave.com/sto522">Try Brave Browser with Metamask</a>
+                        </p>
                     </div>
                 </main>
             )

@@ -57,13 +57,31 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-0-0-9">
                       <div className="centraltabgroup-0-0-9-0" /> 
                       <div className="centraltabgroup-donations_-_0">
-                          <div>Donations - 0x300afbE08EE4619EC93524f9255CE59a013a5b63</div>
-                          <div>{"https://github.com/stobiewan/scorchable-payments"}</div>
-                          <div>Contract address 0x000</div>
+                          Donations - 0x300afbE08EE4619EC93524f9255CE59a013a5b63
                       </div>
                       <div className="centraltabgroup-0-0-9-2" /> 
                   </div>
                   <div className="centraltabgroup-0-0-10" /> 
+                  <div className="centraltabgroup-0-0-11">
+                      <div className="centraltabgroup-0-0-11-0" /> 
+                      <a href="https://brave.com/sto522" className="centraltabgroup-0-0-11-1">
+                          <div className="centraltabgroup-try_brave_browser_-5">
+                              Try Brave Browser
+                          </div>
+                      </a>
+                      <div className="centraltabgroup-0-0-11-2" /> 
+                  </div>
+                  <div className="centraltabgroup-0-0-12" /> 
+                  <div className="centraltabgroup-0-0-13">
+                      <div className="centraltabgroup-0-0-13-0" /> 
+                      <a href="https://etherscan.io/" className="centraltabgroup-0-0-13-1">
+                          <div className="centraltabgroup-view_contract_-1">
+                              View Contract
+                          </div>
+                      </a>
+                      <div className="centraltabgroup-0-0-13-2" /> 
+                  </div>
+                  <div className="centraltabgroup-0-0-14" /> 
               </div>
           : null}
           { (this.props.state === "2") ?
