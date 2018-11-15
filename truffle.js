@@ -7,9 +7,9 @@ var provider = "https://kovan.infura.io/v3/02e ...";
 module.exports = {
     migrations_directory: "./migrations",
     networks: {
-        "kovan-infura": {
+        "mainnet-infura": {
             provider: () => new HDWalletProvider(mnemonic, provider),
-            network_id: 42,
+            network_id: 1,
             gas: 4700000
         }
     },

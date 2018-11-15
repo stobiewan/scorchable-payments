@@ -109,7 +109,7 @@ class DrizzleApp extends Component {
     }
 
     componentDidMount() {
-        const daiContract = new this.context.drizzle.web3.eth.Contract(DSToken, "0xc4375b7de8af5a38a93548eb8453a498222c4ff2", {from: this.props.accounts[0]});  // mainnet 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359
+        const daiContract = new this.context.drizzle.web3.eth.Contract(DSToken, "0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359", {from: this.props.accounts[0]});
         this.context.drizzle.addContract({
             contractName: 'DSToken',
             web3Contract: daiContract,

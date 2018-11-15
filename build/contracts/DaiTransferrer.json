@@ -1,11 +1,11 @@
 {
   "contractName": "DaiTransferrer",
   "abi": [],
-  "bytecode": "0x608060405260008054600160a060020a031990811673c4375b7de8af5a38a93548eb8453a498222c4ff2179182905560018054909116600160a060020a0392909216919091179055348015605257600080fd5b5060358060606000396000f3006080604052600080fd00a165627a7a72305820b6b6c0c9a478462bec7890a743f08879bead2d6d2772ca4777b1aacdbc099b020029",
-  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820b6b6c0c9a478462bec7890a743f08879bead2d6d2772ca4777b1aacdbc099b020029",
-  "sourceMap": "165:397:0:-;;;196:63;;;-1:-1:-1;;;;;;196:63:0;;;217:42;196:63;;;;;;365:51;;;;;-1:-1:-1;;;;;405:10:0;;;;365:51;;;;;;165:397;5:2:-1;;;;30:1;27;20:12;5:2;165:397:0;;;;;;;",
-  "deployedSourceMap": "165:397:0:-;;;;;",
-  "source": "pragma solidity ^0.4.24;\n\nimport \"./SafeMath.sol\";\n\ncontract DaiInterface {\n    function transferFrom(address src, address dst, uint wad) public returns (bool);\n}\n\n\ncontract DaiTransferrer {\n\n    address daiAddress = 0xC4375B7De8af5a38a93548eb8453a498222C4fF2; // TODO Kovan, replace in drizzleOptions too. Mainnet is 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359\n    DaiInterface daiContract = DaiInterface(daiAddress);\n\n    function transferDai(address _src, address _dst, uint _dai) internal {\n        require(daiContract.transferFrom(_src, _dst, _dai));\n    }\n}\n",
+  "bytecode": "0x608060405260008054600160a060020a03199081167389d24a6b4ccb1b6faa2625fe562bdd9a23260359179182905560018054909116600160a060020a0392909216919091179055348015605257600080fd5b5060358060606000396000f3006080604052600080fd00a165627a7a7230582070be3178797f93a270b22e37b61592d4f5f2f5befbc908f0102b52810bf8e14f0029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a7230582070be3178797f93a270b22e37b61592d4f5f2f5befbc908f0102b52810bf8e14f0029",
+  "sourceMap": "165:297:0:-;;;196:63;;;-1:-1:-1;;;;;;196:63:0;;;217:42;196:63;;;;;;265:51;;;;;-1:-1:-1;;;;;305:10:0;;;;265:51;;;;;;165:297;5:2:-1;;;;30:1;27;20:12;5:2;165:297:0;;;;;;;",
+  "deployedSourceMap": "165:297:0:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./SafeMath.sol\";\n\ncontract DaiInterface {\n    function transferFrom(address src, address dst, uint wad) public returns (bool);\n}\n\n\ncontract DaiTransferrer {\n\n    address daiAddress = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359;\n    DaiInterface daiContract = DaiInterface(daiAddress);\n\n    function transferDai(address _src, address _dst, uint _dai) internal {\n        require(daiContract.transferFrom(_src, _dst, _dai));\n    }\n}\n",
   "sourcePath": "/home/mark/scorchable-payments/contracts/DaiInterface.sol",
   "ast": {
     "absolutePath": "/home/mark/scorchable-payments/contracts/DaiInterface.sol",
@@ -232,7 +232,7 @@
             },
             "value": {
               "argumentTypes": null,
-              "hexValue": "307843343337354237446538616635613338613933353438656238343533613439383232324334664632",
+              "hexValue": "307838396432344136623443634231423666414132363235664535363262444439613233323630333539",
               "id": 16,
               "isConstant": false,
               "isLValue": false,
@@ -246,7 +246,7 @@
                 "typeIdentifier": "t_address",
                 "typeString": "address"
               },
-              "value": "0xC4375B7De8af5a38a93548eb8453a498222C4fF2"
+              "value": "0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359"
             },
             "visibility": "internal"
           },
@@ -256,7 +256,7 @@
             "name": "daiContract",
             "nodeType": "VariableDeclaration",
             "scope": 42,
-            "src": "365:51:0",
+            "src": "265:51:0",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -269,7 +269,7 @@
               "name": "DaiInterface",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 14,
-              "src": "365:12:0",
+              "src": "265:12:0",
               "typeDescriptions": {
                 "typeIdentifier": "t_contract$_DaiInterface_$14",
                 "typeString": "contract DaiInterface"
@@ -285,7 +285,7 @@
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
                   "referencedDeclaration": 17,
-                  "src": "405:10:0",
+                  "src": "305:10:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
                     "typeString": "address"
@@ -304,7 +304,7 @@
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
                 "referencedDeclaration": 14,
-                "src": "392:12:0",
+                "src": "292:12:0",
                 "typeDescriptions": {
                   "typeIdentifier": "t_type$_t_contract$_DaiInterface_$14_$",
                   "typeString": "type(contract DaiInterface)"
@@ -318,7 +318,7 @@
               "lValueRequested": false,
               "names": [],
               "nodeType": "FunctionCall",
-              "src": "392:24:0",
+              "src": "292:24:0",
               "typeDescriptions": {
                 "typeIdentifier": "t_contract$_DaiInterface_$14",
                 "typeString": "contract DaiInterface"
@@ -330,7 +330,7 @@
             "body": {
               "id": 40,
               "nodeType": "Block",
-              "src": "492:68:0",
+              "src": "392:68:0",
               "statements": [
                 {
                   "expression": {
@@ -346,7 +346,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 24,
-                            "src": "535:4:0",
+                            "src": "435:4:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
                               "typeString": "address"
@@ -359,7 +359,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 26,
-                            "src": "541:4:0",
+                            "src": "441:4:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
                               "typeString": "address"
@@ -372,7 +372,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 28,
-                            "src": "547:4:0",
+                            "src": "447:4:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -401,7 +401,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 22,
-                            "src": "510:11:0",
+                            "src": "410:11:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_DaiInterface_$14",
                               "typeString": "contract DaiInterface"
@@ -415,7 +415,7 @@
                           "memberName": "transferFrom",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 13,
-                          "src": "510:24:0",
+                          "src": "410:24:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$_t_bool_$",
                             "typeString": "function (address,address,uint256) external returns (bool)"
@@ -429,7 +429,7 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "510:42:0",
+                        "src": "410:42:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -451,7 +451,7 @@
                         993
                       ],
                       "referencedDeclaration": 992,
-                      "src": "502:7:0",
+                      "src": "402:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
@@ -465,7 +465,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "502:51:0",
+                    "src": "402:51:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -473,7 +473,7 @@
                   },
                   "id": 39,
                   "nodeType": "ExpressionStatement",
-                  "src": "502:51:0"
+                  "src": "402:51:0"
                 }
               ]
             },
@@ -495,7 +495,7 @@
                   "name": "_src",
                   "nodeType": "VariableDeclaration",
                   "scope": 41,
-                  "src": "444:12:0",
+                  "src": "344:12:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -506,7 +506,7 @@
                     "id": 23,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "444:7:0",
+                    "src": "344:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -521,7 +521,7 @@
                   "name": "_dst",
                   "nodeType": "VariableDeclaration",
                   "scope": 41,
-                  "src": "458:12:0",
+                  "src": "358:12:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -532,7 +532,7 @@
                     "id": 25,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "458:7:0",
+                    "src": "358:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -547,7 +547,7 @@
                   "name": "_dai",
                   "nodeType": "VariableDeclaration",
                   "scope": 41,
-                  "src": "472:9:0",
+                  "src": "372:9:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -558,7 +558,7 @@
                     "id": 27,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "472:4:0",
+                    "src": "372:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -568,27 +568,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "443:39:0"
+              "src": "343:39:0"
             },
             "payable": false,
             "returnParameters": {
               "id": 30,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "492:0:0"
+              "src": "392:0:0"
             },
             "scope": 42,
-            "src": "423:137:0",
+            "src": "323:137:0",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
         "scope": 43,
-        "src": "165:397:0"
+        "src": "165:297:0"
       }
     ],
-    "src": "0:563:0"
+    "src": "0:463:0"
   },
   "legacyAST": {
     "absolutePath": "/home/mark/scorchable-payments/contracts/DaiInterface.sol",
@@ -815,7 +815,7 @@
             },
             "value": {
               "argumentTypes": null,
-              "hexValue": "307843343337354237446538616635613338613933353438656238343533613439383232324334664632",
+              "hexValue": "307838396432344136623443634231423666414132363235664535363262444439613233323630333539",
               "id": 16,
               "isConstant": false,
               "isLValue": false,
@@ -829,7 +829,7 @@
                 "typeIdentifier": "t_address",
                 "typeString": "address"
               },
-              "value": "0xC4375B7De8af5a38a93548eb8453a498222C4fF2"
+              "value": "0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359"
             },
             "visibility": "internal"
           },
@@ -839,7 +839,7 @@
             "name": "daiContract",
             "nodeType": "VariableDeclaration",
             "scope": 42,
-            "src": "365:51:0",
+            "src": "265:51:0",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -852,7 +852,7 @@
               "name": "DaiInterface",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 14,
-              "src": "365:12:0",
+              "src": "265:12:0",
               "typeDescriptions": {
                 "typeIdentifier": "t_contract$_DaiInterface_$14",
                 "typeString": "contract DaiInterface"
@@ -868,7 +868,7 @@
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
                   "referencedDeclaration": 17,
-                  "src": "405:10:0",
+                  "src": "305:10:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
                     "typeString": "address"
@@ -887,7 +887,7 @@
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
                 "referencedDeclaration": 14,
-                "src": "392:12:0",
+                "src": "292:12:0",
                 "typeDescriptions": {
                   "typeIdentifier": "t_type$_t_contract$_DaiInterface_$14_$",
                   "typeString": "type(contract DaiInterface)"
@@ -901,7 +901,7 @@
               "lValueRequested": false,
               "names": [],
               "nodeType": "FunctionCall",
-              "src": "392:24:0",
+              "src": "292:24:0",
               "typeDescriptions": {
                 "typeIdentifier": "t_contract$_DaiInterface_$14",
                 "typeString": "contract DaiInterface"
@@ -913,7 +913,7 @@
             "body": {
               "id": 40,
               "nodeType": "Block",
-              "src": "492:68:0",
+              "src": "392:68:0",
               "statements": [
                 {
                   "expression": {
@@ -929,7 +929,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 24,
-                            "src": "535:4:0",
+                            "src": "435:4:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
                               "typeString": "address"
@@ -942,7 +942,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 26,
-                            "src": "541:4:0",
+                            "src": "441:4:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
                               "typeString": "address"
@@ -955,7 +955,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 28,
-                            "src": "547:4:0",
+                            "src": "447:4:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -984,7 +984,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 22,
-                            "src": "510:11:0",
+                            "src": "410:11:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_DaiInterface_$14",
                               "typeString": "contract DaiInterface"
@@ -998,7 +998,7 @@
                           "memberName": "transferFrom",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 13,
-                          "src": "510:24:0",
+                          "src": "410:24:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$_t_bool_$",
                             "typeString": "function (address,address,uint256) external returns (bool)"
@@ -1012,7 +1012,7 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "510:42:0",
+                        "src": "410:42:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -1034,7 +1034,7 @@
                         993
                       ],
                       "referencedDeclaration": 992,
-                      "src": "502:7:0",
+                      "src": "402:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
@@ -1048,7 +1048,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "502:51:0",
+                    "src": "402:51:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -1056,7 +1056,7 @@
                   },
                   "id": 39,
                   "nodeType": "ExpressionStatement",
-                  "src": "502:51:0"
+                  "src": "402:51:0"
                 }
               ]
             },
@@ -1078,7 +1078,7 @@
                   "name": "_src",
                   "nodeType": "VariableDeclaration",
                   "scope": 41,
-                  "src": "444:12:0",
+                  "src": "344:12:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1089,7 +1089,7 @@
                     "id": 23,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "444:7:0",
+                    "src": "344:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -1104,7 +1104,7 @@
                   "name": "_dst",
                   "nodeType": "VariableDeclaration",
                   "scope": 41,
-                  "src": "458:12:0",
+                  "src": "358:12:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1115,7 +1115,7 @@
                     "id": 25,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "458:7:0",
+                    "src": "358:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -1130,7 +1130,7 @@
                   "name": "_dai",
                   "nodeType": "VariableDeclaration",
                   "scope": 41,
-                  "src": "472:9:0",
+                  "src": "372:9:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1141,7 +1141,7 @@
                     "id": 27,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "472:4:0",
+                    "src": "372:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1151,27 +1151,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "443:39:0"
+              "src": "343:39:0"
             },
             "payable": false,
             "returnParameters": {
               "id": 30,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "492:0:0"
+              "src": "392:0:0"
             },
             "scope": 42,
-            "src": "423:137:0",
+            "src": "323:137:0",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
         "scope": 43,
-        "src": "165:397:0"
+        "src": "165:297:0"
       }
     ],
-    "src": "0:563:0"
+    "src": "0:463:0"
   },
   "compiler": {
     "name": "solc",
@@ -1179,5 +1179,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-11-12T01:29:45.761Z"
+  "updatedAt": "2018-11-15T22:06:15.572Z"
 }
