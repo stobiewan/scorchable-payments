@@ -1,8 +1,8 @@
 const HDWalletProvider = require("truffle-hdwallet-provider");
 
 // replace with real values when using
-var mnemonic = "mountains supernatural ...";
-var provider = "https://kovan.infura.io/v3/02e ...";
+var mnemonic = "ivory debris hunt final organ index skill govern motion soft silver burden";
+var provider = "https://mainnet.infura.io/v3/02e795aee1fb4e4dbd74eaacd542530a";
 
 module.exports = {
     migrations_directory: "./migrations",
@@ -10,7 +10,8 @@ module.exports = {
         "mainnet-infura": {
             provider: () => new HDWalletProvider(mnemonic, provider),
             network_id: 1,
-            gas: 4700000
+            gas: 1700000,
+            gasPrice: 3000000001
         }
     },
     solc: {
