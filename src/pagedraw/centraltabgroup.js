@@ -74,7 +74,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-0-0-12" /> 
                   <div className="centraltabgroup-0-0-13">
                       <div className="centraltabgroup-0-0-13-0" /> 
-                      <a href="https://etherscan.io/" className="centraltabgroup-0-0-13-1">
+                      <a href="https://etherscan.io/address/0xb8c27c2d49d33975e31938577a0c35ea262889e4#code" className="centraltabgroup-0-0-13-1">
                           <div className="centraltabgroup-view_contract_-1">
                               View Contract
                           </div>
