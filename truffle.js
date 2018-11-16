@@ -1,8 +1,8 @@
 const HDWalletProvider = require("truffle-hdwallet-provider");
 
 // replace with real values when using
-var mnemonic = "ivory debris hunt final organ index skill govern motion soft silver burden";
-var provider = "https://mainnet.infura.io/v3/02e795aee1fb4e4dbd74eaacd542530a";
+var mnemonic = "ivory debris";
+var provider = "https://mainnet.infura.io/v3/02";
 
 module.exports = {
     migrations_directory: "./migrations",
