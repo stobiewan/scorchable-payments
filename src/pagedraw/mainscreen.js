@@ -19,7 +19,7 @@ export default class Mainscreen extends React.Component {
                                   <Buttonwithstate state={(this.props.selectedTab === 1 ? "selected" : "unselected")} text={"Intro"} text2={"Intro"} /> 
                               </div>
                               <div onClick={() => this.props.setSelectedTab(2)} className="mainscreen-tabbutton2">
-                                  <Buttonwithstate state={(this.props.selectedTab === 2 ? "selected" : "unselected")} text={"Manage Dai"} text2={"Manage Dai"} /> 
+                                  <Buttonwithstate state={(this.props.selectedTab === 2 ? "selected" : "unselected")} text={"Manage Sai"} text2={"Manage Dai"} />
                               </div>
                               <div onClick={() => this.props.setSelectedTab(3)} className="mainscreen-tabbutton3">
                                   <Buttonwithstate state={(this.props.selectedTab === 3 ? "selected" : "unselected")} text={"Create Payment"} text2={"Create Payment"} /> 

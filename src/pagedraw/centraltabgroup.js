@@ -29,7 +29,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-0-0-3">
                       <div className="centraltabgroup-0-0-3-0" /> 
                       <div className="centraltabgroup-summarytext-9">
-                          {"Scorchable payments are a simple method for making payments in Dai or ether with more safety than direct transfers for everyone. They are free  and have no centralised third party controlling escrows. Neither party can benefit from dishonouring the deal so there is no incentive for scams to ever occur. The process follows three stages:"}
+                          {"Scorchable payments are a simple method for making payments in Sai or ether with more safety than direct transfers for everyone. They are free  and have no centralised third party controlling escrows. Neither party can benefit from dishonouring the deal so there is no incentive for scams to ever occur. The process follows three stages:"}
                       </div>
                       <div className="centraltabgroup-0-0-3-2" /> 
                   </div>
@@ -37,7 +37,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-0-0-5">
                       <div className="centraltabgroup-0-0-5-0" /> 
                       <div className="centraltabgroup-phasestext-2">
-                          <div>{"1 -> A payer creates a payment by sending Dai or ether into the contract and specifying who can receive it and what bond they should pay. During this stage the payer can cancel the payment to reclaim all of the funds unless the bond was zero."}</div>
+                          <div>{"1 -> A payer creates a payment by sending Sai or ether into the contract and specifying who can receive it and what bond they should pay. During this stage the payer can cancel the payment to reclaim all of the funds unless the bond was zero."}</div>
                           <br/>
                           <br/>
                           <div>{"2 -> The payee can pay the bond to remove the payers option to cancel the payment."}</div>
@@ -94,7 +94,7 @@ export default class Centraltabgroup extends React.Component {
                           <div className="centraltabgroup-1-0-1-1-1">
                               <div className="centraltabgroup-1-0-1-1-1-0" /> 
                               <div className="centraltabgroup-daisummarytext-1">
-                                  Here you can approve this contract to transfer Dai from your balance. You need to do this before paying bonds or making payments with Dai. The contract can only transfer the Dai when you sign transactions requesting it to.
+                                  Here you can approve this contract to transfer Sai from your balance. You need to do this before paying bonds or making payments with Sai. The contract can only transfer the Sai when you sign transactions requesting it to.
                               </div>
                               <div className="centraltabgroup-1-0-1-1-1-2" /> 
                           </div>
@@ -119,14 +119,14 @@ export default class Centraltabgroup extends React.Component {
                                   <div className="centraltabgroup-1-0-1-1-3-1-2">
                                       <div className="centraltabgroup-owneddaiplaceholder-4">
                                           <div>
-                                              <ContractData contract="DSToken" method="balanceOf" isTokenValue={1} prefix="Dai you own: " methodArgs={[this.props.selectedAccount]}/>
+                                              <ContractData contract="DSToken" method="balanceOf" isTokenValue={1} prefix="Sai you own: " methodArgs={[this.props.selectedAccount]}/>
                                           </div>
                                       </div>
                                   </div>
                                   <div className="centraltabgroup-1-0-1-1-3-1-3">
                                       <div className="centraltabgroup-approveddaiplaceholder-8">
                                           <div>
-                                              <ContractData contract="DSToken" method="allowance" isTokenValue={1} prefix="Dai approved for contract: " methodArgs={[this.props.selectedAccount, "contractPlaceholder:ScorchablePayments"]}/>
+                                              <ContractData contract="DSToken" method="allowance" isTokenValue={1} prefix="Sai approved for contract: " methodArgs={[this.props.selectedAccount, "contractPlaceholder:ScorchablePayments"]}/>
                                           </div>
                                       </div>
                                   </div>
@@ -138,7 +138,7 @@ export default class Centraltabgroup extends React.Component {
                           <div className="centraltabgroup-1-0-1-1-5">
                               <div className="centraltabgroup-approvedaiplaceholder-4">
                                   <div>
-                                      <ContractForm contract="DSToken" method="approve" purpose="Approve Dai" fixedParams={["contractPlaceholder:ScorchablePayments", -1]} paramNamesToScale={["wad"]} labels={["guy", "Dai Quantity"]}  placeholders={["0", "0"]}/> 
+                                      <ContractForm contract="DSToken" method="approve" purpose="Approve Sai" fixedParams={["contractPlaceholder:ScorchablePayments", -1]} paramNamesToScale={["wad"]} labels={["guy", "Dai Quantity"]}  placeholders={["0", "0"]}/>
                                   </div>
                               </div>
                           </div>
@@ -153,7 +153,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-2-0-0">
                       <div className="centraltabgroup-2-0-0-0" /> 
                       <div className="centraltabgroup-createpaymentheader-6">
-                          { "Create an ether or Dai payment, the funds will be then be stored in the smart contract. If the bond is set to above zero you will be able to cancel the payment and have all funds returned until the payee pays the bond. The timeout period is in seconds since the epoch, use " + (Math.round(Date.now() / 1000) + 2419200).toString() + " for the inaction timeout to set it to four weeks from now. You can extend the timeout at any time, if it expires before the payment is finalised the payee can claim the funds." }
+                          { "Create an ether or Sai payment, the funds will be then be stored in the smart contract. If the bond is set to above zero you will be able to cancel the payment and have all funds returned until the payee pays the bond. The timeout period is in seconds since the epoch, use " + (Math.round(Date.now() / 1000) + 2419200).toString() + " for the inaction timeout to set it to four weeks from now. You can extend the timeout at any time, if it expires before the payment is finalised the payee can claim the funds." }
                       </div>
                       <div className="centraltabgroup-2-0-0-2" /> 
                   </div>
