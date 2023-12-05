@@ -57,7 +57,7 @@ export default class Centraltabgroup extends React.Component {
                   <div className="centraltabgroup-0-0-9">
                       <div className="centraltabgroup-0-0-9-0" /> 
                       <div className="centraltabgroup-donations_-_0">
-                          Donations - 0x300afbE08EE4619EC93524f9255CE59a013a5b63
+                          
                       </div>
                       <div className="centraltabgroup-0-0-9-2" /> 
                   </div>
